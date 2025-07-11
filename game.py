@@ -1,7 +1,7 @@
-from units import Unit
+from units import Unit, Militia
 
 class Game:
-	def __init__(self, game_name, country, faction, resources, production, upkeep):
+	def __init__(self, game_name, country, faction, resources=None, production=None, upkeep=None):
 		self.game_name = game_name
 		self.country = country
 		self.faction = faction
@@ -11,6 +11,8 @@ class Game:
 		self.game_name = game_name
 		self.country = country
 		self.faction = faction
+	def __str__(self):
+		return f"{"-" * 40}\nGame: {self.game_name}\nCountry: {self.country}\nFaction: {self.faction}\n{"-" * 40}"
 
 class Resources:
 	def __init__(self, resources=None, production=None, upkeep=None):
@@ -35,5 +37,11 @@ class Resources:
 	def day_change(self):
 		for resource, value in self.resources:
 			self.resources[resource] += self.production[resource] - self.upkeep[resource]
+	def __str__(self):
+		return f"Current Resources: {self.resources}, Current Production: {self.production}, Current Upkeep: {self.upkeep}"
 
-setup = Unit("Game 1", 1)
+game = Game("Game 1", "Ohio", "Axis")
+print(game)
+
+militia = Militia("Militia", 1, game)
+print(militia)
