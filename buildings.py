@@ -49,21 +49,21 @@ class Aircraft_Factory(Buildings):
 		match self.level:
 			case 1:
 				self.health = 20
-				self effects = 100
+				self.effects = 100
 				self.refueling_time = 0.5	### in hours ###
 				self.costs = {'gas': 2350, 'corn': 1250, 'cash': 3600}
-				self.construction_time = 0.083
+				self.construction_time = 0.5
 
 class Secret_Lab(Buildings):
 	def __init__(self, level, game):
-		super().__init__(level, game):
+		super().__init__(level, game)
 		self.description = "The Secret Lab is required to produce secret weapons. Each level of the Secret Lab halves the unit production time until the minimum production time of a unit is reached. The current level of the Secret Lab is hidden to others. The Secret Lab can only constructed in urban provinces."
 		match self.level:
 			case 1:
 				self.health = 20
 				self.effects = 100
 				self.costs = {'steel': 1400, 'gas': 2200, 'cash': 3600}
-				self.construction_time = 0.083
+				self.construction_time = 0.5
 
 class Industry(Buildings):
 	def __init__(self, level, game):
@@ -75,6 +75,11 @@ class Industry(Buildings):
 				self.effects = 13	### Production boost in percentage ###
 				self.costs = {'steel': 1400, 'gas': 1600, 'cash': 3000}
 				self.construction_time = 8	### in hours ###
+			case 2:
+				self.health = 40
+				self.effects = 28
+				self.costs = {'steel': 1850, 'gas': 2150, 'cash': 4000}
+				self.construction_time = 14
 
 class Recruiting_Station(Buildings):
 	def __init__(self, level, game):

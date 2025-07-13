@@ -29,15 +29,12 @@ class Unit:
 		else:
 			self.level += 1
 		self.update_stats()
-	def attack(self, enemy_unit, territory, bunker_level):
+	def attack(self, enemy_unit, territory, buildings):
 		hp = self.terrain_effects[territory]['HP']
 		if self.terrain_effects[territory]['strength']:
 			hp = hp * self.terrain_effects[territory]['strength']
-		if bunker_level:
-			bunker_stats = {1: 15, 2: 30, 3: 45, 4: 60, 5: 75}
-			
-		while hp and enemy_unit.health:
-			
+		if buildings:
+			pass
 	def __str__(self):
 		basic = (f"{"-" * 50}\nUnit name: {self.name}\nUnit level: {self.level}\nUnit Faction: {self.game.faction}\nUnit Health: {self.health}\nUnit Speed: {self.speed}\nUnit View Range: {self.view_range}\nUnit Attack Range: {self.attack_range}\nDay available: {self.day_available}\n")
 		if self.combat:
