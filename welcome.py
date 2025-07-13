@@ -30,7 +30,7 @@ def print_welcome():
 	print("no waiting, no hassle, just strategy and fun.")
 	print()
 	print("If you like what you see, please consider starring the repo!")
-	print("\n" * 1)
+	print("\n" * 4)
 	print("-" * 70)
 	print("Note: Currently, only Axis units are available.")
 	print("> > > For detailed instructions, check out tutorial.py < < <")
@@ -44,8 +44,8 @@ def print_welcome():
 	print("If you enjoyed the project and want to support me, I'm")
 	print("actively seeking an internship opportunity!")
 	print()
-	print("LinkedIn : https://www.linkedin.com/in/daniel-proano-20976b32a/")
-	print("Email    : djz.labz@gmail.com")
+	print("LinkedIn: https://www.linkedin.com/in/daniel-proano-20976b32a/")
+	print("Email: djz.labz@gmail.com")
 	print("*" * 70)
 
 if __name__ == "__main__":
