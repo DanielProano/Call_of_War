@@ -47,23 +47,46 @@ class Resources:
 			for key, value in upkeep.items():
 				self.upkeep[key] += value
 	def subtract(self, resources=None, production=None, upkeep=None):
+		unable_to_pay = False
+		depleted_resource = {}
 		if resources:
 			for key, value in resources.items():
 				self.resources[key] -= value
+				if self.resources[key] < 0:
+					unable_to_pay = True
+					depleted_resource[key] = value
 		if production:
 			for key, value in production.items():
 				self.production[key] -= value
+				if self.production[key] < 0:
+					unable_to_pay = True
+					depleted_resource[key] = value
 		if upkeep:
 			for key, value in upkeep.items():
 				self.upkeep[key] -= value
+				if self.upkeep[key] < 0:
+					unable_to_pay = True
+					depleted_resource[key] = value
+		if unable_to_pay:
+			print(f"Cannot afford Unit, need at least:")
+			for key, value in depleted_resource.items():
+				print(f"\t-{value} {key}s")
+			if resources:
+				self.add(resources=resources)
+			if production:
+				self.add(production=production)
+			if upkeep:
+				self.add(upkeep=upkeep)
+			return False
+		return True
 	def day_change(self):
 		for key, value in self.resources.items():
 			self.resources[key] += self.production[key] - self.upkeep[key]
 	def __str__(self):
 		return f"{'-' * 50}\nResources:\n\tCorn: {self.resources['corn']}\n\tGas: {self.resources['gas']}\n\tSteel: {self.resources['steel']}\n\tCash: {self.resources['cash']}\n\tManpower: {self.resources['manpower']}\n\tWar Bonds: {self.resources['war_bonds']}\nProduction:\n\tCorn: {self.production['corn']}\n\tGas: {self.production['gas']}\n\tSteel: {self.production['steel']}\n\tCash: {self.production['cash']}\n\tManpower: {self.production['manpower']}\n\tWar Bonds: {self.production['war_bonds']}\n Upkeep:\n\tCorn: {self.upkeep['corn']}\n\tGas: {self.upkeep['gas']}\n\tSteel: {self.upkeep['steel']}\n\tCash: {self.upkeep['cash']}\n\tManpower: {self.upkeep['manpower']}\n\tWar Bonds: {self.upkeep['war_bonds']}\n{'-' * 50}"
 
-game = Game("Game 1", "Ohio", "Axis", resources={'corn':550}, production={'corn': 100}, upkeep={'corn':500})
+game = Game("Game 1", "Ohio", "Axis", resources={'corn':0, 'steel': 10000, 'gas': 10000, 'cash': 50000, 'manpower': 30000})
 
-militia = units.Militia("Militia", 1, game)
+militia = units.Militia("Militia", 2, game)
 print(militia)
 print(game.resources)
