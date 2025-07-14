@@ -446,17 +446,17 @@ class Mechanized_Infantry(Unit):
 
 	def __init__(self, level, game, territory=None, buildings=None, health=None, build=True):
 		super().__init__(level, game, territory, buildings, health)
-		self.name = "Motorized Infantry"
-		self.description = "Motorized Infantry has the strength of nromal infantry and adds additional speed a high view range to it, in which it also reveals stealth units. As offensive unit it is best used for conquering cities."
-		self.special = "Can uncover stealth units of the same of lower stealth level."
-		self.armor_class = "unarmored"
+		self.name = "Mechanized Infantry"
+		self.description = "Mechanized Infantry combines the strengths of infantry with the endurance of armored vehicles. As an allrounder it can be used for both offensive and defenseive maneuvers. It is most effective against unarmored targets."
+		self.special = None
+		self.armor_class = "light armor"
 		if build:
 			self.update_stats()
 			self.pay_costs()
 			if health:
 				self.health = health
 			if not self.can_afford_unit:
-				raise ValueError("Cannot afford Mot. Infantry. Please do not try to bypass create() method! Instead, use game.add_unit()")
+				raise ValueError("Cannot afford Mech. Infantry. Please do not try to bypass create() method! Instead, use game.add_unit()")
 	def update_stats(self):
 		match self.game.faction:
 			case "Axis":
