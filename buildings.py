@@ -60,9 +60,15 @@ class Aircraft_Factory(Buildings):
 			case 1:
 				self.health = 20
 				self.effects = 100
-				self.refueling_time = 0.5	### in hours ###
+				self.refueling_time = 30	### in minutes ###
 				self.upgrade_costs = {'gas': 2350, 'corn': 1250, 'cash': 3600}
 				self.upgrade_time = 0.5
+			case 2:
+				self.health = 40
+				self.effects = 200
+				self.refueling_time = 25
+				self.upgrade_costs = {'gas': 3150, 'corn': 1650, 'cash': 4800}
+				self.upgrade_time = 4
 
 class Secret_Lab(Buildings):
 	def __init__(self, level, game):
@@ -74,6 +80,11 @@ class Secret_Lab(Buildings):
 				self.effects = 100
 				self.upgrade_costs = {'steel': 1400, 'gas': 2200, 'cash': 3600}
 				self.upgrade_time = 0.5
+			case 2:
+				self.health = 40
+				self.effects = 200
+				self.upgrade_costs = {'steel': 1850, 'gas': 2950, 'cash': 4800}
+				self.upgrade_time = 4
 
 class Industry(Buildings):
 	def __init__(self, level, game):
@@ -95,7 +106,16 @@ class Industry(Buildings):
 				self.effects = 50
 				self.upgrade_costs = {'steel': 2450, 'gas': 2850, 'cash': 5300}
 				self.upgrade_time = 20
-
+			case 4:
+				self.health = 120	
+				self.effects = 80
+				self.upgrade_costs = {'steel': 3250, 'gas': 3800, 'cash': 7050}
+				self.upgrade_time = 26
+			case 5:
+				self.health = 160
+				self.effects = 120
+				self.upgrade_costs = None
+				self.upgrade_time = None
 class Recruiting_Station(Buildings):
 	def __init__(self, level, game):
 		super().__init__(level, game)
@@ -125,8 +145,12 @@ class Propaganda_Office(Buildings):
 			case 2:
 				self.health = 60
 				self.effects = 23
-				self.upgrade_costs = {'gas': 2400, 'corn': 1350, 'gas': 1050}
+				self.upgrade_costs = {'cash': 2400, 'corn': 1350, 'gas': 1050}
 				self.upgrade_time = 6
+			case 3:
+				self.health = 120
+				self.effects = 40
+				self.upgrade_
 
 class Bunkers(Buildings):
 	def __init__(self, level, game):
@@ -153,6 +177,11 @@ class Bunkers(Buildings):
 				self.effects = -60
 				self.upgrade_costs = {'steel': 2050, 'gas': 1550, 'cash': 3500}
 				self.upgrade_time = 15
+			case 5:
+				self.health = 200
+				self.effects = -75
+				self.upgrade_costs = None
+				self.upgrade_time = None
 
 class Infrastructure(Buildings):
 	def __init__(self, level, game):
