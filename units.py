@@ -43,7 +43,22 @@ class Unit:
 			basic += (f"Unit Name: {self.name}\n")
 		basic += (f"Unit level: {self.level}\nUnit Faction: {self.game.faction}\nUnit Health: {self.health}\nUnit Speed: {self.speed}\nUnit View Range: {self.view_range}\nUnit Attack Range: {self.attack_range}\nDay available: {self.day_available}\n")
 		if self.combat:
-			combat_info = (f"{'=' * 35}\nAttack Unarmored: {self.combat['unarmored']['attack']}\nDefense against Unarmored: {self.combat['unarmored']['defense']}\n{"=" * 35}\nAttack Light Armor: {self.combat['light_armor']['attack']}\nDefense Against Light Armor: {self.combat['light_armor']['defense']}\n{'=' * 35}\nAttack Heavy Armor: {self.combat['heavy_armor']['attack']}\nDefense Against Heavy Armor: {self.combat['heavy_armor']['defense']}\n{'=' * 35}\nAttack Airplane: {self.combat['airplane']['attack']}\nDefense Against Airplane: {self.combat['airplane']['defense']}\n{'=' * 35}\nAttack ship: {self.combat['ship']['attack']}\nDefense Against ships: {self.combat['ship']['defense']}\n{'=' * 35}\nAttack submarine: {self.combat['submarine']['attack']}\nDefense Against submarine: {self.combat['submarine']['defense']}\n{'=' * 35}\nAttack Buildings: {self.combat['buildings']['attack']}\nDefense Against Buildings: {self.combat['buildings']['defense']}\n{'=' * 35}\nAttack morale: {self.combat['morale']}\n{'=' * 35}\n\n\n{'=' * 35}\nResearch Costs: {self.research_costs}\nProduction Costs: {self.production_costs}\nDaily Costs: {self.daily_costs}\nTerrain Effects: {self.terrain_effects}\n{'=' * 35}\n")
+			combat_info = (f"\n{'=' * 35}\nAttack Unarmored: {self.combat['unarmored']['attack']}\nDefense against Unarmored: {self.combat['unarmored']['defense']}\n{"=" * 35}\nAttack Light Armor: {self.combat['light_armor']['attack']}\nDefense Against Light Armor: {self.combat['light_armor']['defense']}\n{'=' * 35}\nAttack Heavy Armor: {self.combat['heavy_armor']['attack']}\nDefense Against Heavy Armor: {self.combat['heavy_armor']['defense']}\n{'=' * 35}\nAttack Airplane: {self.combat['airplane']['attack']}\nDefense Against Airplane: {self.combat['airplane']['defense']}\n{'=' * 35}\nAttack ship: {self.combat['ship']['attack']}\nDefense Against ships: {self.combat['ship']['defense']}\n{'=' * 35}\nAttack submarine: {self.combat['submarine']['attack']}\nDefense Against submarine: {self.combat['submarine']['defense']}\n{'=' * 35}\nAttack Buildings: {self.combat['buildings']['attack']}\nDefense Against Buildings: {self.combat['buildings']['defense']}\n{'=' * 35}\nAttack morale: {self.combat['morale']}\n{'=' * 35}\n\n\n{'=' * 35}\n")
+			combat_info += (f"Research Costs:\n")
+			for key, value in self.research_costs.items():
+				combat_info += (f"\t{key}: {value}\n")
+			combat_info += (f"\nProduction Costs:\n")
+			for key, value in self.production_costs.items():
+				combat_info += (f"\t{key}: {value}\n")
+			combat_info += (f"\nDaily Costs:\n")
+			for key, value in self.daily_costs.items():
+				combat_info += (f"\t{key}: {value}\n")
+			combat_info += (f"\nTerrain Effects: \n")
+			for key, value in self.terrain_effects.items():
+				combat_info += (f"\t{key}:\n") 
+				for k, v in value.items():
+					combat_info += (f"\t\t{k}: {v}\n")
+			combat_info += (f"{'=' * 35}\n")
 			basic += combat_info
 		basic += f"{"-" * 50}"
 		return basic
@@ -59,6 +74,7 @@ class Militia(Unit):
 		return unit
 
 	def __init__(self, level, game, build=True):
+
 		super().__init__(level, game)
 		self.name = "Militia"
 		self.description = "The militia is a cheap defensive unit. Due to its slow speed and fast production time its main purpose is to defend own provinces and, due to its stealth characteristics, to ambush enemy attackers."
