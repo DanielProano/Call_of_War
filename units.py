@@ -462,10 +462,10 @@ class Mechanized_Infantry(Unit):
 			case "Axis":
 				match self.level:
 					case 1:
-						self.combat = {"unarmored": {"attack": 7.8, "defense": 5.2}, "light_armor": {"attack": 3.5, "defense": 2.3}, "heavy_armor": {"attack": 2.6, "defense": 1.7}, "airplane": {"attack": 2.6, "defense": 1.7}, "ship": {"attack": 1.7, "defense": 1.1}, "submarine": {"attack": 1.7, "defense": 1.1}, "buildings": {"attack": 0.5, "defense": 0.3}, "morale": 0.1}
-						self.health = 23
-						self.speed = 69
-						self.view_range = 72
+						self.combat = {"unarmored": {"attack": 9.8, "defense": 9.8}, "light_armor": {"attack": 5.2, "defense": 5.2}, "heavy_armor": {"attack": 4.0, "defense": 4.0}, "airplane": {"attack": 4.0, "defense": 4.0}, "ship": {"attack": 2.3, "defense": 2.3}, "submarine": {"attack": 2.6, "defense": 2.6}, "buildings": {"attack": 0.7, "defense": 0.7}, "morale": 0.1}
+						self.health = 40
+						self.speed = 55
+						self.view_range = 42
 						self.attack_range = 0
 						self.production_costs = {'gas': 1700, 'corn': 1100, 'cash': 1400, 'manpower': 1300}
 						self.research_costs = {'corn': 1800, 'gas': 2750, 'cash': 4400}
