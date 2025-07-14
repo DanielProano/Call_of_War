@@ -432,3 +432,46 @@ class Motorized_Infantry(Unit):
 						self.day_available = 16
 						self.terrain_effects = {'plains': {'HP': 75, 'armor': 'soldier', 'speed': 0.25, 'strength': 0.25}, 'hills': {'HP': 75, 'armor': 'soldier', 'speed': -0.25, 'strength': None}, 'mountains': {'HP': 75, 'armor': 'soldier', 'speed': -0.5, 'strength': None}, 'forest': {'HP': 75, 'armor': 'soldier', 'speed': -0.25, 'strength': None}, 'urban': {'HP': 75, 'armor': 'soldier', 'speed': None, 'strength': 0.25}, 'sea': {'HP': 12, 'armor': 'ship', 'speed': None, 'strength': None}, 'enemy_territory': {'HP': None, 'armor': None, 'speed': -0.50, 'strength': None}}
 
+class Mechanized_Infantry(Unit):
+	@classmethod
+	def create(cls, level, game, territory=None, buildings=None, health=None):
+		unit = cls(level, game, territory, buildings, health, build=False)
+		unit.update_stats()
+		unit.pay_costs()
+		if health:
+			unit.health = health
+		if not unit.can_afford_unit:
+			return None
+		return unit
+
+	def __init__(self, level, game, territory=None, buildings=None, health=None, build=True):
+		super().__init__(level, game, territory, buildings, health)
+		self.name = "Motorized Infantry"
+		self.description = "Motorized Infantry has the strength of nromal infantry and adds additional speed a high view range to it, in which it also reveals stealth units. As offensive unit it is best used for conquering cities."
+		self.special = "Can uncover stealth units of the same of lower stealth level."
+		self.armor_class = "unarmored"
+		if build:
+			self.update_stats()
+			self.pay_costs()
+			if health:
+				self.health = health
+			if not self.can_afford_unit:
+				raise ValueError("Cannot afford Mot. Infantry. Please do not try to bypass create() method! Instead, use game.add_unit()")
+	def update_stats(self):
+		match self.game.faction:
+			case "Axis":
+				match self.level:
+					case 1:
+						self.combat = {"unarmored": {"attack": 7.8, "defense": 5.2}, "light_armor": {"attack": 3.5, "defense": 2.3}, "heavy_armor": {"attack": 2.6, "defense": 1.7}, "airplane": {"attack": 2.6, "defense": 1.7}, "ship": {"attack": 1.7, "defense": 1.1}, "submarine": {"attack": 1.7, "defense": 1.1}, "buildings": {"attack": 0.5, "defense": 0.3}, "morale": 0.1}
+						self.health = 23
+						self.speed = 69
+						self.view_range = 72
+						self.attack_range = 0
+						self.production_costs = {'gas': 1700, 'corn': 1100, 'cash': 1400, 'manpower': 1300}
+						self.research_costs = {'corn': 1800, 'gas': 2750, 'cash': 4400}
+						self.daily_costs = {'corn': 50, 'manpower': 58, 'gas': 75, 'cash': 63}
+						self.minimum_production_time = 3.75
+						self.research_time = 8
+						self.day_available = 1
+						self.terrain_effects = {'plains': {'HP': 23, 'armor': 'soldier', 'speed': 0.25, 'strength': 0.25}, 'hills': {'HP': 23, 'armor': 'soldier', 'speed': -0.25, 'strength': None}, 'mountains': {'HP': 23, 'armor': 'soldier', 'speed': -0.5, 'strength': None}, 'forest': {'HP': 23, 'armor': 'soldier', 'speed': -0.25, 'strength': None}, 'urban': {'HP': 23, 'armor': 'soldier', 'speed': None, 'strength': 0.25}, 'sea': {'HP': 12, 'armor': 'ship', 'speed': None, 'strength': None}, 'enemy_territory': {'HP': None, 'armor': None, 'speed': -0.50, 'strength': None}}
+
