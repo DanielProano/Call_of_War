@@ -7,6 +7,7 @@ class Game:
 		self.faction = faction
 		self.resources = Resources(resources, production, upkeep)
 		self.units = []
+		self.enemy_units = []
 	def update(self, game_name, country, faction):
 		self.game_name = game_name
 		self.country = country

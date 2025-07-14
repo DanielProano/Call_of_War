@@ -323,4 +323,112 @@ class Infantry(Unit):
 				pass
 			case "Pan-Asian":
 				pass
-		
+
+class Motorized_Infantry(Unit):
+	@classmethod
+	def create(cls, level, game, territory=None, buildings=None, health=None):
+		unit = cls(level, game, territory, buildings, health, build=False)
+		unit.update_stats()
+		unit.pay_costs()
+		if health:
+			unit.health = health
+		if not unit.can_afford_unit:
+			return None
+		return unit
+
+	def __init__(self, level, game, territory=None, buildings=None, health=None, build=True):
+		super().__init__(level, game, territory, buildings, health)
+		self.name = "Motorized Infantry"
+		self.description = "Motorized Infantry has the strength of nromal infantry and adds additional speed a high view range to it, in which it also reveals stealth units. As offensive unit it is best used for conquering cities."
+		self.special = "Can uncover stealth units of the same of lower stealth level."
+		self.armor_class = "unarmored"
+		if build:
+			self.update_stats()
+			self.pay_costs()
+			if health:
+				self.health = health
+			if not self.can_afford_unit:
+				raise ValueError("Cannot afford Mot. Infantry. Please do not try to bypass create() method! Instead, use game.add_unit()")
+	def update_stats(self):
+		match self.game.faction:
+			case "Axis":
+				match self.level:
+					case 1:
+						self.combat = {"unarmored": {"attack": 7.8, "defense": 5.2}, "light_armor": {"attack": 3.5, "defense": 2.3}, "heavy_armor": {"attack": 2.6, "defense": 1.7}, "airplane": {"attack": 2.6, "defense": 1.7}, "ship": {"attack": 1.7, "defense": 1.1}, "submarine": {"attack": 1.7, "defense": 1.1}, "buildings": {"attack": 0.5, "defense": 0.3}, "morale": 0.1}
+						self.health = 23
+						self.speed = 69
+						self.view_range = 72
+						self.attack_range = 0
+						self.production_costs = {'gas': 1700, 'corn': 1100, 'cash': 1400, 'manpower': 1300}
+						self.research_costs = {'corn': 1800, 'gas': 2750, 'cash': 4400}
+						self.daily_costs = {'corn': 50, 'manpower': 58, 'gas': 75, 'cash': 63}
+						self.minimum_production_time = 3.75
+						self.research_time = 8
+						self.day_available = 1
+						self.terrain_effects = {'plains': {'HP': 23, 'armor': 'soldier', 'speed': 0.25, 'strength': 0.25}, 'hills': {'HP': 23, 'armor': 'soldier', 'speed': -0.25, 'strength': None}, 'mountains': {'HP': 23, 'armor': 'soldier', 'speed': -0.5, 'strength': None}, 'forest': {'HP': 23, 'armor': 'soldier', 'speed': -0.25, 'strength': None}, 'urban': {'HP': 23, 'armor': 'soldier', 'speed': None, 'strength': 0.25}, 'sea': {'HP': 12, 'armor': 'ship', 'speed': None, 'strength': None}, 'enemy_territory': {'HP': None, 'armor': None, 'speed': -0.50, 'strength': None}}
+					case 2:
+						self.combat = {"unarmored": {"attack": 10.8, "defense": 7.2}, "light_armor": {"attack": 4.8, "defense": 3.2}, "heavy_armor": {"attack": 3.5, "defense": 2.3}, "airplane": {"attack": 3.5, "defense": 2.3}, "ship": {"attack": 2.6, "defense": 1.7}, "submarine": {"attack": 2.6, "defense": 1.7}, "buildings": {"attack": 0.7, "defense": 0.5}, "morale": 0.1}
+						self.health = 29
+						self.speed = 77
+						self.view_range = 72
+						self.attack_range = 0
+						self.production_costs = {'gas': 1700, 'corn': 1200, 'cash': 1400, 'manpower': 1700}
+						self.research_costs = {'corn': 2000, 'gas': 2950, 'cash': 4850}
+						self.daily_costs = {'corn': 53, 'manpower': 58, 'gas': 78, 'cash': 65}
+						self.minimum_production_time = 3.75
+						self.research_time = 12
+						self.day_available = 2
+						self.terrain_effects = {'plains': {'HP': 29, 'armor': 'soldier', 'speed': 0.25, 'strength': 0.25}, 'hills': {'HP': 29, 'armor': 'soldier', 'speed': -0.25, 'strength': None}, 'mountains': {'HP': 29, 'armor': 'soldier', 'speed': -0.5, 'strength': None}, 'forest': {'HP': 29, 'armor': 'soldier', 'speed': -0.25, 'strength': None}, 'urban': {'HP': 29, 'armor': 'soldier', 'speed': None, 'strength': 0.25}, 'sea': {'HP': 12, 'armor': 'ship', 'speed': None, 'strength': None}, 'enemy_territory': {'HP': None, 'armor': None, 'speed': -0.50, 'strength': None}}
+					case 3:
+						self.combat = {"unarmored": {"attack": 14.3, "defense": 9.5}, "light_armor": {"attack": 6.9, "defense": 4.6}, "heavy_armor": {"attack": 5.2, "defense": 3.5}, "airplane": {"attack": 5.2, "defense": 3.5}, "ship": {"attack": 3.5, "defense": 2.3}, "submarine": {"attack": 3.5, "defense": 2.3}, "buildings": {"attack": 1.2, "defense": 0.8}, "morale": 0.2}
+						self.health = 35
+						self.speed = 85
+						self.view_range = 72
+						self.attack_range = 0
+						self.production_costs = {'gas': 1900, 'corn': 1300, 'cash': 1600, 'manpower': 1300}
+						self.research_costs = {'corn': 2450, 'gas': 3700, 'cash': 6200}
+						self.daily_costs = {'corn': 58, 'manpower': 58, 'gas': 88, 'cash': 73}
+						self.minimum_production_time = 5.75
+						self.research_time = 16
+						self.day_available = 4
+						self.terrain_effects = {'plains': {'HP': 35, 'armor': 'soldier', 'speed': 0.25, 'strength': 0.25}, 'hills': {'HP': 35, 'armor': 'soldier', 'speed': -0.25, 'strength': None}, 'mountains': {'HP': 35, 'armor': 'soldier', 'speed': -0.5, 'strength': None}, 'forest': {'HP': 35, 'armor': 'soldier', 'speed': -0.25, 'strength': None}, 'urban': {'HP': 35, 'armor': 'soldier', 'speed': None, 'strength': 0.25}, 'sea': {'HP': 12, 'armor': 'ship', 'speed': None, 'strength': None}, 'enemy_territory': {'HP': None, 'armor': None, 'speed': -0.50, 'strength': None}}
+					case 4:
+						self.combat = {"unarmored": {"attack": 18.2, "defense": 12.1}, "light_armor": {"attack": 8.6, "defense": 5.7}, "heavy_armor": {"attack": 6.9, "defense": 4.6}, "airplane": {"attack": 6.9, "defense": 4.6}, "ship": {"attack": 5.2, "defense": 3.5}, "submarine": {"attack": 5.2, "defense": 3.5}, "buildings": {"attack": 1.4, "defense": 0.9}, "morale": 0.2}
+						self.health = 46
+						self.speed = 93
+						self.view_range = 72
+						self.attack_range = 0
+						self.production_costs = {'gas': 2200, 'corn': 1400, 'cash': 1800, 'manpower': 1300}
+						self.research_costs = {'corn': 3100, 'gas': 4650, 'cash': 8000}
+						self.daily_costs = {'corn': 65, 'manpower': 60, 'gas': 100, 'cash': 83}
+						self.minimum_production_time = 6.75
+						self.research_time = 22
+						self.day_available = 8
+						self.terrain_effects = {'plains': {'HP': 46, 'armor': 'soldier', 'speed': 0.25, 'strength': 0.25}, 'hills': {'HP': 46, 'armor': 'soldier', 'speed': -0.25, 'strength': None}, 'mountains': {'HP': 46, 'armor': 'soldier', 'speed': -0.5, 'strength': None}, 'forest': {'HP': 46, 'armor': 'soldier', 'speed': -0.25, 'strength': None}, 'urban': {'HP': 46, 'armor': 'soldier', 'speed': None, 'strength': 0.25}, 'sea': {'HP': 12, 'armor': 'ship', 'speed': None, 'strength': None}, 'enemy_territory': {'HP': None, 'armor': None, 'speed': -0.50, 'strength': None}}
+					case 5:
+						self.combat = {"unarmored": {"attack": 24.1, "defense": 16.1}, "light_armor": {"attack": 12.1, "defense": 8.1}, "heavy_armor": {"attack": 9.2, "defense": 6.1}, "airplane": {"attack": 9.2, "defense": 6.1}, "ship": {"attack": 6.9, "defense": 4.6}, "submarine": {"attack": 6.9, "defense": 4.6}, "buildings": {"attack": 2.1, "defense": 1.4}, "morale": 0.3}
+						self.health = 58
+						self.speed = 101
+						self.view_range = 72
+						self.attack_range = 0
+						self.production_costs = {'gas': 2400, 'corn': 1700, 'cash': 2000, 'manpower': 1400}
+						self.research_costs = {'corn': 3750, 'gas': 5600, 'cash': 9800}
+						self.daily_costs = {'corn': 75, 'manpower': 63, 'gas': 110, 'cash': 93}
+						self.minimum_production_time = 7.75
+						self.research_time = 30
+						self.day_available = 12
+						self.terrain_effects = {'plains': {'HP': 58, 'armor': 'soldier', 'speed': 0.25, 'strength': 0.25}, 'hills': {'HP': 58, 'armor': 'soldier', 'speed': -0.25, 'strength': None}, 'mountains': {'HP': 58, 'armor': 'soldier', 'speed': -0.5, 'strength': None}, 'forest': {'HP': 58, 'armor': 'soldier', 'speed': -0.25, 'strength': None}, 'urban': {'HP': 58, 'armor': 'soldier', 'speed': None, 'strength': 0.25}, 'sea': {'HP': 12, 'armor': 'ship', 'speed': None, 'strength': None}, 'enemy_territory': {'HP': None, 'armor': None, 'speed': -0.50, 'strength': None}}
+					case 6:
+						self.combat = {"unarmored": {"attack": 29.9, "defense": 19.9}, "light_armor": {"attack": 16.1, "defense": 10.7}, "heavy_armor": {"attack": 12.1, "defense": 8.1}, "airplane": {"attack": 12.1, "defense": 8.1}, "ship": {"attack": 9.8, "defense": 6.5}, "submarine": {"attack": 9.8, "defense": 6.5}, "buildings": {"attack": 3.2, "defense": 2.1}, "morale": 0.4}
+						self.health = 75
+						self.speed = 109
+						self.view_range = 72
+						self.attack_range = 0
+						self.production_costs = {'gas': 2700, 'corn': 1800, 'cash': 2400, 'manpower': 2000}
+						self.research_costs = {'corn': 4400, 'gas': 6550, 'cash': 1160}
+						self.daily_costs = {'corn': 83, 'manpower': 63, 'gas': 123, 'cash': 103}
+						self.minimum_production_time = 8.5
+						self.research_time = 38
+						self.day_available = 16
+						self.terrain_effects = {'plains': {'HP': 75, 'armor': 'soldier', 'speed': 0.25, 'strength': 0.25}, 'hills': {'HP': 75, 'armor': 'soldier', 'speed': -0.25, 'strength': None}, 'mountains': {'HP': 75, 'armor': 'soldier', 'speed': -0.5, 'strength': None}, 'forest': {'HP': 75, 'armor': 'soldier', 'speed': -0.25, 'strength': None}, 'urban': {'HP': 75, 'armor': 'soldier', 'speed': None, 'strength': 0.25}, 'sea': {'HP': 12, 'armor': 'ship', 'speed': None, 'strength': None}, 'enemy_territory': {'HP': None, 'armor': None, 'speed': -0.50, 'strength': None}}
+
