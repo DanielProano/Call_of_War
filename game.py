@@ -11,8 +11,8 @@ class Game:
 		self.game_name = game_name
 		self.country = country
 		self.faction = faction
-	def add_unit(self, unit_cls, level, territory=None, buildings=None):
-		unit = unit_cls.create(level, self, territory, buildings)
+	def add_unit(self, unit_cls, level, territory=None, buildings=None, health=None):
+		unit = unit_cls.create(level, self, territory, buildings, health)
 		if unit:
 			self.units.append(unit)
 			return unit
