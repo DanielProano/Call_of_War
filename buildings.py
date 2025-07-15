@@ -26,6 +26,11 @@ class Barracks(Buildings):
 				self.effects = 2
 				self.construction_costs = {'steel': 1800, 'corn': 3000, 'cash': 4800}
 				self.construction_time = 4
+			case 3:
+				self.health = 80
+				self.effects = 4
+				self.construction_costs = {'steel': 2400, 'corn': 4000, 'cash': 6400}
+				self.construction_time = 12
 
 class Ordance_Foundry(Buildings):	
 	def __init__(self, level, game):
@@ -80,6 +85,18 @@ class Aircraft_Factory(Buildings):
 				self.refueling_time = 25
 				self.construction_costs = {'gas': 3150, 'corn': 1650, 'cash': 4800}
 				self.construction_time = 4
+			case 3:
+				self.health = 80
+				self.effects = 4
+				self refueling_time = 20
+				self.construction_costs = {'gas': 4200, 'corn': 2200, 'cash': 6400}
+				self.construction_time = 12
+			case 4:
+				self.health = 120
+				self.effects = 8
+				self.refueling_time = 15
+				self.construction_costs = {'gas': 5600, 'corn': 2950, 'cash': 8500}
+				self.construction_time = 24
 
 class Secret_Lab(Buildings):
 	def __init__(self, level, game):
@@ -106,6 +123,11 @@ class Secret_Lab(Buildings):
 				self.effects = 8
 				self.construction_costs = {'steel': 3250, 'gas': 5200, 'cash': 8500}
 				self.construction_time = 24
+			case 5:
+				self.health = 160
+				self.effects = 16
+				self.construction_costs = {'gas': 6900, 'steel': 4300, 'cash': 11300}
+				self.construction_time = 32
 
 class Industry(Buildings):
 	def __init__(self, level, game):
