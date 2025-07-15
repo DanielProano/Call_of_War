@@ -67,6 +67,11 @@ class Tank_Plant(Buildings):
 				self.effects = 8
 				self.construction_costs = {'steel': 4900, 'gas': 3500, 'cash': 8500}
 				self.construction_time = 24
+			case 5:
+				self.health = 160
+				self.effects = 16
+				self.construction_costs = {'steel': 6500, 'gas': 4650, 'cash': 11300}
+				self.construction_time = 32
 
 class Aircraft_Factory(Buildings):
 	def __init__(self, level, game):
