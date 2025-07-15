@@ -174,6 +174,11 @@ class Recruiting_Station(Buildings):
 				self.effects = 1
 				self.construction_costs = {'steel': 1450, 'corn': 2150, 'cash': 3600}
 				self.construction_time = 12
+			case 3:
+				self.health = 120
+				self.effects = 2
+				self.construction_costs = {'steel': 1950, 'corn': 2850, 'cash': 4800}
+				self.construction_time = 18
 
 class Propaganda_Office(Buildings):
 	def __init__(self, level, game):
