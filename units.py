@@ -237,7 +237,7 @@ class Infantry(Unit):
 						self.minimum_production_time = 2.5
 						self.research_time = 0.083
 						self.day_available = 1
-						self.terrain_effects = {'plains': {'HP': 17, 'armor': 'soldier', 'speed': None, 'strength': None}, 'hills': {'HP': 17, 'armor': 'soldier', 'speed': None, 'strength': None}, 'mountains': {'HP': 17, 'armor': 'soldier', 'speed': -1.5, 'strength': 1.20}, 'forest': {'HP': 17, 'armor': 'soldier', 'speed': None, 'strength': 1.20}, 'urban': {'HP': 17, 'armor': 'soldier', 'speed': None, 'strength': 1.5}, 'sea': {'HP': 12, 'armor': 'ship', 'speed': None, 'strength': None}, 'enemy_territory': {'HP': None, 'armor': None, 'speed': -1.50, 'strength': None}}
+						self.terrain_effects = {'plains': {'HP': 17, 'armor': 'unarmored', 'speed': None, 'strength': None}, 'hills': {'HP': 17, 'armor': 'unarmored', 'speed': None, 'strength': None}, 'mountains': {'HP': 17, 'armor': 'unarmored', 'speed': -1.5, 'strength': 1.20}, 'forest': {'HP': 17, 'armor': 'unarmored', 'speed': None, 'strength': 1.20}, 'urban': {'HP': 17, 'armor': 'unarmored', 'speed': None, 'strength': 1.5}, 'sea': {'HP': 12, 'armor': 'ship', 'speed': None, 'strength': None}, 'enemy_territory': {'HP': None, 'armor': None, 'speed': -1.50, 'strength': None}}
 					case 2:
 						self.combat = {"unarmored": {"attack": 4.6, "defense": 6.9}, "light_armor": {"attack": 2.3, "defense": 3.4}, "heavy_armor": {"attack": 1.7, "defense": 2.6}, "airplane": {"attack": 1.7, "defense": 2.6}, "ship": {"attack": 1.2, "defense": 1.8}, "submarine": {"attack": 1.2, "defense": 1.8}, "buildings": {"attack": 0.3, "defense": 0.5}, "morale": 0.1}
 						self.health = 23
@@ -250,7 +250,7 @@ class Infantry(Unit):
 						self.minimum_production_time = 3
 						self.research_time = 5
 						self.day_available = 2
-						self.terrain_effects = {'plains': {'HP': 23, 'armor': 'soldier', 'speed': None, 'strength': None}, 'hills': {'HP': 23, 'armor': 'soldier', 'speed': None, 'strength': None}, 'mountains': {'HP': 23, 'armor': 'soldier', 'speed': -1.5, 'strength': 1.20}, 'forest': {'HP': 23, 'armor': 'soldier', 'speed': None, 'strength': 1.20}, 'urban': {'HP': 23, 'armor': 'soldier', 'speed': None, 'strength': 1.5}, 'sea': {'HP': 12, 'armor': 'ship', 'speed': None, 'strength': None}, 'enemy_territory': {'HP': None, 'armor': None, 'speed': -1.50, 'strength': None}}
+						self.terrain_effects = {'plains': {'HP': 23, 'armor': 'unarmored', 'speed': None, 'strength': None}, 'hills': {'HP': 23, 'armor': 'unarmored', 'speed': None, 'strength': None}, 'mountains': {'HP': 23, 'armor': 'unarmored', 'speed': -1.5, 'strength': 1.20}, 'forest': {'HP': 23, 'armor': 'unarmored', 'speed': None, 'strength': 1.20}, 'urban': {'HP': 23, 'armor': 'unarmored', 'speed': None, 'strength': 1.5}, 'sea': {'HP': 12, 'armor': 'ship', 'speed': None, 'strength': None}, 'enemy_territory': {'HP': None, 'armor': None, 'speed': -1.50, 'strength': None}}
 					case 3:
 						self.combat = {"unarmored": {"attack": 6.3, "defense": 9.4}, "light_armor": {"attack": 3.1, "defense": 4.6}, "heavy_armor": {"attack": 2.3, "defense": 3.4}, "airplane": {"attack": 2.3, "defense": 3.4}, "ship": {"attack": 1.7, "defense": 2.6}, "submarine": {"attack": 1.7, "defense": 2.6}, "buildings": {"attack": 0.5, "defense": 0.7}, "morale": 0.1}
 						self.health = 29
@@ -263,7 +263,7 @@ class Infantry(Unit):
 						self.minimum_production_time = 3.5
 						self.research_time = 8
 						self.day_available = 3
-						self.terrain_effects = {'plains': {'HP': 29, 'armor': 'soldier', 'speed': None, 'strength': None}, 'hills': {'HP': 29, 'armor': 'soldier', 'speed': None, 'strength': None}, 'mountains': {'HP': 23, 'armor': 'soldier', 'speed': -1.5, 'strength': 1.20}, 'forest': {'HP': 29, 'armor': 'soldier', 'speed': None, 'strength': 1.20}, 'urban': {'HP': 29, 'armor': 'soldier', 'speed': None, 'strength': 1.5}, 'sea': {'HP': 12, 'armor': 'ship', 'speed': None, 'strength': None}, 'Enemy_territory': {'HP': None, 'armor': None, 'speed': -1.50, 'strength': None}}
+						self.terrain_effects = {'plains': {'HP': 29, 'armor': 'unarmored', 'speed': None, 'strength': None}, 'hills': {'HP': 29, 'armor': 'unarmored', 'speed': None, 'strength': None}, 'mountains': {'HP': 23, 'armor': 'unarmored', 'speed': -1.5, 'strength': 1.20}, 'forest': {'HP': 29, 'armor': 'unarmored', 'speed': None, 'strength': 1.20}, 'urban': {'HP': 29, 'armor': 'unarmored', 'speed': None, 'strength': 1.5}, 'sea': {'HP': 12, 'armor': 'ship', 'speed': None, 'strength': None}, 'Enemy_territory': {'HP': None, 'armor': None, 'speed': -1.50, 'strength': None}}
 					case 4:
 						self.combat = {"unarmored": {"attack": 8.1, "defense": 12.2}, "light_armor": {"attack": 4.6, "defense": 6.9}, "heavy_armor": {"attack": 3.5, "defense": 5.3}, "airplane": {"attack": 3.5, "defense": 5.3}, "ship": {"attack": 3.5, "defense": 3.5}, "submarine": {"attack": 2.3, "defense": 3.5}, "buildings": {"attack": 0.7, "defense": 1.1}, "morale": 0.2}
 						self.health = 35
@@ -276,7 +276,7 @@ class Infantry(Unit):
 						self.minimum_production_time = 4
 						self.research_time = 10
 						self.day_available = 4
-						self.terrain_effects = {'plains': {'HP': 35, 'armor': 'soldier', 'speed': None, 'strength': None}, 'hills': {'HP': 35, 'armor': 'soldier', 'speed': None, 'strength': None}, 'mountains': {'HP': 35, 'armor': 'soldier', 'speed': -1.5, 'strength': 1.20}, 'forest': {'HP': 35, 'armor': 'soldier', 'speed': None, 'strength': 1.20}, 'urban': {'HP': 35, 'armor': 'soldier', 'speed': None, 'strength': 1.5}, 'sea': {'HP': 12, 'armor': 'ship', 'speed': None, 'strength': None}, 'enemy_territory': {'HP': None, 'armor': None, 'speed': -1.50, 'strength': None}}
+						self.terrain_effects = {'plains': {'HP': 35, 'armor': 'unarmored', 'speed': None, 'strength': None}, 'hills': {'HP': 35, 'armor': 'unarmored', 'speed': None, 'strength': None}, 'mountains': {'HP': 35, 'armor': 'unarmored', 'speed': -1.5, 'strength': 1.20}, 'forest': {'HP': 35, 'armor': 'unarmored', 'speed': None, 'strength': 1.20}, 'urban': {'HP': 35, 'armor': 'unarmored', 'speed': None, 'strength': 1.5}, 'sea': {'HP': 12, 'armor': 'ship', 'speed': None, 'strength': None}, 'enemy_territory': {'HP': None, 'armor': None, 'speed': -1.50, 'strength': None}}
 					case 5:
 						self.combat = {"unarmored": {"attack": 10.4, "defense": 15.6}, "light_armor": {"attack": 5.8, "defense": 8.7}, "heavy_armor": {"attack": 4.6, "defense": 6.9}, "airplane": {"attack": 4.6, "defense": 6.9}, "ship": {"attack": 3.5, "defense": 5.2}, "submarine": {"attack": 3.5, "defense": 5.2}, "buildings": {"attack": 0.9, "defense": 1.3}, "morale": 0.2}
 						self.health = 46
@@ -289,7 +289,7 @@ class Infantry(Unit):
 						self.minimum_production_time = 5
 						self.research_time = 15
 						self.day_available = 8
-						self.terrain_effects = {'plains': {'HP': 46, 'armor': 'soldier', 'speed': None, 'strength': None}, 'hills': {'HP': 46, 'armor': 'soldier', 'speed': None, 'strength': None}, 'mountains': {'HP': 46, 'armor': 'soldier', 'speed': -1.5, 'strength': 1.20}, 'forest': {'HP': 46, 'armor': 'soldier', 'speed': None, 'strength': 1.20}, 'urban': {'HP': 46, 'armor': 'soldier', 'speed': None, 'strength': 1.5}, 'sea': {'HP': 12, 'armor': 'ship', 'speed': None, 'strength': None}, 'enemy_territory': {'HP': None, 'armor': None, 'speed': -1.50, 'strength': None}}
+						self.terrain_effects = {'plains': {'HP': 46, 'armor': 'unarmored', 'speed': None, 'strength': None}, 'hills': {'HP': 46, 'armor': 'unarmored', 'speed': None, 'strength': None}, 'mountains': {'HP': 46, 'armor': 'unarmored', 'speed': -1.5, 'strength': 1.20}, 'forest': {'HP': 46, 'armor': 'unarmored', 'speed': None, 'strength': 1.20}, 'urban': {'HP': 46, 'armor': 'unarmored', 'speed': None, 'strength': 1.5}, 'sea': {'HP': 12, 'armor': 'ship', 'speed': None, 'strength': None}, 'enemy_territory': {'HP': None, 'armor': None, 'speed': -1.50, 'strength': None}}
 					case 6:
 						self.combat = {"unarmored": {"attack": 13.8, "defense": 20.7}, "light_armor": {"attack": 8.1, "defense": 12.2}, "heavy_armor": {"attack": 6.1, "defense": 9.1}, "airplane": {"attack": 6.1, "defense": 9.1}, "ship": {"attack": 4.6, "defense": 6.9}, "submarine": {"attack": 4.6, "defense": 6.9}, "buildings": {"attack": 1.4, "defense": 2.1}, "morale": 0.3}
 						self.health = 58
@@ -302,7 +302,7 @@ class Infantry(Unit):
 						self.minimum_production_time = 5.5
 						self.research_time = 22
 						self.day_available = 12
-						self.terrain_effects = {'plains': {'HP': 58, 'armor': 'soldier', 'speed': None, 'strength': None}, 'hills': {'HP': 58, 'armor': 'soldier', 'speed': None, 'strength': None}, 'mountains': {'HP': 58, 'armor': 'soldier', 'speed': -1.5, 'strength': 1.20}, 'forest': {'HP': 58, 'armor': 'soldier', 'speed': None, 'strength': 1.20}, 'urban': {'HP': 58, 'armor': 'soldier', 'speed': None, 'strength': 1.5}, 'sea': {'HP': 12, 'armor': 'shi[', 'speed': None, 'strength': None}, 'enemy_territory': {'HP': None, 'armor': None, 'speed': -1.50, 'strength': None}}
+						self.terrain_effects = {'plains': {'HP': 58, 'armor': 'unarmored', 'speed': None, 'strength': None}, 'hills': {'HP': 58, 'armor': 'unarmored', 'speed': None, 'strength': None}, 'mountains': {'HP': 58, 'armor': 'unarmored', 'speed': -1.5, 'strength': 1.20}, 'forest': {'HP': 58, 'armor': 'unarmored', 'speed': None, 'strength': 1.20}, 'urban': {'HP': 58, 'armor': 'unarmored', 'speed': None, 'strength': 1.5}, 'sea': {'HP': 12, 'armor': 'shi[', 'speed': None, 'strength': None}, 'enemy_territory': {'HP': None, 'armor': None, 'speed': -1.50, 'strength': None}}
 					case 7:
 						self.combat = {"unarmored": {"attack": 17.6, "defense": 26.4}, "light_armor": {"attack": 10.7, "defense": 16.0}, "heavy_armor": {"attack": 8.1, "defense": 12.2}, "airplane": {"attack": 8.1, "defense": 12.2}, "ship": {"attack": 6.6, "defense": 9.9}, "submarine": {"attack": 6.6, "defense": 9.9}, "buildings": {"attack": 2.1, "defense": 3.1}, "morale": 0.4}
 						self.health = 75
@@ -315,7 +315,7 @@ class Infantry(Unit):
 						self.minimum_production_time = 6.25
 						self.research_time = 30
 						self.day_available = 16
-						self.terrain_effects = {'plains': {'HP': 75, 'armor': 'soldier', 'speed': None, 'strength': None}, 'hills': {'HP': 75, 'armor': 'soldier', 'speed': None, 'strength': None}, 'mountains': {'HP': 75, 'armor': 'soldier', 'speed': -1.5, 'strength': 1.20}, 'forest': {'HP': 75, 'armor': 'soldier', 'speed': None, 'strength': 1.20}, 'urban': {'HP': 75, 'armor': 'soldier', 'speed': None, 'strength': 1.5}, 'sea': {'HP': 12, 'armor': 'ship', 'speed': None, 'strength': None}, 'enemy_territory': {'HP': None, 'armor': None, 'speed': -1.50, 'strength': None}}
+						self.terrain_effects = {'plains': {'HP': 75, 'armor': 'unarmored', 'speed': None, 'strength': None}, 'hills': {'HP': 75, 'armor': 'unarmored', 'speed': None, 'strength': None}, 'mountains': {'HP': 75, 'armor': 'unarmored', 'speed': -1.5, 'strength': 1.20}, 'forest': {'HP': 75, 'armor': 'unarmored', 'speed': None, 'strength': 1.20}, 'urban': {'HP': 75, 'armor': 'unarmored', 'speed': None, 'strength': 1.5}, 'sea': {'HP': 12, 'armor': 'ship', 'speed': None, 'strength': None}, 'enemy_territory': {'HP': None, 'armor': None, 'speed': -1.50, 'strength': None}}
 
 			case "Allies":
 				pass
@@ -365,7 +365,7 @@ class Motorized_Infantry(Unit):
 						self.minimum_production_time = 3.75
 						self.research_time = 8
 						self.day_available = 1
-						self.terrain_effects = {'plains': {'HP': 23, 'armor': 'soldier', 'speed': 0.25, 'strength': 0.25}, 'hills': {'HP': 23, 'armor': 'soldier', 'speed': -0.25, 'strength': None}, 'mountains': {'HP': 23, 'armor': 'soldier', 'speed': -0.5, 'strength': None}, 'forest': {'HP': 23, 'armor': 'soldier', 'speed': -0.25, 'strength': None}, 'urban': {'HP': 23, 'armor': 'soldier', 'speed': None, 'strength': 0.25}, 'sea': {'HP': 12, 'armor': 'ship', 'speed': None, 'strength': None}, 'enemy_territory': {'HP': None, 'armor': None, 'speed': -0.50, 'strength': None}}
+						self.terrain_effects = {'plains': {'HP': 23, 'armor': 'unarmored', 'speed': 0.25, 'strength': 0.25}, 'hills': {'HP': 23, 'armor': 'unarmored', 'speed': -0.25, 'strength': None}, 'mountains': {'HP': 23, 'armor': 'unarmored', 'speed': -0.5, 'strength': None}, 'forest': {'HP': 23, 'armor': 'unarmored', 'speed': -0.25, 'strength': None}, 'urban': {'HP': 23, 'armor': 'unarmored', 'speed': None, 'strength': 0.25}, 'sea': {'HP': 12, 'armor': 'ship', 'speed': None, 'strength': None}, 'enemy_territory': {'HP': None, 'armor': None, 'speed': -0.50, 'strength': None}}
 					case 2:
 						self.combat = {"unarmored": {"attack": 10.8, "defense": 7.2}, "light_armor": {"attack": 4.8, "defense": 3.2}, "heavy_armor": {"attack": 3.5, "defense": 2.3}, "airplane": {"attack": 3.5, "defense": 2.3}, "ship": {"attack": 2.6, "defense": 1.7}, "submarine": {"attack": 2.6, "defense": 1.7}, "buildings": {"attack": 0.7, "defense": 0.5}, "morale": 0.1}
 						self.health = 29
@@ -378,7 +378,7 @@ class Motorized_Infantry(Unit):
 						self.minimum_production_time = 3.75
 						self.research_time = 12
 						self.day_available = 2
-						self.terrain_effects = {'plains': {'HP': 29, 'armor': 'soldier', 'speed': 0.25, 'strength': 0.25}, 'hills': {'HP': 29, 'armor': 'soldier', 'speed': -0.25, 'strength': None}, 'mountains': {'HP': 29, 'armor': 'soldier', 'speed': -0.5, 'strength': None}, 'forest': {'HP': 29, 'armor': 'soldier', 'speed': -0.25, 'strength': None}, 'urban': {'HP': 29, 'armor': 'soldier', 'speed': None, 'strength': 0.25}, 'sea': {'HP': 12, 'armor': 'ship', 'speed': None, 'strength': None}, 'enemy_territory': {'HP': None, 'armor': None, 'speed': -0.50, 'strength': None}}
+						self.terrain_effects = {'plains': {'HP': 29, 'armor': 'unarmored', 'speed': 0.25, 'strength': 0.25}, 'hills': {'HP': 29, 'armor': 'unarmored', 'speed': -0.25, 'strength': None}, 'mountains': {'HP': 29, 'armor': 'unarmored', 'speed': -0.5, 'strength': None}, 'forest': {'HP': 29, 'armor': 'unarmored', 'speed': -0.25, 'strength': None}, 'urban': {'HP': 29, 'armor': 'unarmored', 'speed': None, 'strength': 0.25}, 'sea': {'HP': 12, 'armor': 'ship', 'speed': None, 'strength': None}, 'enemy_territory': {'HP': None, 'armor': None, 'speed': -0.50, 'strength': None}}
 					case 3:
 						self.combat = {"unarmored": {"attack": 14.3, "defense": 9.5}, "light_armor": {"attack": 6.9, "defense": 4.6}, "heavy_armor": {"attack": 5.2, "defense": 3.5}, "airplane": {"attack": 5.2, "defense": 3.5}, "ship": {"attack": 3.5, "defense": 2.3}, "submarine": {"attack": 3.5, "defense": 2.3}, "buildings": {"attack": 1.2, "defense": 0.8}, "morale": 0.2}
 						self.health = 35
@@ -391,7 +391,7 @@ class Motorized_Infantry(Unit):
 						self.minimum_production_time = 5.75
 						self.research_time = 16
 						self.day_available = 4
-						self.terrain_effects = {'plains': {'HP': 35, 'armor': 'soldier', 'speed': 0.25, 'strength': 0.25}, 'hills': {'HP': 35, 'armor': 'soldier', 'speed': -0.25, 'strength': None}, 'mountains': {'HP': 35, 'armor': 'soldier', 'speed': -0.5, 'strength': None}, 'forest': {'HP': 35, 'armor': 'soldier', 'speed': -0.25, 'strength': None}, 'urban': {'HP': 35, 'armor': 'soldier', 'speed': None, 'strength': 0.25}, 'sea': {'HP': 12, 'armor': 'ship', 'speed': None, 'strength': None}, 'enemy_territory': {'HP': None, 'armor': None, 'speed': -0.50, 'strength': None}}
+						self.terrain_effects = {'plains': {'HP': 35, 'armor': 'unarmored', 'speed': 0.25, 'strength': 0.25}, 'hills': {'HP': 35, 'armor': 'unarmored', 'speed': -0.25, 'strength': None}, 'mountains': {'HP': 35, 'armor': 'unarmored', 'speed': -0.5, 'strength': None}, 'forest': {'HP': 35, 'armor': 'unarmored', 'speed': -0.25, 'strength': None}, 'urban': {'HP': 35, 'armor': 'unarmored', 'speed': None, 'strength': 0.25}, 'sea': {'HP': 12, 'armor': 'ship', 'speed': None, 'strength': None}, 'enemy_territory': {'HP': None, 'armor': None, 'speed': -0.50, 'strength': None}}
 					case 4:
 						self.combat = {"unarmored": {"attack": 18.2, "defense": 12.1}, "light_armor": {"attack": 8.6, "defense": 5.7}, "heavy_armor": {"attack": 6.9, "defense": 4.6}, "airplane": {"attack": 6.9, "defense": 4.6}, "ship": {"attack": 5.2, "defense": 3.5}, "submarine": {"attack": 5.2, "defense": 3.5}, "buildings": {"attack": 1.4, "defense": 0.9}, "morale": 0.2}
 						self.health = 46
@@ -404,7 +404,7 @@ class Motorized_Infantry(Unit):
 						self.minimum_production_time = 6.75
 						self.research_time = 22
 						self.day_available = 8
-						self.terrain_effects = {'plains': {'HP': 46, 'armor': 'soldier', 'speed': 0.25, 'strength': 0.25}, 'hills': {'HP': 46, 'armor': 'soldier', 'speed': -0.25, 'strength': None}, 'mountains': {'HP': 46, 'armor': 'soldier', 'speed': -0.5, 'strength': None}, 'forest': {'HP': 46, 'armor': 'soldier', 'speed': -0.25, 'strength': None}, 'urban': {'HP': 46, 'armor': 'soldier', 'speed': None, 'strength': 0.25}, 'sea': {'HP': 12, 'armor': 'ship', 'speed': None, 'strength': None}, 'enemy_territory': {'HP': None, 'armor': None, 'speed': -0.50, 'strength': None}}
+						self.terrain_effects = {'plains': {'HP': 46, 'armor': 'unarmored', 'speed': 0.25, 'strength': 0.25}, 'hills': {'HP': 46, 'armor': 'unarmored', 'speed': -0.25, 'strength': None}, 'mountains': {'HP': 46, 'armor': 'unarmored', 'speed': -0.5, 'strength': None}, 'forest': {'HP': 46, 'armor': 'unarmored', 'speed': -0.25, 'strength': None}, 'urban': {'HP': 46, 'armor': 'unarmored', 'speed': None, 'strength': 0.25}, 'sea': {'HP': 12, 'armor': 'ship', 'speed': None, 'strength': None}, 'enemy_territory': {'HP': None, 'armor': None, 'speed': -0.50, 'strength': None}}
 					case 5:
 						self.combat = {"unarmored": {"attack": 24.1, "defense": 16.1}, "light_armor": {"attack": 12.1, "defense": 8.1}, "heavy_armor": {"attack": 9.2, "defense": 6.1}, "airplane": {"attack": 9.2, "defense": 6.1}, "ship": {"attack": 6.9, "defense": 4.6}, "submarine": {"attack": 6.9, "defense": 4.6}, "buildings": {"attack": 2.1, "defense": 1.4}, "morale": 0.3}
 						self.health = 58
@@ -417,7 +417,7 @@ class Motorized_Infantry(Unit):
 						self.minimum_production_time = 7.75
 						self.research_time = 30
 						self.day_available = 12
-						self.terrain_effects = {'plains': {'HP': 58, 'armor': 'soldier', 'speed': 0.25, 'strength': 0.25}, 'hills': {'HP': 58, 'armor': 'soldier', 'speed': -0.25, 'strength': None}, 'mountains': {'HP': 58, 'armor': 'soldier', 'speed': -0.5, 'strength': None}, 'forest': {'HP': 58, 'armor': 'soldier', 'speed': -0.25, 'strength': None}, 'urban': {'HP': 58, 'armor': 'soldier', 'speed': None, 'strength': 0.25}, 'sea': {'HP': 12, 'armor': 'ship', 'speed': None, 'strength': None}, 'enemy_territory': {'HP': None, 'armor': None, 'speed': -0.50, 'strength': None}}
+						self.terrain_effects = {'plains': {'HP': 58, 'armor': 'unarmored', 'speed': 0.25, 'strength': 0.25}, 'hills': {'HP': 58, 'armor': 'unarmored', 'speed': -0.25, 'strength': None}, 'mountains': {'HP': 58, 'armor': 'unarmored', 'speed': -0.5, 'strength': None}, 'forest': {'HP': 58, 'armor': 'unarmored', 'speed': -0.25, 'strength': None}, 'urban': {'HP': 58, 'armor': 'unarmored', 'speed': None, 'strength': 0.25}, 'sea': {'HP': 12, 'armor': 'ship', 'speed': None, 'strength': None}, 'enemy_territory': {'HP': None, 'armor': None, 'speed': -0.50, 'strength': None}}
 					case 6:
 						self.combat = {"unarmored": {"attack": 29.9, "defense": 19.9}, "light_armor": {"attack": 16.1, "defense": 10.7}, "heavy_armor": {"attack": 12.1, "defense": 8.1}, "airplane": {"attack": 12.1, "defense": 8.1}, "ship": {"attack": 9.8, "defense": 6.5}, "submarine": {"attack": 9.8, "defense": 6.5}, "buildings": {"attack": 3.2, "defense": 2.1}, "morale": 0.4}
 						self.health = 75
@@ -430,7 +430,7 @@ class Motorized_Infantry(Unit):
 						self.minimum_production_time = 8.5
 						self.research_time = 38
 						self.day_available = 16
-						self.terrain_effects = {'plains': {'HP': 75, 'armor': 'soldier', 'speed': 0.25, 'strength': 0.25}, 'hills': {'HP': 75, 'armor': 'soldier', 'speed': -0.25, 'strength': None}, 'mountains': {'HP': 75, 'armor': 'soldier', 'speed': -0.5, 'strength': None}, 'forest': {'HP': 75, 'armor': 'soldier', 'speed': -0.25, 'strength': None}, 'urban': {'HP': 75, 'armor': 'soldier', 'speed': None, 'strength': 0.25}, 'sea': {'HP': 12, 'armor': 'ship', 'speed': None, 'strength': None}, 'enemy_territory': {'HP': None, 'armor': None, 'speed': -0.50, 'strength': None}}
+						self.terrain_effects = {'plains': {'HP': 75, 'armor': 'unarmored', 'speed': 0.25, 'strength': 0.25}, 'hills': {'HP': 75, 'armor': 'unarmored', 'speed': -0.25, 'strength': None}, 'mountains': {'HP': 75, 'armor': 'unarmored', 'speed': -0.5, 'strength': None}, 'forest': {'HP': 75, 'armor': 'unarmored', 'speed': -0.25, 'strength': None}, 'urban': {'HP': 75, 'armor': 'unarmored', 'speed': None, 'strength': 0.25}, 'sea': {'HP': 12, 'armor': 'ship', 'speed': None, 'strength': None}, 'enemy_territory': {'HP': None, 'armor': None, 'speed': -0.50, 'strength': None}}
 
 class Mechanized_Infantry(Unit):
 	@classmethod
@@ -473,7 +473,7 @@ class Mechanized_Infantry(Unit):
 						self.minimum_production_time = 5.75
 						self.research_time = 14
 						self.day_available = 3
-						self.terrain_effects = {'plains': {'HP': 40, 'armor': 'soldier', 'speed': 0.25, 'strength': 0.25}, 'hills': {'HP': 40, 'armor': 'soldier', 'speed': -0.25, 'strength': None}, 'mountains': {'HP': 40, 'armor': 'soldier', 'speed': -0.5, 'strength': None}, 'forest': {'HP': 40, 'armor': 'soldier', 'speed': -0.25, 'strength': None}, 'urban': {'HP': 40, 'armor': 'soldier', 'speed': None, 'strength': 0.25}, 'sea': {'HP': 12, 'armor': 'ship', 'speed': None, 'strength': None}, 'enemy_territory': {'HP': None, 'armor': None, 'speed': -0.50, 'strength': None}}
+						self.terrain_effects = {'plains': {'HP': 40, 'armor': 'light armor', 'speed': 0.25, 'strength': 0.25}, 'hills': {'HP': 40, 'armor': 'light armor', 'speed': -0.25, 'strength': None}, 'mountains': {'HP': 40, 'armor': 'light armor', 'speed': -0.5, 'strength': None}, 'forest': {'HP': 40, 'armor': 'light armor', 'speed': -0.25, 'strength': None}, 'urban': {'HP': 40, 'armor': 'light armor', 'speed': None, 'strength': 0.25}, 'sea': {'HP': 12, 'armor': 'ship', 'speed': None, 'strength': None}, 'enemy_territory': {'HP': None, 'armor': None, 'speed': -0.50, 'strength': None}}
 					case 2:
 						self.combat = {"unarmored": {"attack": 13.2, "defense": 13.2}, "light_armor": {"attack": 7.5, "defense": 7.5}, "heavy_armor": {"attack": 5.5, "defense": 5.5}, "airplane": {"attack": 5.5, "defense": 5.5}, "ship": {"attack": 3.5, "defense": 3.5}, "submarine": {"attack": 3.5, "defense": 3.5}, "buildings": {"attack": 0.9, "defense": 0.9}, "morale": 0.2}
 						self.health = 52
@@ -486,7 +486,7 @@ class Mechanized_Infantry(Unit):
 						self.minimum_production_time = 7
 						self.research_time = 19
 						self.day_available = 6
-						self.terrain_effects = {'plains': {'HP': 52, 'armor': 'soldier', 'speed': 0.25, 'strength': 0.25}, 'hills': {'HP': 52, 'armor': 'soldier', 'speed': -0.25, 'strength': None}, 'mountains': {'HP': 52, 'armor': 'soldier', 'speed': -0.5, 'strength': None}, 'forest': {'HP': 52, 'armor': 'soldier', 'speed': -0.25, 'strength': None}, 'urban': {'HP': 52, 'armor': 'soldier', 'speed': None, 'strength': 0.25}, 'sea': {'HP': 12, 'armor': 'ship', 'speed': None, 'strength': None}, 'enemy_territory': {'HP': None, 'armor': None, 'speed': -0.50, 'strength': None}}
+						self.terrain_effects = {'plains': {'HP': 52, 'armor': 'light armor', 'speed': 0.25, 'strength': 0.25}, 'hills': {'HP': 52, 'armor': 'light armor', 'speed': -0.25, 'strength': None}, 'mountains': {'HP': 52, 'armor': 'light armor', 'speed': -0.5, 'strength': None}, 'forest': {'HP': 52, 'armor': 'light armor', 'speed': -0.25, 'strength': None}, 'urban': {'HP': 52, 'armor': 'light armor', 'speed': None, 'strength': 0.25}, 'sea': {'HP': 12, 'armor': 'ship', 'speed': None, 'strength': None}, 'enemy_territory': {'HP': None, 'armor': None, 'speed': -0.50, 'strength': None}}
 					case 3:
 						self.combat = {"unarmored": {"attack": 16.7, "defense": 16.7}, "light_armor": {"attack": 10.1, "defense": 10.1}, "heavy_armor": {"attack": 7.5, "defense": 7.5}, "airplane": {"attack": 7.5, "defense": 7.5}, "ship": {"attack": 5.2, "defense": 5.2}, "submarine": {"attack": 5.2, "defense": 5.2}, "buildings": {"attack": 1.4, "defense": 1.4}, "morale": 0.2}
 						self.health = 63
@@ -555,7 +555,7 @@ class Commandos(Unit):
 						self.minimum_production_time = 6.5
 						self.research_time = 20
 						self.day_available = 8
-						self.terrain_effects = {'plains': {'HP': 40, 'armor': 'soldier', 'speed': None, 'strength': None}, 'hills': {'HP': 40, 'armor': 'soldier', 'speed': None, 'strength': None}, 'mountains': {'HP': 40, 'armor': 'soldier', 'speed': -0.5, 'strength': 0.5}, 'forest': {'HP': 40, 'armor': 'soldier', 'speed': None, 'strength': 0.5}, 'urban': {'HP': 40, 'armor': 'soldier', 'speed': None, 'strength': None}, 'sea': {'HP': 12, 'armor': 'ship', 'speed': None, 'strength': None}, 'enemy_territory': {'HP': None, 'armor': None, 'speed': -0.50, 'strength': None}}
+						self.terrain_effects = {'plains': {'HP': 40, 'armor': 'unarmored', 'speed': None, 'strength': None}, 'hills': {'HP': 40, 'armor': 'unarmored', 'speed': None, 'strength': None}, 'mountains': {'HP': 40, 'armor': 'unarmored', 'speed': -0.5, 'strength': 0.5}, 'forest': {'HP': 40, 'armor': 'unarmored', 'speed': None, 'strength': 0.5}, 'urban': {'HP': 40, 'armor': 'unarmored', 'speed': None, 'strength': None}, 'sea': {'HP': 12, 'armor': 'ship', 'speed': None, 'strength': None}, 'enemy_territory': {'HP': None, 'armor': None, 'speed': -0.50, 'strength': None}}
 					case 2:
 						self.combat = {"unarmored": {"attack": 12.7, "defense": 6.3}, "light_armor": {"attack": 13.8, "defense": 6.9}, "heavy_armor": {"attack": 9.2, "defense": 4.6}, "airplane": {"attack": 2.9, "defense": 1.5}, "ship": {"attack": 2.9, "defense": 1.5}, "submarine": {"attack": 1.7, "defense": 0.9}, "buildings": {"attack": 6.9, "defense": 3.5}, "morale": 0.7}
 						self.health = 46
@@ -568,7 +568,7 @@ class Commandos(Unit):
 						self.minimum_production_time = 7.5
 						self.research_time = 26
 						self.day_available = 12
-						self.terrain_effects = {'plains': {'HP': 46, 'armor': 'soldier', 'speed': None, 'strength': None}, 'hills': {'HP': 46, 'armor': 'soldier', 'speed': None, 'strength': None}, 'mountains': {'HP': 46, 'armor': 'soldier', 'speed': -0.5, 'strength': 0.5}, 'forest': {'HP': 46, 'armor': 'soldier', 'speed': None, 'strength': 0.5}, 'urban': {'HP': 46, 'armor': 'soldier', 'speed': None, 'strength': None}, 'sea': {'HP': 12, 'armor': 'ship', 'speed': None, 'strength': None}, 'enemy_territory': {'HP': None, 'armor': None, 'speed': -0.50, 'strength': None}}
+						self.terrain_effects = {'plains': {'HP': 46, 'armor': 'unarmored', 'speed': None, 'strength': None}, 'hills': {'HP': 46, 'armor': 'unarmored', 'speed': None, 'strength': None}, 'mountains': {'HP': 46, 'armor': 'unarmored', 'speed': -0.5, 'strength': 0.5}, 'forest': {'HP': 46, 'armor': 'unarmored', 'speed': None, 'strength': 0.5}, 'urban': {'HP': 46, 'armor': 'unarmored', 'speed': None, 'strength': None}, 'sea': {'HP': 12, 'armor': 'ship', 'speed': None, 'strength': None}, 'enemy_territory': {'HP': None, 'armor': None, 'speed': -0.50, 'strength': None}}
 					case 3:
 						self.combat = {"unarmored": {"attack": 16.7, "defense": 8.4}, "light_armor": {"attack": 19.0, "defense": 9.5}, "heavy_armor": {"attack": 12.7, "defense": 6.3}, "airplane": {"attack": 4.0, "defense": 4.0}, "ship": {"attack": 4.0, "defense": 2.0}, "submarine": {"attack": 2.9, "defense": 1.5}, "buildings": {"attack": 9.8, "defense": 4.9}, "morale": 1.0}
 						self.health = 58
@@ -581,7 +581,7 @@ class Commandos(Unit):
 						self.minimum_production_time = 8.5
 						self.research_time = 34
 						self.day_available = 16
-						self.terrain_effects = {'plains': {'HP': 58, 'armor': 'soldier', 'speed': None, 'strength': None}, 'hills': {'HP': 58, 'armor': 'soldier', 'speed': None, 'strength': None}, 'mountains': {'HP': 58, 'armor': 'soldier', 'speed': -0.5, 'strength': 0.5}, 'forest': {'HP': 58, 'armor': 'soldier', 'speed': None, 'strength': 0.5}, 'urban': {'HP': 58, 'armor': 'soldier', 'speed': None, 'strength': None}, 'sea': {'HP': 12, 'armor': 'ship', 'speed': None, 'strength': None}, 'enemy_territory': {'HP': None, 'armor': None, 'speed': -0.50, 'strength': None}}
+						self.terrain_effects = {'plains': {'HP': 58, 'armor': 'unarmored', 'speed': None, 'strength': None}, 'hills': {'HP': 58, 'armor': 'unarmored', 'speed': None, 'strength': None}, 'mountains': {'HP': 58, 'armor': 'unarmored', 'speed': -0.5, 'strength': 0.5}, 'forest': {'HP': 58, 'armor': 'unarmored', 'speed': None, 'strength': 0.5}, 'urban': {'HP': 58, 'armor': 'unarmored', 'speed': None, 'strength': None}, 'sea': {'HP': 12, 'armor': 'ship', 'speed': None, 'strength': None}, 'enemy_territory': {'HP': None, 'armor': None, 'speed': -0.50, 'strength': None}}
 					case 4:
 						self.combat = {"unarmored": {"attack": 16.7, "defense": 8.4}, "light_armor": {"attack": 23.0, "defense": 11.5}, "heavy_armor": {"attack": 26.5, "defense": 13.3}, "airplane": {"attack": 5.8, "defense": 2.9}, "ship": {"attack": 5.8, "defense": 2.9}, "submarine": {"attack": 4.0, "defense": 2.0}, "buildings": {"attack": 13.8, "defense": 6.9}, "morale": 1.4}
 						self.health = 75
@@ -594,7 +594,7 @@ class Commandos(Unit):
 						self.minimum_production_time = 9.75
 						self.research_time = 46
 						self.day_available = 22
-						self.terrain_effects = {'plains': {'HP': 75, 'armor': 'soldier', 'speed': None, 'strength': None}, 'hills': {'HP': 75, 'armor': 'soldier', 'speed': None, 'strength': None}, 'mountains': {'HP': 75, 'armor': 'soldier', 'speed': -0.5, 'strength': 0.5}, 'forest': {'HP': 75, 'armor': 'soldier', 'speed': None, 'strength': 0.5}, 'urban': {'HP': 75, 'armor': 'soldier', 'speed': None, 'strength': None}, 'sea': {'HP': 12, 'armor': 'ship', 'speed': None, 'strength': None}, 'enemy_territory': {'HP': None, 'armor': None, 'speed': -0.50, 'strength': None}}
+						self.terrain_effects = {'plains': {'HP': 75, 'armor': 'unarmored', 'speed': None, 'strength': None}, 'hills': {'HP': 75, 'armor': 'unarmored', 'speed': None, 'strength': None}, 'mountains': {'HP': 75, 'armor': 'unarmored', 'speed': -0.5, 'strength': 0.5}, 'forest': {'HP': 75, 'armor': 'unarmored', 'speed': None, 'strength': 0.5}, 'urban': {'HP': 75, 'armor': 'unarmored', 'speed': None, 'strength': None}, 'sea': {'HP': 12, 'armor': 'ship', 'speed': None, 'strength': None}, 'enemy_territory': {'HP': None, 'armor': None, 'speed': -0.50, 'strength': None}}
 
 class Paratrooper(Unit):
 	@classmethod
@@ -637,7 +637,7 @@ class Paratrooper(Unit):
 						self.minimum_production_time = 6.5
 						self.research_time = 20
 						self.day_available = 6
-						self.terrain_effects = {'plains': {'HP': 40, 'armor': 'soldier', 'speed': None, 'strength': None}, 'hills': {'HP': 40, 'armor': 'soldier', 'speed': None, 'strength': None}, 'mountains': {'HP': 40, 'armor': 'soldier', 'speed': -0.5, 'strength': 0.5}, 'forest': {'HP': 40, 'armor': 'soldier', 'speed': None, 'strength': 0.5}, 'urban': {'HP': 40, 'armor': 'soldier', 'speed': None, 'strength': None}, 'sea': {'HP': 12, 'armor': 'ship', 'speed': None, 'strength': None}, 'enemy_territory': {'HP': None, 'armor': None, 'speed': -0.50, 'strength': None}}
+						self.terrain_effects = {'plains': {'HP': 40, 'armor': 'unarmored', 'speed': None, 'strength': None}, 'hills': {'HP': 40, 'armor': 'unarmored', 'speed': None, 'strength': None}, 'mountains': {'HP': 40, 'armor': 'unarmored', 'speed': -0.5, 'strength': 0.5}, 'forest': {'HP': 40, 'armor': 'unarmored', 'speed': None, 'strength': 0.5}, 'urban': {'HP': 40, 'armor': 'unarmored', 'speed': None, 'strength': None}, 'sea': {'HP': 12, 'armor': 'ship', 'speed': None, 'strength': None}, 'enemy_territory': {'HP': None, 'armor': None, 'speed': -0.50, 'strength': None}}
 					case 2:
 						self.combat = {"unarmored": {"attack": 12.7, "defense": 12.7}, "light_armor": {"attack": 6.3, "defense": 6.3}, "heavy_armor": {"attack": 4.6, "defense": 4.6}, "airplane": {"attack": 1.7, "defense": 1.7}, "ship": {"attack": 1.7, "defense": 1.7}, "submarine": {"attack": 1.7, "defense": 1.7}, "buildings": {"attack": 1.4, "defense": 1.4}, "morale": 0.2}
 						self.health = 52
@@ -650,7 +650,7 @@ class Paratrooper(Unit):
 						self.minimum_production_time = 7.5
 						self.research_time = 26
 						self.day_available = 10
-						self.terrain_effects = {'plains': {'HP': 52, 'armor': 'soldier', 'speed': None, 'strength': None}, 'hills': {'HP': 52, 'armor': 'soldier', 'speed': None, 'strength': None}, 'mountains': {'HP': 52, 'armor': 'soldier', 'speed': -0.5, 'strength': 0.5}, 'forest': {'HP': 52, 'armor': 'soldier', 'speed': None, 'strength': 0.5}, 'urban': {'HP': 52, 'armor': 'soldier', 'speed': None, 'strength': None}, 'sea': {'HP': 12, 'armor': 'ship', 'speed': None, 'strength': None}, 'enemy_territory': {'HP': None, 'armor': None, 'speed': -0.50, 'strength': None}}
+						self.terrain_effects = {'plains': {'HP': 52, 'armor': 'unarmored', 'speed': None, 'strength': None}, 'hills': {'HP': 52, 'armor': 'unarmored', 'speed': None, 'strength': None}, 'mountains': {'HP': 52, 'armor': 'unarmored', 'speed': -0.5, 'strength': 0.5}, 'forest': {'HP': 52, 'armor': 'unarmored', 'speed': None, 'strength': 0.5}, 'urban': {'HP': 52, 'armor': 'unarmored', 'speed': None, 'strength': None}, 'sea': {'HP': 12, 'armor': 'ship', 'speed': None, 'strength': None}, 'enemy_territory': {'HP': None, 'armor': None, 'speed': -0.50, 'strength': None}}
 					case 3:
 						self.combat = {"unarmored": {"attack": 16.7, "defense": 16.7}, "light_armor": {"attack": 8.6, "defense": 8.6}, "heavy_armor": {"attack": 6.3, "defense": 6.3}, "airplane": {"attack": 2.9, "defense": 2.9}, "ship": {"attack": 2.9, "defense": 2.9}, "submarine": {"attack": 2.9, "defense": 2.9}, "buildings": {"attack": 2.1, "defense": 2.1}, "morale": 0.3}
 						self.health = 63
@@ -663,7 +663,7 @@ class Paratrooper(Unit):
 						self.minimum_production_time = 8.5
 						self.research_time = 34
 						self.day_available = 14
-						self.terrain_effects = {'plains': {'HP': 63, 'armor': 'soldier', 'speed': None, 'strength': None}, 'hills': {'HP': 63, 'armor': 'soldier', 'speed': None, 'strength': None}, 'mountains': {'HP': 63, 'armor': 'soldier', 'speed': -0.5, 'strength': 0.5}, 'forest': {'HP': 63, 'armor': 'soldier', 'speed': None, 'strength': 0.5}, 'urban': {'HP': 63, 'armor': 'soldier', 'speed': None, 'strength': None}, 'sea': {'HP': 12, 'armor': 'ship', 'speed': None, 'strength': None}, 'enemy_territory': {'HP': None, 'armor': None, 'speed': -0.50, 'strength': None}}
+						self.terrain_effects = {'plains': {'HP': 63, 'armor': 'unarmored', 'speed': None, 'strength': None}, 'hills': {'HP': 63, 'armor': 'unarmored', 'speed': None, 'strength': None}, 'mountains': {'HP': 63, 'armor': 'unarmored', 'speed': -0.5, 'strength': 0.5}, 'forest': {'HP': 63, 'armor': 'unarmored', 'speed': None, 'strength': 0.5}, 'urban': {'HP': 63, 'armor': 'unarmored', 'speed': None, 'strength': None}, 'sea': {'HP': 12, 'armor': 'ship', 'speed': None, 'strength': None}, 'enemy_territory': {'HP': None, 'armor': None, 'speed': -0.50, 'strength': None}}
 					case 4:
 						self.combat = {"unarmored": {"attack": 23, "defense": 23}, "light_armor": {"attack": 11.5, "defense": 11.5}, "heavy_armor": {"attack": 8.1, "defense": 8.1}, "airplane": {"attack": 4.6, "defense": 4.6}, "ship": {"attack": 4.6, "defense": 4.6}, "submarine": {"attack": 4.6, "defense": 4.6}, "buildings": {"attack": 3.2, "defense": 3.2}, "morale": 0.4}
 						self.health = 81
@@ -676,5 +676,48 @@ class Paratrooper(Unit):
 						self.minimum_production_time = 9.75
 						self.research_time = 34
 						self.day_available = 20
-						self.terrain_effects = {'plains': {'HP': 81, 'armor': 'soldier', 'speed': None, 'strength': None}, 'hills': {'HP': 81, 'armor': 'soldier', 'speed': None, 'strength': None}, 'mountains': {'HP': 81, 'armor': 'soldier', 'speed': -0.5, 'strength': 0.5}, 'forest': {'HP': 81, 'armor': 'soldier', 'speed': None, 'strength': 0.5}, 'urban': {'HP': 81, 'armor': 'soldier', 'speed': None, 'strength': None}, 'sea': {'HP': 12, 'armor': 'ship', 'speed': None, 'strength': None}, 'enemy_territory': {'HP': None, 'armor': None, 'speed': -0.50, 'strength': None}}
+						self.terrain_effects = {'plains': {'HP': 81, 'armor': 'unarmored', 'speed': None, 'strength': None}, 'hills': {'HP': 81, 'armor': 'unarmored', 'speed': None, 'strength': None}, 'mountains': {'HP': 81, 'armor': 'unarmored', 'speed': -0.5, 'strength': 0.5}, 'forest': {'HP': 81, 'armor': 'unarmored', 'speed': None, 'strength': 0.5}, 'urban': {'HP': 81, 'armor': 'unarmored', 'speed': None, 'strength': None}, 'sea': {'HP': 12, 'armor': 'ship', 'speed': None, 'strength': None}, 'enemy_territory': {'HP': None, 'armor': None, 'speed': -0.50, 'strength': None}}
+
+class Armored_Car(Unit):
+	@classmethod
+	def create(cls, level, game, territory=None, buildings=None, health=None):
+		unit = cls(level, game, territory, buildings, health, build=False)
+		unit.update_stats()
+		unit.pay_costs()
+		if health:
+			unit.health = health
+		if not unit.can_afford_unit:
+			return None
+		return unit
+
+	def __init__(self, level, game, territory=None, buildings=None, health=None, build=True):
+		super().__init__(level, game, territory, buildings, health)
+		self.name = "Armored Car"
+		self.description = "Armored Cars are fast defensive units, which can be quickly moved from one province to another to provide defense aginst incoming attakcs from unarmored units. Their view range makes them well suited to scout out enemy troop movement or to reveal stealth units."
+		self.special = "Can uncover stealth units of the same or lower stealth level."
+		self.armor_class = "light armor"
+		if build:
+			self.update_stats()
+			self.pay_costs()
+			if health:
+				self.health = health
+			if not self.can_afford_unit:
+				raise ValueError("Cannot afford Armored Car. Please do not try to bypass create() method! Instead, use game.add_unit()")
+	def update_stats(self):
+		match self.game.faction:
+			case "Axis":
+				match self.level:
+					case 1:
+						self.combat = {"unarmored": {"attack": 3.5, "defense": 5.3}, "light_armor": {"attack": 1.2, "defense": 1.8}, "heavy_armor": {"attack": 0.8, "defense": 1.2}, "airplane": {"attack": 1.2, "defense": 1.8}, "ship": {"attack": 0.6, "defense": 0.9}, "submarine": {"attack": 0.6, "defense": 0.9}, "buildings": {"attack": 0.2, "defense": 0.3}, "morale": 0.1}
+						self.health = 23
+						self.speed = 55
+						self.view_range = 72
+						self.attack_range = 0
+						self.production_costs = {'gas': 1100, 'steel': 1200, 'cash': 1900, 'manpower': 1200}
+						self.research_costs = {'gas': 1700, 'steel': 1900, 'cash': 5700}
+						self.daily_costs = {'gas': 50, 'manpower': 68, 'steel': 55, 'cash': 88}
+						self.minimum_production_time = 2.75
+						self.research_time = 0.083
+						self.day_available = 1
+						self.terrain_effects = {'plains': {'HP': 23, 'armor': 'light armor', 'speed': 0.25, 'strength': 0.50}, 'hills': {'HP': 23, 'armor': 'light armor', 'speed': -0.25, 'strength': None}, 'mountains': {'HP': 23, 'armor': 'light armor', 'speed': -0.5, 'strength': None}, 'forest': {'HP': 23, 'armor': 'light armor', 'speed': -0.25, 'strength': None}, 'urban': {'HP': 23, 'armor': 'soldier', 'speed': None, 'strength': None}, 'sea': {'HP': 12, 'armor': 'ship', 'speed': None, 'strength': None}, 'enemy_territory': {'HP': None, 'armor': None, 'speed': -0.50, 'strength': None}}
 
