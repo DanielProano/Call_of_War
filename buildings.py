@@ -19,13 +19,13 @@ class Barracks(Buildings):
 			case 1:
 				self.health = 20
 				self.effects = 1	### Unit production effect ###
-				self.upgrade_costs = {'steel': 1350, 'corn': 2250, 'cash': 3600}
-				self.upgrade_time = 0.083	### 5 minutes ###
+				self.construction_costs = {'steel': 1350, 'corn': 2250, 'cash': 3600}
+				self.construction_time = 0.083	### 5 minutes ###
 			case 2:
 				self.health = 40
 				self.effects = 2
-				self.upgrade_costs = {'steel': 1800, 'corn': 3000, 'cash': 4800}
-				self.upgrade_time = 4
+				self.construction_costs = {'steel': 1800, 'corn': 3000, 'cash': 4800}
+				self.construction_time = 4
 
 class Ordance_Foundry(Buildings):	
 	def __init__(self, level, game):
@@ -35,8 +35,8 @@ class Ordance_Foundry(Buildings):
 			case 1:
 				self.health = 20
 				self.effects = 1
-				self.upgrade_costs = {'gas': 2400, 'corn': 1200, 'cash': 3600}
-				self.upgrade_time = 0.083
+				self.construction_costs = {'gas': 2400, 'corn': 1200, 'cash': 3600}
+				self.construction_time = 0.083
 class Tank_Plant(Buildings):
 	def __init__(self, level, game):
 		super().__init__(level, game)
@@ -45,23 +45,23 @@ class Tank_Plant(Buildings):
 			case 1:
 				self.health = 20
 				self.effects = 1
-				self.upgrade_costs = {'steel': 2100, 'gas': 1500, 'cash': 3600}
-				self.upgrade_time = 0.083
+				self.construction_costs = {'steel': 2100, 'gas': 1500, 'cash': 3600}
+				self.construction_time = 0.083
 			case 2:
 				self.health = 40
 				self.effects = 2
-				self.upgrade_costs = {'steel': 2800, 'gas': 2000, 'cash': 4800}
-				self.upgrade_time = 4
+				self.construction_costs = {'steel': 2800, 'gas': 2000, 'cash': 4800}
+				self.construction_time = 4
 			case 3:
 				self.health = 80
 				self.effects = 4
-				self.upgrade_costs = {'steel': 3700, 'gas': 2650, 'cash': 6400}
-				self.upgrade_time = 12
+				self.construction_costs = {'steel': 3700, 'gas': 2650, 'cash': 6400}
+				self.construction_time = 12
 			case 4:
 				self.health = 120
 				self.effects = 8
-				self.upgrade_costs = {'steel': 4900, 'gas': 3500, 'cash': 8500}
-				self.upgrade_time = 24
+				self.construction_costs = {'steel': 4900, 'gas': 3500, 'cash': 8500}
+				self.construction_time = 24
 
 class Aircraft_Factory(Buildings):
 	def __init__(self, level, game):
@@ -72,14 +72,14 @@ class Aircraft_Factory(Buildings):
 				self.health = 20
 				self.effects = 1
 				self.refueling_time = 30	### in minutes ###
-				self.upgrade_costs = {'gas': 2350, 'corn': 1250, 'cash': 3600}
-				self.upgrade_time = 0.5
+				self.construction_costs = {'gas': 2350, 'corn': 1250, 'cash': 3600}
+				self.construction_time = 0.5
 			case 2:
 				self.health = 40
 				self.effects = 2
 				self.refueling_time = 25
-				self.upgrade_costs = {'gas': 3150, 'corn': 1650, 'cash': 4800}
-				self.upgrade_time = 4
+				self.construction_costs = {'gas': 3150, 'corn': 1650, 'cash': 4800}
+				self.construction_time = 4
 
 class Secret_Lab(Buildings):
 	def __init__(self, level, game):
@@ -89,23 +89,23 @@ class Secret_Lab(Buildings):
 			case 1:
 				self.health = 20
 				self.effects = 1
-				self.upgrade_costs = {'steel': 1400, 'gas': 2200, 'cash': 3600}
-				self.upgrade_time = 0.5
+				self.construction_costs = {'steel': 1400, 'gas': 2200, 'cash': 3600}
+				self.construction_time = 0.5
 			case 2:
 				self.health = 40
 				self.effects = 2
-				self.upgrade_costs = {'steel': 1850, 'gas': 2950, 'cash': 4800}
-				self.upgrade_time = 4
+				self.construction_costs = {'steel': 1850, 'gas': 2950, 'cash': 4800}
+				self.construction_time = 4
 			case 3:
 				self.health = 80
 				self.effects = 4
-				self.upgrade_costs = {'steel': 2450, 'gas': 3900, 'cash': 6400}
-				self.upgrade_time = 12
+				self.construction_costs = {'steel': 2450, 'gas': 3900, 'cash': 6400}
+				self.construction_time = 12
 			case 4:
 				self.health = 120
 				self.effects = 8
-				self.costs = {'steel': 3250, 'gas': 5200, 'cash': 8500}
-				self.upgrade_time = 24
+				self.construction_costs = {'steel': 3250, 'gas': 5200, 'cash': 8500}
+				self.construction_time = 24
 
 class Industry(Buildings):
 	def __init__(self, level, game):
@@ -115,28 +115,28 @@ class Industry(Buildings):
 			case 1:
 				self.health = 20
 				self.effects = 0.13	### Production boost in percentage ###
-				self.upgrade_costs = {'steel': 1400, 'gas': 1600, 'cash': 3000}
-				self.upgrade_time = 8	### in hours for next industry, so for industry 2 ###
+				self.construction_costs = {'steel': 1400, 'gas': 1600, 'cash': 3000}
+				self.construction_time = 8	### in hours for next industry, so for industry 2 ###
 			case 2:
 				self.health = 40
 				self.effects = 0.28
-				self.upgrade_costs = {'steel': 1850, 'gas': 2150, 'cash': 4000}
-				self.upgrade_time = 14
+				self.construction_costs = {'steel': 1850, 'gas': 2150, 'cash': 4000}
+				self.construction_time = 14
 			case 3:
 				self.health = 50
 				self.effects = 0.50
-				self.upgrade_costs = {'steel': 2450, 'gas': 2850, 'cash': 5300}
-				self.upgrade_time = 20
+				self.construction_costs = {'steel': 2450, 'gas': 2850, 'cash': 5300}
+				self.construction_time = 20
 			case 4:
 				self.health = 120	
 				self.effects = 0.80
-				self.upgrade_costs = {'steel': 3250, 'gas': 3800, 'cash': 7050}
-				self.upgrade_time = 26
+				self.construction_costs = {'steel': 3250, 'gas': 3800, 'cash': 7050}
+				self.construction_time = 26
 			case 5:
 				self.health = 160
 				self.effects = 1.20
-				self.upgrade_costs = {'steel': 4300, 'gas': 5050, 'cash': 9400}
-				self.upgrade_time = 32
+				self.construction_costs = {'steel': 4300, 'gas': 5050, 'cash': 9400}
+				self.construction_time = 32
 class Recruiting_Station(Buildings):
 	def __init__(self, level, game):
 		super().__init__(level, game)
@@ -145,13 +145,13 @@ class Recruiting_Station(Buildings):
 			case 1:
 				self.health = 20
 				self.effects = 0.35 	### manpower production boost in percentage ###
-				self.upgrade_costs = {'steel': 1100, 'corn': 1600, 'cash': 2700}
-				self.upgrade_time = 6 	### in hours ###
+				self.construction_costs = {'steel': 1100, 'corn': 1600, 'cash': 2700}
+				self.construction_time = 6 	### in hours ###
 			case 2:
 				self.health = 60
 				self.effects = 1
-				self.upgrade_costs = {'steel': 1450, 'corn': 2150, 'cash': 3600}
-				self.upgrade_time = 12
+				self.construction_costs = {'steel': 1450, 'corn': 2150, 'cash': 3600}
+				self.construction_time = 12
 
 class Propaganda_Office(Buildings):
 	def __init__(self, level, game):
@@ -161,18 +161,18 @@ class Propaganda_Office(Buildings):
 			case 1:
 				self.health = 20
 				self.effects = 0.10 	### in percentage ###
-				self.upgrade_costs = {'gas': 800, 'corn': 1000, 'cash': 1800}
-				self.upgrade_time = 3
+				self.construction_costs = {'gas': 800, 'corn': 1000, 'cash': 1800}
+				self.construction_time = 3
 			case 2:
 				self.health = 60
 				self.effects = 0.23
-				self.upgrade_costs = {'cash': 2400, 'corn': 1350, 'gas': 1050}
-				self.upgrade_time = 6
+				self.construction_costs = {'cash': 2400, 'corn': 1350, 'gas': 1050}
+				self.construction_time = 6
 			case 3:
 				self.health = 120
 				self.effects = 0.40
-				self.upgrade_time = None
-				self.upgrade_costs = None
+				self.construction_time = None
+				self.construction_costs = None
 
 class Bunkers(Buildings):
 	def __init__(self, level, game):
@@ -182,28 +182,28 @@ class Bunkers(Buildings):
 			case 1:
 				self.health = 40
 				self.effects = -15	### represents the percentage of damage reduction for stationed troops and buildings ###
-				self.upgrade_costs = {'steel': 850, 'gas': 650, 'cash': 1500}
-				self.upgrade_time = 6
+				self.construction_costs = {'steel': 850, 'gas': 650, 'cash': 1500}
+				self.construction_time = 6
 			case 2:
 				self.health = 80
 				self.effects = -30
-				self.upgrade_costs = {'steel': 1150, 'gas': 850, 'cash': 2000}
-				self.upgrade_time = 9
+				self.construction_costs = {'steel': 1150, 'gas': 850, 'cash': 2000}
+				self.construction_time = 9
 			case 3:
 				self.health = 120
 				self.effects = -45
-				self.upgrade_costs = {'steel': 1550, 'gas': 1150, 'cash': 2650}
-				self.upgrade_time = 12
+				self.construction_costs = {'steel': 1550, 'gas': 1150, 'cash': 2650}
+				self.construction_time = 12
 			case 4:
 				self.health = 160
 				self.effects = -60
-				self.upgrade_costs = {'steel': 2050, 'gas': 1550, 'cash': 3500}
-				self.upgrade_time = 15
+				self.construction_costs = {'steel': 2050, 'gas': 1550, 'cash': 3500}
+				self.construction_time = 15
 			case 5:
 				self.health = 200
 				self.effects = -75
-				self.upgrade_costs = None
-				self.upgrade_time = None
+				self.construction_costs = {'gas': 2050, 'steel': 2750, 'cash': 4650}
+				self.construction_time = 18
 
 class Infrastructure(Buildings):
 	def __init__(self, level, game):
@@ -213,13 +213,13 @@ class Infrastructure(Buildings):
 			case 1:
 				self.health = 20
 				self.effects = 67	### Unit speed percentage ###
-				self.upgrade_costs = {'steel': 600, 'gas': 400, 'cash': 1000}
-				self.upgrade_time = 4
+				self.construction_costs = {'steel': 600, 'gas': 400, 'cash': 1000}
+				self.construction_time = 4
 			case 2:
 				self.health = 60
 				self.effects = 133
-				self.upgrade_costs = {'steel': 700, 'gas': 500, 'cash': 1200}
-				self.upgrade_time = 8
+				self.construction_costs = {'steel': 700, 'gas': 500, 'cash': 1200}
+				self.contsruction_time = 8
 
 
 class Capital(Buildings):
@@ -230,5 +230,5 @@ class Capital(Buildings):
 			case 1:
 				self.health = 100
 				self.effects = 0.10
-				self.upgrade_costs = {'steel': 1250, 'corn': 1250, 'cash': 2500}
-				self.upgrade_time = 12	### hours ###
+				self.construction_costs = {'steel': 1250, 'corn': 1250, 'cash': 2500}
+				self.construction_time = 12	### hours ###
