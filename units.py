@@ -514,3 +514,46 @@ class Mechanized_Infantry(Unit):
 						self.day_available = 14
 						self.terrain_effects = {'plains': {'HP': 81, 'armor': 'soldier', 'speed': 0.25, 'strength': 0.25}, 'hills': {'HP': 81, 'armor': 'soldier', 'speed': -0.25, 'strength': None}, 'mountains': {'HP': 81, 'armor': 'soldier', 'speed': -0.5, 'strength': None}, 'forest': {'HP': 81, 'armor': 'soldier', 'speed': -0.25, 'strength': None}, 'urban': {'HP': 81, 'armor': 'soldier', 'speed': None, 'strength': 0.25}, 'sea': {'HP': 12, 'armor': 'ship', 'speed': None, 'strength': None}, 'enemy_territory': {'HP': None, 'armor': None, 'speed': -0.50, 'strength': None}}
 
+class Commandos(Unit):
+	@classmethod
+	def create(cls, level, game, territory=None, buildings=None, health=None):
+		unit = cls(level, game, territory, buildings, health, build=False)
+		unit.update_stats()
+		unit.pay_costs()
+		if health:
+			unit.health = health
+		if not unit.can_afford_unit:
+			return None
+		return unit
+
+	def __init__(self, level, game, territory=None, buildings=None, health=None, build=True):
+		super().__init__(level, game, territory, buildings, health)
+		self.name = "Commandos"
+		self.description = "Commandos are offensive units that use sabotage and explosives, making them most effective against unarmored and light armored targets. They also ignore enemy defense bonuses and are best used for surprise attacks on lightly defended positions due to their stealth characteristics."
+		self.special = "Is hidden as long as it is not fighting or uncovered by a scout unit of equal or higher level. Also storms fortifications and ignores the enemy defence bonus."
+		self.armor_class = "unarmored"
+		if build:
+			self.update_stats()
+			self.pay_costs()
+			if health:
+				self.health = health
+			if not self.can_afford_unit:
+				raise ValueError("Cannot afford Commando. Please do not try to bypass create() method! Instead, use game.add_unit()")
+	def update_stats(self):
+		match self.game.faction:
+			case "Axis":
+				match self.level:
+					case 1:
+						self.combat = {"unarmored": {"attack": 9.2, "defense": 4.6}, "light_armor": {"attack": 10.4, "defense": 5.2}, "heavy_armor": {"attack": 6.9, "defense": 3.5}, "airplane": {"attack": 2.3, "defense": 1.2}, "ship": {"attack": 2.3, "defense": 1.2}, "submarine": {"attack": 1.2, "defense": 0.6}, "buildings": {"attack": 4.6, "defense": 2.3}, "morale": 0.5}
+						self.health = 35
+						self.speed = 40
+						self.view_range = 30
+						self.attack_range = 0
+						self.production_costs = {'gas': 1100, 'corn': 2400, 'cash': 2400, 'manpower': 1200}
+						self.research_costs = {'gas': 2100, 'corn': 4600, 'cash': 9250}
+						self.daily_costs = {'gas': 50, 'manpower': 53, 'corn': 108, 'cash': 108}
+						self.minimum_production_time = 6.5
+						self.research_time = 20
+						self.day_available = 8
+						self.terrain_effects = {'plains': {'HP': 40, 'armor': 'soldier', 'speed': None, 'strength': None}, 'hills': {'HP': 40, 'armor': 'soldier', 'speed': None, 'strength': None}, 'mountains': {'HP': 40, 'armor': 'soldier', 'speed': -0.5, 'strength': 0.5}, 'forest': {'HP': 40, 'armor': 'soldier', 'speed': None, 'strength': 0.5}, 'urban': {'HP': 40, 'armor': 'soldier', 'speed': None, 'strength': None}, 'sea': {'HP': 12, 'armor': 'ship', 'speed': None, 'strength': None}, 'enemy_territory': {'HP': None, 'armor': None, 'speed': -0.50, 'strength': None}}
+
