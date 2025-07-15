@@ -1,4 +1,5 @@
 class Buildings:
+
 	def __init__(self, level, game):
 		self.level = level
 		self.game = game	### Python game object ###
@@ -51,6 +52,16 @@ class Tank_Plant(Buildings):
 				self.effects = 2
 				self.upgrade_costs = {'steel': 2800, 'gas': 2000, 'cash': 4800}
 				self.upgrade_time = 4
+			case 3:
+				self.health = 80
+				self.effects = 4
+				self.upgrade_costs = {'steel': 3700, 'gas': 2650, 'cash': 6400}
+				self.upgrade_time = 12
+			case 4:
+				self.health = 120
+				self.effects = 8
+				self.upgrade_costs = {'steel': 4900, 'gas': 3500, 'cash': 8500}
+				self.upgrade_time = 24
 
 class Aircraft_Factory(Buildings):
 	def __init__(self, level, game):
@@ -85,6 +96,16 @@ class Secret_Lab(Buildings):
 				self.effects = 2
 				self.upgrade_costs = {'steel': 1850, 'gas': 2950, 'cash': 4800}
 				self.upgrade_time = 4
+			case 3:
+				self.health = 80
+				self.effects = 4
+				self.upgrade_costs = {'steel': 2450, 'gas': 3900, 'cash': 6400}
+				self.upgrade_time = 12
+			case 4:
+				self.health = 120
+				self.effects = 8
+				self.costs = {'steel': 3250, 'gas': 5200, 'cash': 8500}
+				self.upgrade_time = 24
 
 class Industry(Buildings):
 	def __init__(self, level, game):
@@ -114,12 +135,12 @@ class Industry(Buildings):
 			case 5:
 				self.health = 160
 				self.effects = 1.20
-				self.upgrade_costs = None
-				self.upgrade_time = None
+				self.upgrade_costs = {'steel': 4300, 'gas': 5050, 'cash': 9400}
+				self.upgrade_time = 32
 class Recruiting_Station(Buildings):
 	def __init__(self, level, game):
 		super().__init__(level, game)
-		self.description = "The Recruiting Station increases the manpower production rate in this province. LEveling up the Recruiting Station increases the manpower production rate further. The Recruiting Station can be constructed in all provinces."
+		self.description = "The Recruiting Station increases the manpower production rate in this province. Leveling up the Recruiting Station increases the manpower production rate further. The Recruiting Station can be constructed in all provinces."
 		match self.level:
 			case 1:
 				self.health = 20
