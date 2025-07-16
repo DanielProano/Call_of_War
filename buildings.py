@@ -1,9 +1,15 @@
 class Buildings:
 	@classmethod
-	def create(cls, level, game,):
+	def create(cls, level, game, enable_resource_management=True):
 		building = cls(level, game)
-		if hasattr(cls, "construction_costs"):
-			
+		if enable_resource_management:
+			if building.pay_costs():
+				return building
+			else:
+				print("Could not afford building")
+				return None
+		else:
+			return building
 	def __init__(self, level, game):
 		self.level = level
 		self.game = game	### Python game object ###
@@ -12,9 +18,20 @@ class Buildings:
 			successfully_paid = self.game.resources.subtract(resources=self.construction_costs)
 			if successfully_paid:
 				if isinstance(self, Industry):
-					production_resource = self.game.production[self.resource]
+					options = {0: 0, 1: 0.13, 2: 0.28, 3: 0.5, 4: 0.8, 5: 1.2}
+					production_resource = self.game.production[self.resource] / (1 + options[self.level - 1])
 					self.game.production[self.resource] += production_resource * self.effects
+					return True
 				if isinstance(self, Recruiting_Station):
+					options = {0: 0, 1: 0.35, 2: 1, 3: 2}
+					manpower_resource = self.game.production['manpower'] / (1 + options[self.level])
+					self.game.production['manpower'] += manpower_resource * self.effects
+					return True
+				return True
+			else:
+				return False
+		else:
+			return False
 	def update(self, level=None, game=None):
 		if level:
 			self.level = level
