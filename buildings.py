@@ -1,8 +1,20 @@
 class Buildings:
-
+	@classmethod
+	def create(cls, level, game,):
+		building = cls(level, game)
+		if hasattr(cls, "construction_costs"):
+			
 	def __init__(self, level, game):
 		self.level = level
 		self.game = game	### Python game object ###
+	def pay_costs(self):
+		if hasattr(self, "construction_costs"):
+			successfully_paid = self.game.resources.subtract(resources=self.construction_costs)
+			if successfully_paid:
+				if isinstance(self, Industry):
+					production_resource = self.game.production[self.resource]
+					self.game.production[self.resource] += production_resource * self.effects
+				if isinstance(self, Recruiting_Station):
 	def update(self, level=None, game=None):
 		if level:
 			self.level = level
@@ -148,10 +160,22 @@ class Secret_Lab(Buildings):
 				self.construction_costs = {'gas': 6900, 'steel': 4300, 'cash': 11300}
 				self.construction_time = 32
 
+### Industry is a special building where the resource being produced also needs to be specified in text. Your options are "corn", "steel", "gas". ###
+
 class Industry(Buildings):
-	def __init__(self, level, game):
+	def __init__(self, level, game, resource):
 		super().__init__(level, game)
 		self.description = "The Industry increases the production rates of resorces and money in this province. Leveling up the Industry increases these production rates further. Industry can only be constructed in urban provinces."
+		options = ["corn", "steel", "gas"]
+		is_a_resource = False
+		for i in options:
+			if i == resource:
+				is_a_resource = True
+		if is_a_resource:
+			self.resource = resource
+		else:
+			self.resource = None
+
 		match self.level:
 			case 1:
 				self.health = 20

@@ -1,10 +1,7 @@
-import game, units
+import game, units, buildings
 
 game = game.Game("Game 1", "Ohio", "Axis", resources={'corn': 10000, 'steel': 10000, 'gas': 10000, 'cash': 50000, 'manpower': 30000})
 
-militia = game.add_unit(units.Militia, 3)
+building = game.add_building(buildings.Barracks, 1, game)
 
-infantry = game.add_unit(units.Infantry, 1)
-
-militia.fight(infantry)
-
+print(building)

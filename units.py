@@ -1,14 +1,28 @@
 
 
 class Unit:
-	def __init__(self, level, game, territory=None, buildings=None, health=None):
+	@classmethod
+	def create(cls, level, game, territory=None, buildings=None, health=None):
+		unit = cls(level, game, territory, buildings, health, build=False)
+		if hasattr(cls, "update_stats"):
+			unit.update_stats()
+			unit.pay_costs()
+			if health:
+				unit.health = health
+			if not unit.can_afford_unit:
+				return None
+			return unit
+		else:
+			return None
+
+	def __init__(self, level, game, territory=None, buildings=None, health=None, build=True):
 		self.level = level
 		self.game = game		### Python game object for access to important information like faction ### 
 		self.territory = territory
 		self.buildings = buildings
 		self.health = health
 	def pay_costs(self):
-		if self.daily_costs and self.production_costs:
+		if hasattr(self, "daily_costs") and hasattr(self, "production_costs"):
 			payment = self.game.resources.subtract(resources=self.production_costs)
 			if payment:
 				self.game.resources.add(upkeep=self.daily_costs)
@@ -110,19 +124,8 @@ class Unit:
 		return basic
 
 class Militia(Unit):
-	@classmethod
-	def create(cls, level, game, territory=None, buildings=None, health=None):
-		unit = cls(level, game, territory, buildings, health, build=False)
-		unit.update_stats()
-		unit.pay_costs()
-		if health:
-			unit.health = health
-		if not unit.can_afford_unit:
-			return None
-		return unit
-
 	def __init__(self, level, game, territory=None, buildings=None, health=None, build=True):
-		super().__init__(level, game, territory, buildings, health)
+		super().__init__(level, game, territory, buildings, health, build)
 		self.name = "Militia"
 		self.description = "The militia is a cheap defensive unit. Due to its slow speed and fast production time its main purpose is to defend own provinces and, due to its stealth characteristics, to ambush enemy attackers."
 		self.special = "Is hidden (in hills, forests, or urban) as long as it is not fighting or uncovered by a scout unit of equal or higher level."
@@ -202,16 +205,8 @@ class Militia(Unit):
 				pass
 
 class Infantry(Unit):
-	@classmethod
-	def create(cls, level, game, territory=None, buildings=None, health=None):
-		unit = cls(level, game, territory, buildings, health, build=False)
-		unit.update_stats()
-		unit.pay_costs()
-		if unit.can_afford_unit:
-			return unit
-		return None
 	def __init__(self, level, game, territory=None, buildings=None, health=None, build=True):
-		super().__init__(level, game, territory, buildings, health)
+		super().__init__(level, game, territory, buildings, health, build)
 		self.name = "Infantry"
 		self.description = "Infantry is a defensive unit and the base unit of every army. It is cheap and easy to produce and important to defend cities. Infantry is best used to defend against unarmored units."
 		self.special = None
@@ -325,19 +320,8 @@ class Infantry(Unit):
 				pass
 
 class Motorized_Infantry(Unit):
-	@classmethod
-	def create(cls, level, game, territory=None, buildings=None, health=None):
-		unit = cls(level, game, territory, buildings, health, build=False)
-		unit.update_stats()
-		unit.pay_costs()
-		if health:
-			unit.health = health
-		if not unit.can_afford_unit:
-			return None
-		return unit
-
 	def __init__(self, level, game, territory=None, buildings=None, health=None, build=True):
-		super().__init__(level, game, territory, buildings, health)
+		super().__init__(level, game, territory, buildings, health, build)
 		self.name = "Motorized Infantry"
 		self.description = "Motorized Infantry has the strength of nromal infantry and adds additional speed a high view range to it, in which it also reveals stealth units. As offensive unit it is best used for conquering cities."
 		self.special = "Can uncover stealth units of the same of lower stealth level."
@@ -433,19 +417,8 @@ class Motorized_Infantry(Unit):
 						self.terrain_effects = {'plains': {'HP': 75, 'armor': 'unarmored', 'speed': 0.25, 'strength': 0.25}, 'hills': {'HP': 75, 'armor': 'unarmored', 'speed': -0.25, 'strength': None}, 'mountains': {'HP': 75, 'armor': 'unarmored', 'speed': -0.5, 'strength': None}, 'forest': {'HP': 75, 'armor': 'unarmored', 'speed': -0.25, 'strength': None}, 'urban': {'HP': 75, 'armor': 'unarmored', 'speed': None, 'strength': 0.25}, 'sea': {'HP': 12, 'armor': 'ship', 'speed': None, 'strength': None}, 'enemy_territory': {'HP': None, 'armor': None, 'speed': -0.50, 'strength': None}}
 
 class Mechanized_Infantry(Unit):
-	@classmethod
-	def create(cls, level, game, territory=None, buildings=None, health=None):
-		unit = cls(level, game, territory, buildings, health, build=False)
-		unit.update_stats()
-		unit.pay_costs()
-		if health:
-			unit.health = health
-		if not unit.can_afford_unit:
-			return None
-		return unit
-
 	def __init__(self, level, game, territory=None, buildings=None, health=None, build=True):
-		super().__init__(level, game, territory, buildings, health)
+		super().__init__(level, game, territory, buildings, health, build)
 		self.name = "Mechanized Infantry"
 		self.description = "Mechanized Infantry combines the strengths of infantry with the endurance of armored vehicles. As an allrounder it can be used for both offensive and defenseive maneuvers. It is most effective against unarmored targets."
 		self.special = None
@@ -515,19 +488,8 @@ class Mechanized_Infantry(Unit):
 						self.terrain_effects = {'plains': {'HP': 81, 'armor': 'soldier', 'speed': 0.25, 'strength': 0.25}, 'hills': {'HP': 81, 'armor': 'soldier', 'speed': -0.25, 'strength': None}, 'mountains': {'HP': 81, 'armor': 'soldier', 'speed': -0.5, 'strength': None}, 'forest': {'HP': 81, 'armor': 'soldier', 'speed': -0.25, 'strength': None}, 'urban': {'HP': 81, 'armor': 'soldier', 'speed': None, 'strength': 0.25}, 'sea': {'HP': 12, 'armor': 'ship', 'speed': None, 'strength': None}, 'enemy_territory': {'HP': None, 'armor': None, 'speed': -0.50, 'strength': None}}
 
 class Commandos(Unit):
-	@classmethod
-	def create(cls, level, game, territory=None, buildings=None, health=None):
-		unit = cls(level, game, territory, buildings, health, build=False)
-		unit.update_stats()
-		unit.pay_costs()
-		if health:
-			unit.health = health
-		if not unit.can_afford_unit:
-			return None
-		return unit
-
 	def __init__(self, level, game, territory=None, buildings=None, health=None, build=True):
-		super().__init__(level, game, territory, buildings, health)
+		super().__init__(level, game, territory, buildings, health, build)
 		self.name = "Commandos"
 		self.description = "Commandos are offensive units that use sabotage and explosives, making them most effective against unarmored and light armored targets. They also ignore enemy defense bonuses and are best used for surprise attacks on lightly defended positions due to their stealth characteristics."
 		self.special = "Is hidden as long as it is not fighting or uncovered by a scout unit of equal or higher level. Also storms fortifications and ignores the enemy defence bonus."
@@ -597,19 +559,8 @@ class Commandos(Unit):
 						self.terrain_effects = {'plains': {'HP': 75, 'armor': 'unarmored', 'speed': None, 'strength': None}, 'hills': {'HP': 75, 'armor': 'unarmored', 'speed': None, 'strength': None}, 'mountains': {'HP': 75, 'armor': 'unarmored', 'speed': -0.5, 'strength': 0.5}, 'forest': {'HP': 75, 'armor': 'unarmored', 'speed': None, 'strength': 0.5}, 'urban': {'HP': 75, 'armor': 'unarmored', 'speed': None, 'strength': None}, 'sea': {'HP': 12, 'armor': 'ship', 'speed': None, 'strength': None}, 'enemy_territory': {'HP': None, 'armor': None, 'speed': -0.50, 'strength': None}}
 
 class Paratrooper(Unit):
-	@classmethod
-	def create(cls, level, game, territory=None, buildings=None, health=None):
-		unit = cls(level, game, territory, buildings, health, build=False)
-		unit.update_stats()
-		unit.pay_costs()
-		if health:
-			unit.health = health
-		if not unit.can_afford_unit:
-			return None
-		return unit
-
 	def __init__(self, level, game, territory=None, buildings=None, health=None, build=True):
-		super().__init__(level, game, territory, buildings, health)
+		super().__init__(level, game, territory, buildings, health, build)
 		self.name = "Paratrooper"
 		self.description = "Paratroopers are versatile units used for surprise attacks behind enemy lines. They are fighting best against unarmored units. While on the ground they can also be converted back into an aircraft and dropped in another location."
 		self.special = "This unit can be transported via air carg to the next airfield. Also, is hidden as long as it is not fighting or uncovered by a scout unit of equal or higher level."
@@ -679,19 +630,8 @@ class Paratrooper(Unit):
 						self.terrain_effects = {'plains': {'HP': 81, 'armor': 'unarmored', 'speed': None, 'strength': None}, 'hills': {'HP': 81, 'armor': 'unarmored', 'speed': None, 'strength': None}, 'mountains': {'HP': 81, 'armor': 'unarmored', 'speed': -0.5, 'strength': 0.5}, 'forest': {'HP': 81, 'armor': 'unarmored', 'speed': None, 'strength': 0.5}, 'urban': {'HP': 81, 'armor': 'unarmored', 'speed': None, 'strength': None}, 'sea': {'HP': 12, 'armor': 'ship', 'speed': None, 'strength': None}, 'enemy_territory': {'HP': None, 'armor': None, 'speed': -0.50, 'strength': None}}
 
 class Armored_Car(Unit):
-	@classmethod
-	def create(cls, level, game, territory=None, buildings=None, health=None):
-		unit = cls(level, game, territory, buildings, health, build=False)
-		unit.update_stats()
-		unit.pay_costs()
-		if health:
-			unit.health = health
-		if not unit.can_afford_unit:
-			return None
-		return unit
-
 	def __init__(self, level, game, territory=None, buildings=None, health=None, build=True):
-		super().__init__(level, game, territory, buildings, health)
+		super().__init__(level, game, territory, buildings, health, build)
 		self.name = "Armored Car"
 		self.description = "Armored Cars are fast defensive units, which can be quickly moved from one province to another to provide defense aginst incoming attakcs from unarmored units. Their view range makes them well suited to scout out enemy troop movement or to reveal stealth units."
 		self.special = "Can uncover stealth units of the same or lower stealth level."
