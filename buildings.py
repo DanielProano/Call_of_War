@@ -1,8 +1,8 @@
 class Buildings:
 	@classmethod
-	def create(cls, level, game, enable_resource_management=True):
+	def create(cls, level, game, resource_management=True):
 		building = cls(level, game)
-		if enable_resource_management:
+		if resource_management:
 			if building.pay_costs():
 				return building
 			else:
