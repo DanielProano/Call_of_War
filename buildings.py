@@ -1,7 +1,7 @@
 class Buildings:
 	@classmethod
 	def create(cls, level, game, *args, affect_resources=True):
-		building = cls(level, game)
+		building = cls(level, game, *args)
 		if affect_resources:
 			if building.pay_costs():
 				return building
@@ -18,12 +18,14 @@ class Buildings:
 			successfully_paid = self.game.resources.subtract(resources=self.construction_costs)
 			if successfully_paid:
 				if isinstance(self, Industry):
-					options = {0: 0, 1: 0.13, 2: 0.28, 3: 0.5, 4: 0.8, 5: 1.2}
-					production_resource = self.game.production[self.resource] / (1 + options[self.level - 1])
-					self.game.production[self.resource] += production_resource * self.effects
+					if self.level == 1:
+						self.game.resources.production[self.resource] += self.game.resources.production[self.resource] * 0.13
+					options = {1: 0.13, 2: 0.28, 3: 0.5, 4: 0.8, 5: 1.2}
+					production_resource = self.game.resources.production[self.resource] / (1 + options[self.level - 1])
+					self.game.resources.production[self.resource] += production_resource * self.effects
 					return True
 				if isinstance(self, Recruiting_Station):
-					options = {0: 0, 1: 0.35, 2: 1, 3: 2}
+					options = {1: 0.35, 2: 1, 3: 2}
 					manpower_resource = self.game.production['manpower'] / (1 + options[self.level])
 					self.game.production['manpower'] += manpower_resource * self.effects
 					return True
@@ -216,7 +218,7 @@ class Secret_Lab(Buildings):
 ### Industry is a special building where the resource being produced also needs to be specified in text. Your options are "corn", "steel", "gas". ###
 
 class Industry(Buildings):
-	def __init__(self, level, game, resource):
+	def __init__(self, level, game, resource, daily_resource_productio):
 		super().__init__(level, game)
 		self.description = "The Industry increases the production rates of resorces and money in this province. Leveling up the Industry increases these production rates further. Industry can only be constructed in urban provinces."
 		options = ["corn", "steel", "gas"]
