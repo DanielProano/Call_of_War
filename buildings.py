@@ -9,7 +9,21 @@ class Buildings:
 		if game:
 			self.game = game
 	def __str__(self):
-		return f"Level: {self.level}\nFaction: {self.game.faction}\n"
+		info = f"Level: {self.level}\nFaction: {self.game.faction}\n"
+		if hasattr(self, "description"):
+			info += f"Description: {self.description}\n"
+		if hasattr(self, "health"):
+			info += f"Health: {self.health}\n"
+		if hasattr(self, "effects"):
+			info += f"Effects: {self.effects * 100}%\n"
+		if hasattr(self, "construction_costs"):
+			info += f"Construction Costs: {self.construction_costs}\n"
+		if hasattr(self, "construction_time"):
+			info += f"Construction Time: {self.construction_time} hours\n"
+		if hasattr(self, "refueling_time"):
+			info += f"Refueling Time: {self.refueling_time} minutes\n"
+		return info
+		
 
 class Barracks(Buildings):
 	def __init__(self, level, game):
@@ -93,7 +107,7 @@ class Aircraft_Factory(Buildings):
 			case 3:
 				self.health = 80
 				self.effects = 4
-				self refueling_time = 20
+				self.refueling_time = 20
 				self.construction_costs = {'gas': 4200, 'corn': 2200, 'cash': 6400}
 				self.construction_time = 12
 			case 4:
