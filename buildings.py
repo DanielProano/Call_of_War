@@ -1,8 +1,8 @@
 class Buildings:
 	@classmethod
-	def create(cls, level, game, resource_management=True):
+	def create(cls, level, game, *args, affect_resources=True):
 		building = cls(level, game)
-		if resource_management:
+		if affect_resources:
 			if building.pay_costs():
 				return building
 			else:
@@ -103,11 +103,11 @@ class Ordance_Foundry(Buildings):
 			case 3:	
 				self.health = 80
 				self.effects = 4
-				self.construction_costs = ['gas': 4250, 'corn': 2150, 'cash': 6400}
+				self.construction_costs = {'gas': 4250, 'corn': 2150, 'cash': 6400}
 				self.construction_time = 12
 			case 4:
 				self.health = 120
-				self.effects 8
+				self.effects = 8
 				self.construction_costs = {'gas': 5650, 'corn': 2850, 'cash': 8500}
 				self.construction_time = 24
 			case 5:

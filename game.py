@@ -19,8 +19,11 @@ class Game:
 			return unit
 		print("Failed to create Unit")
 		return None
-	def add_building(self, building_cls, level, game):
-		return building_cls.create(level, game)
+	def add_building(self, building_cls, level, game, affect_resources=True):
+		building = building_cls.create(level, game, affect_resources)
+		if building:
+			return building
+		return None
 	def faction_info(self):
 		print(f"{'-' * 35}\nAxis\n\t+Increased Unit Damage\n\t+Increased Unit Hitpoints\n\t-Increased Unit Costs\n{"-" * 35}\nAllies\n\t+Decreased Production Times\n\t+Decreased Research Costs & Times\n\t+Decreased Upgrade Costs & Times\n\t-Decreased Unit Speed\n{"-" * 35}\nComintern\n\t+Decreased Unit Costs\n\t+Decreased unit upkeep\n\t-Decreased Unit Damage\n{"-" * 35}\nPan-asian\n\t+Increased Unit Speed\n\t+Increased Unit View Range\n\t+Increased Unit Terrain Bonus\n\t-Decreased Unit Hitpoints\n{'-' * 35}")
 	def __str__(self):
