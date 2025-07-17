@@ -50,7 +50,6 @@ class Buildings:
 					else:
 						options = {1: 0.35, 2: 1, 3: 2}
 						manpower_resource = self.daily_resource_production / (1 + options[self.level - 1])
-						print(manpower_resource)
 						self.game.resources.production['manpower'] += round((manpower_resource * self.effects) + manpower_resource)
 						return True
 				return True
@@ -101,8 +100,8 @@ class Buildings:
 			pass
 		if isinstance(cls, Recruiting_Station):
 			pass
-		building = cls.create(
-		info = {"
+		#building = cls.create(
+		#info = {"
 
 	'''
 	A method to show all of the stats of the
@@ -123,9 +122,9 @@ class Buildings:
 			info += f"Construction Time: {self.construction_time} hours\n"
 		if hasattr(self, "refueling_time"):
 			info += f"Refueling Time: {self.refueling_time} minutes\n"
-		if hasattr(self, "resource")
+		if hasattr(self, "resource"):
 			info += f"Resource Building affects: {self.resource}\n"
-		if hasattr(self, "daily_resource_production")
+		if hasattr(self, "daily_resource_production"):
 			info += f"Daily Resource Production: {self.daily_resource_production}\n"
 		info += f"{'-' * 50}\n"
 		return info

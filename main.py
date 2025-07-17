@@ -1,16 +1,26 @@
-import game as Game
-import units as Units
-import buildings as Buildings
+import game
+import units
+import buildings
 
 def run_game():
-	game = Game.Game("Game 1", "Ohio", "Axis", resources={'corn': 10000, 'steel': 10000, 'gas': 10000, 'cash': 10000, 'manpower': 10000})
+	my_game = game.Game("Game 1", "Ohio", "Axis", resources={'corn': 10000, 'steel': 10000, 'gas': 10000, 'cash': 10000, 'manpower': 10000})
 
-	building = game.add_building(Buildings.Recruiting_Station, 3, 113)
+	building1 = my_game.add_building(buildings.Recruiting_Station, 3, 113)
 
-	print(building)
-	print(game.resources)
-	game.resources.day_change()
-	print(game.resources)
+	unit1 = my_game.add_unit(units.Militia, 1)
+
+	unit2 = my_game.add_unit(units.Motorized_Infantry, 3)
+
+	building2 = my_game.add_building(buildings.Industry, 1, "corn", 2000)
+
+	print(unit1)
+	print(building1)
+	print(unit2)
+	print(building2)
+
+	print(my_game.resources)
+	my_game.resources.day_change()
+	print(my_game.resources)
 
 if __name__ == "__main__":
 	run_game()
