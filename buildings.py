@@ -1,4 +1,12 @@
 class Buildings:
+
+	'''
+	Create is the standard way to initialize a new Building.
+	If you'd like to create a new Building without paying
+	or affecting resources, use the 'affect_resources'
+	boolian keyword arguement
+	'''
+
 	@classmethod
 	def create(cls, level, game, *args, affect_resources=True):
 		building = cls(level, game, *args)
@@ -13,6 +21,13 @@ class Buildings:
 	def __init__(self, level, game):
 		self.level = level
 		self.game = game	### Python game object ###
+
+	'''
+	This method handles the logic for subtracting the
+	construction costs from the games total resources
+	and updating the production resources
+	'''
+
 	def pay_costs(self):
 		if hasattr(self, "construction_costs"):
 			successfully_paid = self.game.resources.subtract(resources=self.construction_costs)
@@ -44,10 +59,12 @@ class Buildings:
 		else:
 			return False
 
-	# Update game state last if the player
-	# decides to change it. I lowkey don't
-	# really want to deal with weird game
-	# state changes.
+	'''
+	Update game state last if the player
+	decides to change it. I lowkey don't
+	really want to deal with weird game
+	state changes.
+	'''
 	
 	def update(self, level=None, game=None, resource=None, daily_resource_production=None, affect_resources=True):
 		if level:
@@ -67,6 +84,31 @@ class Buildings:
 				self.resource = resource
 		if game:
 			self.game = game
+
+	'''
+	This method is for python developers who 
+	aren't interested in the normal functioning
+	of this library BUT would like to access
+	all the updated stats.
+
+	Every stat is returned in a python dictionary
+	for developers to do as they please
+	'''
+
+	@classmethod
+	def get(cls):
+		if isinstance(cls, Industry):
+			pass
+		if isinstance(cls, Recruiting_Station):
+			pass
+		building = cls.create(
+		info = {"
+
+	'''
+	A method to show all of the stats of the
+	current building.
+	'''
+
 	def __str__(self):
 		info = f"Building Information\n{'-' * 50}\nLevel: {self.level}\nFaction: {self.game.faction}\n"
 		if hasattr(self, "description"):
