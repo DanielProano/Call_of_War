@@ -19,8 +19,9 @@ class Buildings:
 			if successfully_paid:
 				if isinstance(self, Industry):
 					if self.level == 1:
-						self.game.resources.production[self.resource] += self.game.resources.production[self.resource] * 0.13
-					options = {1: 0.13, 2: 0.28, 3: 0.5, 4: 0.8, 5: 1.2}
+						self.game.resources.production[self.resource] += self.daily_resource_production * 0.13
+					else:
+						options = {1: 0.13, 2: 0.28, 3: 0.5, 4: 0.8, 5: 1.2}
 					production_resource = self.game.resources.production[self.resource] / (1 + options[self.level - 1])
 					self.game.resources.production[self.resource] += production_resource * self.effects
 					return True
@@ -86,6 +87,8 @@ class Barracks(Buildings):
 				self.effects = 16
 				self.construction_costs = {'steel': 4250, 'corn': 7050, 'cash': 11300}
 				self.construction_time = 32
+			case _:
+				raise ValueError("This level does not exist")
 
 class Ordance_Foundry(Buildings):	
 	def __init__(self, level, game):
@@ -117,6 +120,8 @@ class Ordance_Foundry(Buildings):
 				self.effects = 16
 				self.construction_costs = {'gas': 7500, 'corn': 3800, 'cash': 11300}
 				self.construction_time = 32
+			case _:
+				raise ValueError("This level does not exist")
 class Tank_Plant(Buildings):
 	def __init__(self, level, game):
 		super().__init__(level, game)
