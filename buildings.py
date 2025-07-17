@@ -43,19 +43,30 @@ class Buildings:
 				return False
 		else:
 			return False
+
+	# Update game state last if the player
+	# decides to change it. I lowkey don't
+	# really want to deal with weird game
+	# state changes.
+	
 	def update(self, level=None, game=None, resource=None, daily_resource_production=None, affect_resources=True):
 		if level:
-			self.level = level
 			if affect_resources:
 				self.pay_costs()
-		if game:
-			self.game = game
+				self.level = level
+			else:
+				self.level = level
 		if daily_resource_production:
 			self.daily_resource_production = daily_resource_production
+		
 		if resource:
-			self.game.resources.production[self.resource] =
-			self.resource = resource
-			
+			if affect_resources:
+				self.game.resources.production[self.resource] = 1
+				self.resource = resource
+			else:
+				self.resource = resource
+		if game:
+			self.game = game
 	def __str__(self):
 		info = f"Building Information\n{'-' * 50}\nLevel: {self.level}\nFaction: {self.game.faction}\n"
 		if hasattr(self, "description"):
@@ -70,6 +81,10 @@ class Buildings:
 			info += f"Construction Time: {self.construction_time} hours\n"
 		if hasattr(self, "refueling_time"):
 			info += f"Refueling Time: {self.refueling_time} minutes\n"
+		if hasattr(self, "resource")
+			info += f"Resource Building affects: {self.resource}\n"
+		if hasattr(self, "daily_resource_production")
+			info += f"Daily Resource Production: {self.daily_resource_production}\n"
 		info += f"{'-' * 50}\n"
 		return info
 		
