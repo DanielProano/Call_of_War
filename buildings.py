@@ -19,12 +19,15 @@ class Buildings:
 			if successfully_paid:
 				if isinstance(self, Industry):
 					if self.level == 1:
-						self.game.resources.production[self.resource] += self.daily_resource_production * 0.13
+						self.game.resources.production[self.resource] += round(self.daily_resource_production * 1.13)
+						self.game.resources.production['cash'] += round(self.daily_resource_production * 1.13)
+						return True
 					else:
 						options = {1: 0.13, 2: 0.28, 3: 0.5, 4: 0.8, 5: 1.2}
-					production_resource = self.game.resources.production[self.resource] / (1 + options[self.level - 1])
-					self.game.resources.production[self.resource] += production_resource * self.effects
-					return True
+						production_resource = self.daily_resource_production / (1 + options[self.level - 1])
+						self.game.resources.production[self.resource] += round((production_resource * self.effects) + production_resource)
+						self.game.resources.production['cash'] += round((production_resource * self.effects) + production_resource)
+						return True
 				if isinstance(self, Recruiting_Station):
 					options = {1: 0.35, 2: 1, 3: 2}
 					manpower_resource = self.game.production['manpower'] / (1 + options[self.level])
@@ -41,7 +44,7 @@ class Buildings:
 		if game:
 			self.game = game
 	def __str__(self):
-		info = f"Level: {self.level}\nFaction: {self.game.faction}\n"
+		info = f"Building Information\n{'-' * 50}\nLevel: {self.level}\nFaction: {self.game.faction}\n"
 		if hasattr(self, "description"):
 			info += f"Description: {self.description}\n"
 		if hasattr(self, "health"):
@@ -54,6 +57,7 @@ class Buildings:
 			info += f"Construction Time: {self.construction_time} hours\n"
 		if hasattr(self, "refueling_time"):
 			info += f"Refueling Time: {self.refueling_time} minutes\n"
+		info += f"{'-' * 50}\n"
 		return info
 		
 
@@ -231,9 +235,10 @@ class Secret_Lab(Buildings):
 ### Industry is a special building where the resource being produced also needs to be specified in text. Your options are "corn", "steel", "gas". ###
 
 class Industry(Buildings):
-	def __init__(self, level, game, resource, daily_resource_productio):
+	def __init__(self, level, game, resource, daily_resource_production):
 		super().__init__(level, game)
 		self.description = "The Industry increases the production rates of resorces and money in this province. Leveling up the Industry increases these production rates further. Industry can only be constructed in urban provinces."
+		self.daily_resource_production = daily_resource_production
 		options = ["corn", "steel", "gas"]
 		is_a_resource = False
 		for i in options:
@@ -242,7 +247,7 @@ class Industry(Buildings):
 		if is_a_resource:
 			self.resource = resource
 		else:
-			self.resource = None
+			raise ValueError("Not an available resource, please choose one of these: corn, steel, gas")
 
 		match self.level:
 			case 1:
