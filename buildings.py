@@ -152,6 +152,8 @@ class Tank_Plant(Buildings):
 				self.effects = 16
 				self.construction_costs = {'steel': 6500, 'gas': 4650, 'cash': 11300}
 				self.construction_time = 32
+			case _:
+				raise ValueError("This level does not exist")
 
 class Aircraft_Factory(Buildings):
 	def __init__(self, level, game):
@@ -188,6 +190,9 @@ class Aircraft_Factory(Buildings):
 				self.refueling_time = 10
 				self.construction_costs = {'gas': 7450, 'corn': 3900, 'cash': 11300}
 				self.construction_time = 32
+			case _:
+				raise ValueError("This level does not exist")
+
 
 class Secret_Lab(Buildings):
 	def __init__(self, level, game):
@@ -219,6 +224,9 @@ class Secret_Lab(Buildings):
 				self.effects = 16
 				self.construction_costs = {'gas': 6900, 'steel': 4300, 'cash': 11300}
 				self.construction_time = 32
+			case _:
+				raise ValueError("This level does not exist")
+
 
 ### Industry is a special building where the resource being produced also needs to be specified in text. Your options are "corn", "steel", "gas". ###
 
@@ -262,6 +270,9 @@ class Industry(Buildings):
 				self.effects = 1.20
 				self.construction_costs = {'steel': 4300, 'gas': 5050, 'cash': 9400}
 				self.construction_time = 32
+			case _:
+				raise ValueError("This level does not exist")
+
 class Recruiting_Station(Buildings):
 	def __init__(self, level, game):
 		super().__init__(level, game)
@@ -282,6 +293,9 @@ class Recruiting_Station(Buildings):
 				self.effects = 2
 				self.construction_costs = {'steel': 1950, 'corn': 2850, 'cash': 4800}
 				self.construction_time = 18
+			case _:
+				raise ValueError("This level does not exist")
+
 
 class Propaganda_Office(Buildings):
 	def __init__(self, level, game):
@@ -303,6 +317,9 @@ class Propaganda_Office(Buildings):
 				self.effects = 0.40
 				self.construction_time = {'gas': 1400, 'corn': 1800, 'cash': 3200}
 				self.construction_costs = 9
+			case _:
+				raise ValueError("This level does not exist")
+
 
 class Bunkers(Buildings):
 	def __init__(self, level, game):
@@ -334,6 +351,9 @@ class Bunkers(Buildings):
 				self.effects = -0.75
 				self.construction_costs = {'gas': 2050, 'steel': 2750, 'cash': 4650}
 				self.construction_time = 18
+			case _:
+				raise ValueError("This level does not exist")
+
 
 class Infrastructure(Buildings):
 	def __init__(self, level, game):
@@ -355,6 +375,9 @@ class Infrastructure(Buildings):
 				self.effects = 2
 				self.construction_costs = {'gas': 600, 'steel': 850, 'cash': 1450}
 				self.construction_time = 12
+			case _:
+				raise ValueError("This level does not exist")
+
 
 class Capital(Buildings):
 	def __init__(self, level, game):
@@ -365,4 +388,7 @@ class Capital(Buildings):
 				self.health = 100
 				self.effects = 0.10
 				self.construction_costs = {'steel': 1250, 'corn': 1250, 'cash': 2500}
-				self.construction_time = 12	### hours ###
+				self.construction_time = 12	### hours ##			
+			case _:
+				raise ValueError("This level does not exist")
+#
