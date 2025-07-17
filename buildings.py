@@ -43,11 +43,19 @@ class Buildings:
 				return False
 		else:
 			return False
-	def update(self, level=None, game=None):
+	def update(self, level=None, game=None, resource=None, daily_resource_production=None, affect_resources=True):
 		if level:
 			self.level = level
+			if affect_resources:
+				self.pay_costs()
 		if game:
 			self.game = game
+		if daily_resource_production:
+			self.daily_resource_production = daily_resource_production
+		if resource:
+			self.game.resources.production[self.resource] =
+			self.resource = resource
+			
 	def __str__(self):
 		info = f"Building Information\n{'-' * 50}\nLevel: {self.level}\nFaction: {self.game.faction}\n"
 		if hasattr(self, "description"):
