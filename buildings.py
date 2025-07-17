@@ -29,10 +29,15 @@ class Buildings:
 						self.game.resources.production['cash'] += round((production_resource * self.effects) + production_resource)
 						return True
 				if isinstance(self, Recruiting_Station):
-					options = {1: 0.35, 2: 1, 3: 2}
-					manpower_resource = self.game.production['manpower'] / (1 + options[self.level])
-					self.game.production['manpower'] += manpower_resource * self.effects
-					return True
+					if self.level == 1:
+						self.game.resources.production[self.resource] += round(self.daily_resource_production * 1.35)
+						return True
+					else:
+						options = {1: 0.35, 2: 1, 3: 2}
+						manpower_resource = self.daily_resource_production / (1 + options[self.level - 1])
+						print(manpower_resource)
+						self.game.resources.production['manpower'] += round((manpower_resource * self.effects) + manpower_resource)
+						return True
 				return True
 			else:
 				return False
@@ -279,9 +284,11 @@ class Industry(Buildings):
 				raise ValueError("This level does not exist")
 
 class Recruiting_Station(Buildings):
-	def __init__(self, level, game):
+	def __init__(self, level, game, daily_resource_production):
 		super().__init__(level, game)
 		self.description = "The Recruiting Station increases the manpower production rate in this province. Leveling up the Recruiting Station increases the manpower production rate further. The Recruiting Station can be constructed in all provinces."
+		self.resource = "cash"
+		self.daily_resource_production = daily_resource_production
 		match self.level:
 			case 1:
 				self.health = 20
