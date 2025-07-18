@@ -94,15 +94,20 @@ class Buildings:
 	for developers to do as they please
 	'''
 
-	@classmethod
-	def get(cls):
-		if isinstance(cls, Industry):
-			pass
-		if isinstance(cls, Recruiting_Station):
-			pass
-		#building = cls.create(
-		#info = {"
-
+	def get(self):
+		stats = {
+			'name': self.__class__.__name__,
+			'level': self.level,
+			'faction': getattr(self.game, 'faction', None),
+			'description': getattr(self.game, 'description', None),
+			'health': getattr(self.game, 'health', None),
+			'effects': getattr(self.game, 'effects', None),
+			'construction_costs': getattr(self.game, 'construction_costs', None),
+			'construction_time': getattr(self.game, 'construction_time', None),
+			'refueling_time': getattr(self.game, 'refueling_time', None),
+			'resource': getattr(self.game, 'refueling_time', None),
+			'daily_resource_production': getattr(self.game, 'daily_resource_production', None)}
+		return {k: v for k, v in stats.items() if v is not None}
 	'''
 	A method to show all of the stats of the
 	current building.
