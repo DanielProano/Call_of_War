@@ -84,7 +84,7 @@ class Resources:
 					unable_to_pay = True
 					depleted_resource[key] = value
 		if unable_to_pay:
-			print(f"{'*' * 50}\n\nCannot afford Unit, need at least:")
+			print(f"{'*' * 50}\n\nCannot afford {self.__class__.__name__}, need at least:")
 			for key, value in depleted_resource.items():
 				print(f"\t~ {value} {key}\n")
 			print(f"{'*' * 50}\n")
