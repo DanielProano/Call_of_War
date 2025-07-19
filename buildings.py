@@ -8,10 +8,10 @@ class Buildings:
 	'''
 
 	@classmethod
-	def create(cls, level, game, *args, affect_resources=True):
+	def create(cls, level, game, *args, affect_resources=True, jump_to_this_level=True):
 		building = cls(level, game, *args)
 		if affect_resources:
-			if building.pay_costs():
+			if building.pay_costs(jump_to_this_level=jump_to_this_level):
 				return building
 			else:
 				return None
@@ -36,22 +36,18 @@ class Buildings:
 					if self.level == 1:
 						self.game.resources.production[self.resource] += round(self.daily_resource_production * 1.13)
 						self.game.resources.production['cash'] += round(self.daily_resource_production * 1.13)
-						return True
 					else:
 						options = {1: 0.13, 2: 0.28, 3: 0.5, 4: 0.8, 5: 1.2}
 						production_resource = self.daily_resource_production / (1 + options[self.level - 1])
 						self.game.resources.production[self.resource] += round((production_resource * self.effects) + production_resource)
 						self.game.resources.production['cash'] += round((production_resource * self.effects) + production_resource)
-						return True
 				if isinstance(self, Recruiting_Station):
 					if self.level == 1:
 						self.game.resources.production[self.resource] += round(self.daily_resource_production * 1.35)
-						return True
 					else:
 						options = {1: 0.35, 2: 1, 3: 2}
 						manpower_resource = self.daily_resource_production / (1 + options[self.level - 1])
 						self.game.resources.production['manpower'] += round((manpower_resource * self.effects) + manpower_resource)
-						return True
 				return True
 			else:
 				print(f"{'*' * 50}\n\nCannot afford {self.__class__.__name__}, need at least:")
@@ -70,10 +66,19 @@ class Buildings:
 	state changes.
 	'''
 	
-	def update(self, level=None, game=None, resource=None, daily_resource_production=None, affect_resources=True):
+	def update(self, level=None, game=None, resource=None, daily_resource_production=None, affect_resources=True, jump_to_this_level=True):
 		if level:
 			if affect_resources:
-				self.pay_costs()
+				if isinstance(self, Industry):
+					options = {1: 0.13, 2: 0.28, 3: 0.5, 4: 0.8, 5: 1.2}
+					production_resource = self.daily_resource_production / (1 + options[self.level])
+					self.game.resources.production[self.resource] += round((production_resource * self.effects) + production_resource)
+					self.game.resources.production['cash'] += round((production_resource * self.effects) + production_resource)
+				if isinstance(self, Recruiting_Station):
+					options = {1: 0.35, 2: 1, 3: 2}
+					manpower_resource = self.daily_resource_production / (1 + options[self.level - 1])
+					self.game.resources.production['manpower'] += round((manpower_resource * self.effects) + manpower_resource)
+
 				self.level = level
 			else:
 				self.level = level
@@ -328,7 +333,8 @@ class Secret_Lab(Buildings):
 Industry is a special building where the
 resource being produced also needs to be
 specified in text. Your options are "corn",
-"steel", "gas".
+"steel", "gas". Also specifiy the amount
+produced.
 '''
 
 class Industry(Buildings):
@@ -374,6 +380,13 @@ class Industry(Buildings):
 				self.construction_time = 32
 			case _:
 				raise ValueError("This level does not exist")
+
+'''
+Recruiting_Station is
+similar to Industry in that
+it needs the amount produced
+everyday specified.
+'''
 
 class Recruiting_Station(Buildings):
 	def __init__(self, level, game, daily_resource_production):
