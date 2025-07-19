@@ -102,7 +102,16 @@ class Unit:
 	def kill(self):
 		self.health = 0
 		self.game.units.remove(self)
+
 	def __str__(self):
+		return f"{'-' * 50}\nName: {self.__class__.__name__}\nFaction: {self.game.faction}\nLevel: {self.level}\nHealth: {self.health}\n{'-' * 50}\n"
+
+	'''
+	Returns all of the stats
+	that the unit has.
+	'''
+
+	def full_info(self):
 		basic = f"{'-' * 50}\n"
 		if self.name:
 			basic += (f"Unit Name: {self.name}\n")

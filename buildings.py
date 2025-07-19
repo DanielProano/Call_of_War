@@ -14,10 +14,10 @@ class Buildings:
 			if building.pay_costs():
 				return building
 			else:
-				print("Could not afford building")
 				return None
 		else:
 			return building
+
 	def __init__(self, level, game):
 		self.level = level
 		self.game = game	### Python game object ###
@@ -123,12 +123,15 @@ class Buildings:
 		return repr(self.to_dict())
 
 
+	def __str__(self):
+		return f"{'-' * 50}\nName: {self.__class__.__name__}\nFaction: {self.game.faction}\nLevel: {self.level}\nHealth: {self.health}\n{'-' * 50}\n"
+
 	'''
 	A method to show all of the stats of the
 	current building.
 	'''
 
-	def __str__(self):
+	def full_info(self):
 		info = f"Building Information\n{'-' * 50}\nLevel: {self.level}\nFaction: {self.game.faction}\n"
 		if hasattr(self, "description"):
 			info += f"Description: {self.description}\n"
@@ -321,7 +324,12 @@ class Secret_Lab(Buildings):
 				raise ValueError("This level does not exist")
 
 
-### Industry is a special building where the resource being produced also needs to be specified in text. Your options are "corn", "steel", "gas". ###
+'''
+Industry is a special building where the
+resource being produced also needs to be
+specified in text. Your options are "corn",
+"steel", "gas".
+'''
 
 class Industry(Buildings):
 	def __init__(self, level, game, resource, daily_resource_production):
@@ -343,7 +351,7 @@ class Industry(Buildings):
 				self.health = 20
 				self.effects = 0.13	### Production boost in percentage ###
 				self.construction_costs = {'steel': 1400, 'gas': 1600, 'cash': 3000}
-				self.construction_time = 8	### in hours for next industry, so for industry 2 ###
+				self.construction_time = 8
 			case 2:
 				self.health = 40
 				self.effects = 0.28
