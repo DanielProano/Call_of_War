@@ -66,22 +66,43 @@ class Buildings:
 	state changes.
 	'''
 	
-	def update(self, level=None, game=None, resource=None, daily_resource_production=None, affect_resources=True, jump_to_this_level=True):
+	def update(self, level=None, game=None, resource=None, daily_resource_production=None, affect_resources=True):
 		if level:
 			if affect_resources:
 				if isinstance(self, Industry):
 					options = {1: 0.13, 2: 0.28, 3: 0.5, 4: 0.8, 5: 1.2}
-					production_resource = self.daily_resource_production / (1 + options[self.level])
-					self.game.resources.production[self.resource] += round((production_resource * self.effects) + production_resource)
-					self.game.resources.production['cash'] += round((production_resource * self.effects) + production_resource)
+
+					# Subtract resource production levels
+					self.game.resources.production[resource] -= self.daily_resource_production
+					self.game.resources.production['cash'] -= self.daily_resource_production
+					original = self.daily_resource_production / (1 + options[self.level]) 	# self.level and level are different variables
+
+					# Add new level of resource effects
+					new_daily_rate = round((original * options[level]) + original)
+					self.game.resources.production[resource] += new_daily_rate
+					self.game.resources.production['cash'] += new_daily_rate
+
+					# Save new rate
+					self.daily_resource_production = new_daily_rate
+
 				if isinstance(self, Recruiting_Station):
 					options = {1: 0.35, 2: 1, 3: 2}
-					manpower_resource = self.daily_resource_production / (1 + options[self.level - 1])
-					self.game.resources.production['manpower'] += round((manpower_resource * self.effects) + manpower_resource)
+
+					# Subtract
+					self.game.resources.production['manpower'] -= daily_resource_production
+					original = self.daily_resource_production / (1 + options[self.level])
+					
+					# Add
+					new_daily_rate = round((original * options[level]) + original)
+					self.game.resources.production['manpower'] += new_daily_rate
+					
+					# Save new rate
+					self.daily_resource_production = new_daily_rate
 
 				self.level = level
 			else:
 				self.level = level
+
 		if daily_resource_production:
 			self.daily_resource_production = daily_resource_production
 		
