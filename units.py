@@ -23,11 +23,16 @@ class Unit:
 		self.health = health
 	def pay_costs(self):
 		if hasattr(self, "daily_costs") and hasattr(self, "production_costs"):
-			payment = self.game.resources.subtract(resources=self.production_costs)
-			if payment:
+			resources_depleted = self.game.resources.subtract(resources=self.production_costs)
+			if not resources_depleted:
 				self.game.resources.add(upkeep=self.daily_costs)
 				self.can_afford_unit = True
 			else:
+				print(f"{'*' * 50}\n\nCannot afford {self.__class__.__name__}, need at least:")
+				for key, value in resources_depleted.items():
+					print(f"\t~ {value} {key}\n")
+				print(f"{'*' * 50}\n")
+
 				self.can_afford_unit = False
 		else:
 			self.can_afford_unit = False

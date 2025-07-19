@@ -30,8 +30,8 @@ class Buildings:
 
 	def pay_costs(self):
 		if hasattr(self, "construction_costs"):
-			successfully_paid = self.game.resources.subtract(resources=self.construction_costs)
-			if successfully_paid:
+			resources_depleted = self.game.resources.subtract(resources=self.construction_costs)
+			if not resources_depleted:
 				if isinstance(self, Industry):
 					if self.level == 1:
 						self.game.resources.production[self.resource] += round(self.daily_resource_production * 1.13)
@@ -54,8 +54,13 @@ class Buildings:
 						return True
 				return True
 			else:
+				print(f"{'*' * 50}\n\nCannot afford {self.__class__.__name__}, need at least:")
+				for key, value in resources_depleted.items():
+					print(f"\t~ {value} {key}\n")
+				print(f"{'*' * 50}\n")
 				return False
 		else:
+			print(f"Building does not have Construction Costs")
 			return False
 
 	'''
@@ -94,7 +99,7 @@ class Buildings:
 	for developers to do as they please
 	'''
 
-	def get(self):
+	def to_dict(self):
 		stats = {
 			'name': self.__class__.__name__,
 			'level': self.level,
@@ -105,9 +110,19 @@ class Buildings:
 			'construction_costs': getattr(self.game, 'construction_costs', None),
 			'construction_time': getattr(self.game, 'construction_time', None),
 			'refueling_time': getattr(self.game, 'refueling_time', None),
-			'resource': getattr(self.game, 'refueling_time', None),
+			'resource': getattr(self.game, 'resource', None),
 			'daily_resource_production': getattr(self.game, 'daily_resource_production', None)}
 		return {k: v for k, v in stats.items() if v is not None}
+
+	'''
+	Another way for python devs
+	to access the info.
+	'''
+	
+	def __repr__(self):
+		return repr(self.to_dict())
+
+
 	'''
 	A method to show all of the stats of the
 	current building.

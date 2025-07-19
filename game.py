@@ -18,14 +18,12 @@ class Game:
 		if unit:
 			self.units.append(unit)
 			return unit
-		print("Failed to create Unit")
 		return None
 	def add_building(self, building_cls, level, *args, affect_resources=True):
 		building = building_cls.create(level, self, *args, affect_resources=affect_resources)
 		if building:
 			self.buildings.append(building)
 			return building
-		print("Failed to create Building")
 		return None
 	def faction_info(self):
 		print(f"Faction Information\n{'-' * 35}\nAxis\n\t+Increased Unit Damage\n\t+Increased Unit Hitpoints\n\t-Increased Unit Costs\n{"-" * 35}\nAllies\n\t+Decreased Production Times\n\t+Decreased Research Costs & Times\n\t+Decreased Upgrade Costs & Times\n\t-Decreased Unit Speed\n{"-" * 35}\nComintern\n\t+Decreased Unit Costs\n\t+Decreased unit upkeep\n\t-Decreased Unit Damage\n{"-" * 35}\nPan-asian\n\t+Increased Unit Speed\n\t+Increased Unit View Range\n\t+Increased Unit Terrain Bonus\n\t-Decreased Unit Hitpoints\n{'-' * 35}\n")
@@ -62,6 +60,14 @@ class Resources:
 		if upkeep:
 			for key, value in upkeep.items():
 				self.upkeep[key] += value
+
+	'''
+	Returns the resources that
+	are depleted as a dictionary.
+	This is successful if it
+	return None
+	'''
+
 	def subtract(self, resources=None, production=None, upkeep=None):
 		unable_to_pay = False
 		depleted_resource = {}
@@ -84,18 +90,14 @@ class Resources:
 					unable_to_pay = True
 					depleted_resource[key] = value
 		if unable_to_pay:
-			print(f"{'*' * 50}\n\nCannot afford {self.__class__.__name__}, need at least:")
-			for key, value in depleted_resource.items():
-				print(f"\t~ {value} {key}\n")
-			print(f"{'*' * 50}\n")
 			if resources:
 				self.add(resources=resources)
 			if production:
 				self.add(production=production)
 			if upkeep:
 				self.add(upkeep=upkeep)
-			return False
-		return True
+			return depleted_resource
+		return None
 	def day_change(self):
 		for key, value in self.resources.items():
 			self.resources[key] += self.production[key] - self.upkeep[key]
