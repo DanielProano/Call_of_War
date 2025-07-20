@@ -20,7 +20,7 @@ class Buildings:
 
 	def __init__(self, level, game):
 		self.level = level
-		self.game = game	### Python game object ##
+		self.game = game	### Python game object ###
 
 	'''
 	This method handles the logic for subtracting the
