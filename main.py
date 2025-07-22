@@ -10,7 +10,7 @@ def run_game():
 	print(building1)
 	print(my_game.resources)
 
-	building1.update(level=3)
+	building1.update(level=3, costs={'corn': 300})
 	print(my_game.resources)
 
 if __name__ == "__main__":

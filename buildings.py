@@ -64,7 +64,12 @@ class Buildings:
 	
 	def update(self, level=None, game=None, resource=None, daily_resource_production=None, costs=None, affect_resources=True):
 		if costs:
-			pass
+			if self.game.resources.subtract(resources=costs):
+				print("Failed to pay costs\n")
+				return
+			else:
+				print("Successfully paid costs\n")
+
 		if resource:
 			if affect_resources:
 				self.game.resources.production[self.resource] -= self.daily_resource_production
@@ -87,7 +92,6 @@ class Buildings:
 
 					# Add new level of resource effects
 					new_daily_rate = round((original * options[level]))
-					print(f"New Daily rate: {new_daily_rate}")
 					self.game.resources.production[self.resource] += new_daily_rate
 					self.game.resources.production['cash'] += new_daily_rate
 
