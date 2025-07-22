@@ -8,10 +8,10 @@ class Buildings:
 	'''
 
 	@classmethod
-	def create(cls, level, game, *args, affect_resources=True, jump_to_this_level=True):
+	def create(cls, level, game, *args, affect_resources=True):
 		building = cls(level, game, *args)
 		if affect_resources:
-			if building.pay_costs(jump_to_this_level=jump_to_this_level):
+			if building.pay_costs():
 				return building
 			else:
 				return None
@@ -31,23 +31,15 @@ class Buildings:
 	def pay_costs(self):
 		if hasattr(self, "construction_costs"):
 			resources_depleted = self.game.resources.subtract(resources=self.construction_costs)
+
+			# If resources are not depleted
+
 			if not resources_depleted:
 				if isinstance(self, Industry):
-					if self.level == 1:
-						self.game.resources.production[self.resource] += round(self.daily_resource_production * 1.13)
-						self.game.resources.production['cash'] += round(self.daily_resource_production * 1.13)
-					else:
-						options = {1: 0.13, 2: 0.28, 3: 0.5, 4: 0.8, 5: 1.2}
-						production_resource = self.daily_resource_production / (1 + options[self.level - 1])
-						self.game.resources.production[self.resource] += round((production_resource * self.effects) + production_resource)
-						self.game.resources.production['cash'] += round((production_resource * self.effects) + production_resource)
+					self.game.resources.production[self.resource] += round(self.daily_resource_production * self.effects)
+					self.game.resources.production]'cash'] += round(self.daily_resource_production * self.effects)
 				if isinstance(self, Recruiting_Station):
-					if self.level == 1:
-						self.game.resources.production[self.resource] += round(self.daily_resource_production * 1.35)
-					else:
-						options = {1: 0.35, 2: 1, 3: 2}
-						manpower_resource = self.daily_resource_production / (1 + options[self.level - 1])
-						self.game.resources.production['manpower'] += round((manpower_resource * self.effects) + manpower_resource)
+					self.game.resources.production['cash'] += round(self.daily_resource_production * self.effects)
 				return True
 			else:
 				print(f"{'*' * 50}\n\nCannot afford {self.__class__.__name__}, need at least:")
@@ -64,9 +56,23 @@ class Buildings:
 	decides to change it. I lowkey don't
 	really want to deal with weird game
 	state changes.
+
+	The order of what is updated is first
+	resource, then daily resouce production,
+	then level, and then game
 	'''
 	
 	def update(self, level=None, game=None, resource=None, daily_resource_production=None, affect_resources=True):
+		if resource:
+			if affect_resources:
+				self.game.resources.production[self.resource] -= self.daily_resource_production
+				self.resource = resource
+				self.game.resources.production[self.resource] += self.daily_resource_production
+			else:
+				self.resource = resource
+		if daily_resource_production:
+			self.daily_resource_production = daily_resource_production
+
 		if level:
 			if affect_resources:
 				if isinstance(self, Industry):
@@ -103,15 +109,6 @@ class Buildings:
 			else:
 				self.level = level
 
-		if daily_resource_production:
-			self.daily_resource_production = daily_resource_production
-		
-		if resource:
-			if affect_resources:
-				self.game.resources.production[self.resource] = 1
-				self.resource = resource
-			else:
-				self.resource = resource
 		if game:
 			self.game = game
 
