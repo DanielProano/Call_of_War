@@ -36,10 +36,10 @@ class Buildings:
 
 			if not resources_depleted:
 				if isinstance(self, Industry):
-					self.game.resources.production[self.resource] += round(self.daily_resource_production * self.effects)
-					self.game.resources.production]'cash'] += round(self.daily_resource_production * self.effects)
+					self.game.resources.production[self.resource] += round((self.daily_resource_production * self.effects) + self.daily_resource_production)
+					self.game.resources.production['cash'] += round((self.daily_resource_production * self.effects) + self.daily_resource_production)
 				if isinstance(self, Recruiting_Station):
-					self.game.resources.production['cash'] += round(self.daily_resource_production * self.effects)
+					self.game.resources.production['manpower'] += round((self.daily_resource_production * self.effects) + self.daily_resource_production)
 				return True
 			else:
 				print(f"{'*' * 50}\n\nCannot afford {self.__class__.__name__}, need at least:")
@@ -62,7 +62,9 @@ class Buildings:
 	then level, and then game
 	'''
 	
-	def update(self, level=None, game=None, resource=None, daily_resource_production=None, affect_resources=True):
+	def update(self, level=None, game=None, resource=None, daily_resource_production=None, costs=None, affect_resources=True):
+		if costs:
+			pass
 		if resource:
 			if affect_resources:
 				self.game.resources.production[self.resource] -= self.daily_resource_production
@@ -79,13 +81,14 @@ class Buildings:
 					options = {1: 0.13, 2: 0.28, 3: 0.5, 4: 0.8, 5: 1.2}
 
 					# Subtract resource production levels
-					self.game.resources.production[resource] -= self.daily_resource_production
-					self.game.resources.production['cash'] -= self.daily_resource_production
-					original = self.daily_resource_production / (1 + options[self.level]) 	# self.level and level are different variables
+					self.game.resources.production[self.resource] -= self.daily_resource_production * self.effects
+					self.game.resources.production['cash'] -= self.daily_resource_production * self.effects
+					original = ((self.daily_resource_production * self.effects) + self.daily_resource_production) / (1 + options[self.level]) 	# self.level and level are different variables
 
 					# Add new level of resource effects
-					new_daily_rate = round((original * options[level]) + original)
-					self.game.resources.production[resource] += new_daily_rate
+					new_daily_rate = round((original * options[level]))
+					print(f"New Daily rate: {new_daily_rate}")
+					self.game.resources.production[self.resource] += new_daily_rate
 					self.game.resources.production['cash'] += new_daily_rate
 
 					# Save new rate
@@ -95,11 +98,11 @@ class Buildings:
 					options = {1: 0.35, 2: 1, 3: 2}
 
 					# Subtract
-					self.game.resources.production['manpower'] -= daily_resource_production
-					original = self.daily_resource_production / (1 + options[self.level])
+					self.game.resources.production['manpower'] -= self.daily_resource_production * self.effects
+					original = ((self.daily_resource_production * self.effects) + self.daily_resource_production) / (1 + options[self.level])
 					
 					# Add
-					new_daily_rate = round((original * options[level]) + original)
+					new_daily_rate = round((original * options[level]))
 					self.game.resources.production['manpower'] += new_daily_rate
 					
 					# Save new rate
