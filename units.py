@@ -739,8 +739,20 @@ class Light_Tank(Unit):
 						self.attack_range = 0
 						self.production_costs = {'gas': 1600, 'steel': 1800, 'cash': 1300, 'manpower': 1100}
 						self.research_costs = {'gas': 2300, 'steel': 3050, 'cash': 5000}
-						self.daily_costs = {'gas': 68, 'manpower': 48, 'steel': 80, 'cash': 60}
-						self.minimum_production_time = 3.25
+						self.daily_costs = {'gas': 73, 'manpower': 48, 'steel': 80, 'cash': 60}
+						self.minimum_production_time = 4.5
 						self.research_time = 12
 						self.day_available = 4
+					case 3:
+						self.combat = {"unarmored": {"attack": 7.5, "defense": 5.0}, "light_armor": {"attack": 11.5, "defense": 7.7}, "heavy_armor": {"attack": 4.6, "defense": 3.1}, "airplane": {"attack": 2.9, "defense": 1.9}, "ship": {"attack": 2.9, "defense": 1.9}, "submarine": {"attack": 2.9, "defense": 1.9}, "buildings": {"attack": 1.0, "defense": 0.7}, "morale": 0.2}
+						self.health = 52
+						self.speed = 74
+						self.view_range = 42
+						self.attack_range = 0
+						self.production_costs = {'gas': 1800, 'steel': 2000, 'cash': 1500, 'manpower': 1100}
+						self.research_costs = {'gas': 2850, 'steel': 3800, 'cash': 6400}
+						self.daily_costs = {'gas': 83, 'manpower': 48, 'steel': 90, 'cash': 68}
+						self.minimum_production_time = 5.75
+						self.research_time = 16
+						self.day_available = 8
 
