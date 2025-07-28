@@ -699,6 +699,18 @@ class Armored_Car(Unit):
 						self.minimum_production_time = 6.5
 						self.research_time = 22
 						self.day_available = 12
+					case 5:
+						self.combat = {"unarmored": {"attack": 17.8, "defense": 26.7}, "light_armor": {"attack": 9.2, "defense": 13.8}, "heavy_armor": {"attack": 6.9, "defense": 10.4}, "airplane": {"attack": 8.1, "defense": 12.2}, "ship": {"attack": 6.3, "defense": 9.5}, "submarine": {"attack": 6.3, "defense": 9.5}, "buildings": {"attack": 2.1, "defense": 3.1}, "morale": 0.3}
+						self.health = 98
+						self.speed = 95
+						self.view_range = 72
+						self.attack_range = 0
+						self.production_costs = {'gas': 1900, 'steel': 2100, 'cash': 3300, 'manpower': 1300}
+						self.research_costs = {'gas': 2050, 'steel': 2300, 'cash': 7000}
+						self.daily_costs = {'gas': 85, 'manpower': 58, 'steel': 95, 'cash': 148}
+						self.minimum_production_time = 7.5
+						self.research_time = 34
+						self.day_available = 18
 class Light_Tank(Unit):
 	def __init__(self, level, game, territory=None, buildings=None, health=None, build=True):
 		super().__init__(level, game, territory, buildings, health, build)
@@ -755,4 +767,16 @@ class Light_Tank(Unit):
 						self.minimum_production_time = 5.75
 						self.research_time = 16
 						self.day_available = 8
+					case 4:
+						self.combat = {"unarmored": {"attack": 12.1, "defense": 8.1}, "light_armor": {"attack": 17.8, "defense": 11.9}, "heavy_armor": {"attack": 8.6, "defense": 5.7}, "airplane": {"attack": 4.6, "defense": 3.1}, "ship": {"attack": 4.6, "defense": 3.1}, "submarine": {"attack": 4.6, "defense": 3.1}, "buildings": {"attack": 2.1, "defense": 1.4, "morale": 0.3}
+						self.health = 75
+						self.speed = 81
+						self.view_range = 42
+						self.attack_range = 0
+						self.production_costs = {'gas': 2200, 'steel': 2400, 'cash': 1800, 'manpower': 1100}
+						self.research_costs = {'gas': 2850, 'steel': 3800, 'cash': 6400}
+						self.daily_costs = {'gas': 100, 'manpower': 50, 'steel': 108, 'cash': 80}
+						self.minimum_production_time = 7.25
+						self.research_time = 26
+						self.day_available = 14
 
