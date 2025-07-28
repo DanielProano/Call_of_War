@@ -7,20 +7,26 @@ class Game:
 	& faction, along with your starting resources and upkeep.
 	'''
 
-	def __init__(self, game_name, country, faction, resources=None, production=None, upkeep=None):
+	def __init__(self, game_name, country, faction, day=1, resources=None, production=None, upkeep=None):
 		self.game_name = game_name
 		self.country = country
 		self.faction = faction
+		self.day = day
 		self.resources = Resources(resources, production, upkeep)
 		self.units = []
 		self.enemy_units = []
 		self.buildings = []
 		self.stacks = []
 
-	def update(self, game_name, country, faction):
-		self.game_name = game_name
-		self.country = country
-		self.faction = faction
+	def update(self, game_name=None, country=None, faction=None, day=None):
+		if game_name:
+			self.game_name = game_name
+		if country:
+			self.country = country
+		if faction:
+			self.faction = faction
+		if day:
+			self.day = day
 
 	'''
 	Official way to add and delete units from game
@@ -60,7 +66,7 @@ class Game:
 	Adds stacks of units to the game
 	'''
 
-	def create_stack(self, territory=None, buildings=None):
+	def create_stack(self, territory=None, buildings=None, owner=True):
 		stack1 = stack.Stack(self, territory=territory, buildings=buildings)
 		if stack1:
 			self.stacks.append(stack1)
