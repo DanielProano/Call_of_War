@@ -57,6 +57,8 @@ class Unit:
 			self.buildings = buildings
 		if health:
 			self.health = health
+
+	'''
 	def fight(self, enemy_unit, attacking=True):
 		
 		# Determine the unit and enemy unit damage output
@@ -73,7 +75,7 @@ class Unit:
 		
 		# Determine the unit and enemy health
 		
-		unit_health = self.health
+		unit_health = self.healths
 		enemy_health = enemy_unit.health
 	
 		print(f"{'=' * 50}\n\t\t\tBATTLE\n{'=' * 50}\n")
@@ -99,6 +101,8 @@ class Unit:
 			self.kill()
 		print(f"{'=' * 50}\n")
 		print(f"{'=' * 50}\n")
+	'''
+
 	def kill(self):
 		self.health = 0
 		self.game.units.remove(self)
@@ -152,6 +156,7 @@ class Militia(Unit):
 				self.health = health
 			if not self.can_afford_unit:
 				raise ValueError("Cannot afford Militia. Please do not try to bypass create() method! Instead, use game.add_unit()")
+
 		self.terrain_effects = {'plains': {'HP': self.health, 'armor': self.armor_class, 'speed': None, 'strength': None}, 'hills': {'HP': self.health, 'armor': self.armor_class, 'speed': None, 'strength': 1.25}, 'mountains': {'HP': self.health, 'armor': self.armor_class, 'speed': -1.5, 'strength': 1.25}, 'forest': {'HP': self.health, 'armor': self.armor_class, 'speed': None, 'strength': 1.50}, 'urban': {'HP': self.health, 'armor': self.armor_class, 'speed': None, 'strength': None}, 'sea': {'HP': 12, 'armor': 'ship', 'speed': None, 'strength': None}, 'enemy_territory': {'HP': None, 'armor': None, 'speed': -1.50, 'strength': None}}
 
 	def update_stats(self):
