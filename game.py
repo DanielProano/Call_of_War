@@ -26,10 +26,13 @@ class Game:
 	Official way to add and delete units from game
 	'''
 
-	def add_unit(self, unit_cls, level, territory=None, buildings=None, health=None):
+	def add_unit(self, unit_cls, level, territory=None, buildings=None, health=None, owner=True):
 		unit = unit_cls.create(level, self, territory=territory, buildings=buildings, health=health)
-		if unit:
+		if unit and owner:
 			self.units.append(unit)
+			return unit
+		elif unit and not owner:
+			self.enemy_units.append(unit)
 			return unit
 		return None
 
@@ -60,7 +63,10 @@ class Game:
 	def create_stack(self, territory=None, buildings=None):
 		stack1 = stack.Stack(self, territory=territory, buildings=buildings)
 		if stack1:
-
+			self.stacks.append(stack1)
+			return stack1
+		else:
+			return None
 	'''
 	Get the general info about the faction pros and cons
 	'''

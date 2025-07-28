@@ -42,6 +42,7 @@ class Unit:
 			if payment:
 				self.can_afford_unit = True
 			else:
+				print("Cannot afford unit")
 				self.can_afford_unit = False
 		else:
 			print("No research costs available")
