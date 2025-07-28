@@ -1,19 +1,25 @@
 import game
 import units
 import buildings
+import stack
 
 def run_game():
 	my_game = game.Game("Game 1", "Ohio", "Axis", resources={'corn': 10000, 'steel': 10000, 'gas': 10000, 'cash': 100000, 'manpower': 10000})
 
 
-	unit = my_game.add_unit(units.Infantry, 1)
+	stack1 = stack.Stack(my_game, territory="hills")
 
-	stack2 = my_game.create_stack(units.Militia, 2, number=2)
+	stack1.create_units(units.Infantry, level=2, num=2)
 
-	joined = my_game.join_stacks(stack2, unit)
+	stack2 = stack.Stack(my_game, territory="mountains")
+		
+	stack2.create_units(units.Militia, level=3, num=1)
 
-	for i in joined:
-		print(i)
+	stack1.combine_with(stack2)
+
+	print(stack1.units)
+
+	print(stack2.units)
 
 if __name__ == "__main__":
 	run_game()

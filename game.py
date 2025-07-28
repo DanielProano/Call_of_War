@@ -1,4 +1,4 @@
-import units
+import units, stack
 
 class Game:
 
@@ -15,6 +15,7 @@ class Game:
 		self.units = []
 		self.enemy_units = []
 		self.buildings = []
+		self.stacks = []
 
 	def update(self, game_name, country, faction):
 		self.game_name = game_name
@@ -38,32 +39,6 @@ class Game:
 		return False
 	
 	'''
-	Ability to a create a stack of one particular
-	unit type & join them together.
-	'''
-
-	def create_stack(self, unit_cls, level, number=1, territory=None, buildings=None, health=None):
-		stack = []
-		for i in range(number):
-			stack.append(unit_cls.create(level, self, territory=territory, buildings=buildings, health=health))
-		return stack
-
-	def join_stacks(self, stack1, stack2):
-		joined = []
-		if hasattr(stack1, '__iter__'):
-			for i in stack1:
-				joined.append(i)
-		else:
-			joined.append(stack1)
-
-		if hasattr(stack2, '__iter__'):
-			for j in stack2:
-				joined.append(j)
-		else:
-			joined.append(stack2)
-
-		return joined
-	'''
 	Add buildings that affect your resource production & units
 	'''
 
@@ -77,6 +52,14 @@ class Game:
 		if not self.buildings.remove(building_obj):
 			return True
 		return False
+
+	'''
+	Adds stacks of units to the game
+	'''
+
+	def create_stack(self, territory=None, buildings=None):
+		stack1 = stack.Stack(self, territory=territory, buildings=buildings)
+		if stack1:
 
 	'''
 	Get the general info about the faction pros and cons
