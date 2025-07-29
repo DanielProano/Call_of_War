@@ -952,3 +952,97 @@ class Heavy_Tank(Unit):
 						self.minimum_production_time = 13.5
 						self.research_time = 50
 						self.day_available = 20
+
+class Tank_Destroyer(Unit):
+	def __init__(self, level, game, territory=None, buildings=None, health=None, build=True):
+		super().__init__(level, game, territory, buildings, health, build)
+		self.name = "Tank Destroyer"
+		self.description = "Tank Destroyers are defensive units specialized in ambushing and destroying enemy tanks. They are most effective against armored targets but have a weak spot when fighting infantry and other unarmored units."
+		self.special = "Is hidden as long as it is not fighting or uncovered by a scout unit of equal or higher level."
+		self.armor_class = "Heavy armor"
+		if build:
+			self.update_stats()
+			self.pay_costs()
+			if health:
+				self.health = health
+			if not self.can_afford_unit:
+				raise ValueError("Cannot afford Tank Destroyer. Please do not try to bypass create() method! Instead, use game.add_unit()")
+		self.terrain_effects = {'plains': {'HP': self.health, 'armor': self.armor_class, 'speed': 1.25, 'strength': 1.50}, 'hills': {'HP': self.health, 'armor': self.armor_class, 'speed': -1.25, 'strength': None}, 'mountains': {'HP': self.health, 'armor': self.armor_class, 'speed': -1.5, 'strength': None}, 'forest': {'HP': self.health, 'armor': self.armor_class, 'speed': -1.25, 'strength': 1.25}, 'urban': {'HP': self.health, 'armor': self.armor_class, 'speed': None, 'strength': None}, 'sea': {'HP': 12, 'armor': 'ship', 'speed': None, 'strength': None}, 'enemy_territory': {'HP': None, 'armor': None, 'speed': -1.50, 'strength': None}}
+
+	def update_stats(self):
+		match self.game.faction:
+			case "Axis":
+				match self.level:
+					case 1:
+						self.combat = {"unarmored": {"attack": 0.8, "defense": 1.2}, "light_armor": {"attack": 4.6, "defense": 6.9}, "heavy_armor": {"attack": 6.9, "defense": 10.3}, "airplane": {"attack": 0.6, "defense": 0.9}, "ship": {"attack": 1.2, "defense": 1.8}, "submarine": {"attack": 1.2, "defense": 1.8}, "buildings": {"attack": 0.5, "defense": 0.7}, "morale": 0.1}
+						self.health = 46
+						self.speed = 38
+						self.view_range = 42
+						self.attack_range = 0
+						self.production_costs = {'gas': 1200, 'steel': 2500, 'cash': 2900, 'manpower': 1400}
+						self.research_costs = {'gas': 2100, 'steel': 3600, 'cash': 7700}
+						self.daily_costs = {'gas': 55, 'manpower': 55, 'steel': 95, 'cash': 103}
+						self.minimum_production_time = 5
+						self.research_time = 12
+						self.day_available = 3
+					case 2:
+						self.combat = {"unarmored": {"attack": 1.2, "defense": 1.8}, "light_armor": {"attack": 6.1, "defense": 9.1}, "heavy_armor": {"attack": 9.2, "defense": 13.8}, "airplane": {"attack": 1.2, "defense": 1.8}, "ship": {"attack": 1.7, "defense": 2.5}, "submarine": {"attack": 1.7, "defense": 2.5}, "buildings": {"attack": 0.7, "defense": 1.0}, "morale": 0.2}
+						self.health = 58
+						self.speed = 44
+						self.view_range = 42
+						self.attack_range = 0
+						self.production_costs = {'gas': 1400, 'steel': 2300, 'cash': 2900, 'manpower': 1300}
+						self.research_costs = {'gas': 2100, 'steel': 3600, 'cash': 7700}
+						self.daily_costs = {'gas': 63, 'manpower': 58, 'steel': 105, 'cash': 115}
+						self.minimum_production_time = 6.5
+						self.research_time = 16
+						self.day_available = 6
+					case 3:
+						self.combat = {"unarmored": {"attack": 1.7, "defense": 2.6}, "light_armor": {"attack": 8.1, "defense": 12.1}, "heavy_armor": {"attack": 12.7, "defense": 19.1}, "airplane": {"attack": 1.5, "defense": 2.3}, "ship": {"attack": 2.3, "defense": 3.5}, "submarine": {"attack": 2.3, "defense": 3.5}, "buildings": {"attack": 1.2, "defense": 1.8}, "morale": 0.4}
+						self.health = 75
+						self.speed = 50
+						self.view_range = 42
+						self.attack_range = 0
+						self.production_costs = {'gas': 1500, 'steel': 2600, 'cash': 2900, 'manpower': 1300}
+						self.research_costs = {'gas': 3300, 'steel': 5650, 'cash': 12700}
+						self.daily_costs = {'gas': 70, 'manpower': 58, 'steel': 120, 'cash': 130}
+						self.minimum_production_time = 7.5
+						self.research_time = 22
+						self.day_available = 10
+					case 4:
+						self.combat = {"unarmored": {"attack": 2.6, "defense": 3.9}, "light_armor": {"attack": 10.7, "defense": 16.0}, "heavy_armor": {"attack": 17.3, "defense": 25.9}, "airplane": {"attack": 2.3, "defense": 3.4}, "ship": {"attack": 3.5, "defense": 5.2}, "submarine": {"attack": 3.5, "defense": 5.2}, "buildings": {"attack": 1.8, "defense": 2.7}, "morale": 0.6}
+						self.health = 92
+						self.speed = 56
+						self.view_range = 42
+						self.attack_range = 0
+						self.production_costs = {'gas': 1800, 'steel': 3000, 'cash': 3300, 'manpower': 1300}
+						self.research_costs = {'gas': 4000, 'steel': 6850, 'cash': 15550}
+						self.daily_costs = {'gas': 80, 'manpower': 60, 'steel': 135, 'cash': 148}
+						self.minimum_production_time = 8.5
+						self.research_time = 30
+						self.day_available = 14
+					case 5:
+						self.combat = {"unarmored": {"attack": 4.0, "defense": 6.0}, "light_armor": {"attack": 13.8, "defense": 20.7}, "heavy_armor": {"attack": 23.0, "defense": 34.5}, "airplane": {"attack": 3.5, "defense": 5.2}, "ship": {"attack": 4.6, "defense": 6.9}, "submarine": {"attack": 4.6, "defense": 6.9}, "buildings": {"attack": 2.8, "defense": 4.2}, "morale": 0.8}
+						self.health = 115
+						self.speed = 62
+						self.view_range = 42
+						self.attack_range = 0
+						self.production_costs = {'gas': 1900, 'steel': 3300, 'cash': 3600, 'manpower': 1300}
+						self.research_costs = {'gas': 4700, 'steel': 8000, 'cash': 18400}
+						self.daily_costs = {'gas': 88, 'manpower': 60, 'steel': 150, 'cash': 163}
+						self.minimum_production_time = 9.5
+						self.research_time = 38
+						self.day_available = 18
+					case 6:
+						self.combat = {"unarmored": {"attack": 5.4, "defense": 8.1}, "light_armor": {"attack": 17.6, "defense": 26.4}, "heavy_armor": {"attack": 29.9, "defense": 44.9}, "airplane": {"attack": 4.6, "defense": 6.9}, "ship": {"attack": 5.8, "defense": 8.7}, "submarine": {"attack": 5.8, "defense": 8.7}, "buildings": {"attack": 4.0, "defense": 6.0}, "morale": 1.2}
+						self.health = 144
+						self.speed = 68
+						self.view_range = 42
+						self.attack_range = 0
+						self.production_costs = {'gas': 2100, 'steel': 3600, 'cash': 3900, 'manpower': 1400}
+						self.research_costs = {'gas': 4700, 'steel': 8000, 'cash': 18400}
+						self.daily_costs = {'gas': 95, 'manpower': 63, 'steel': 165, 'cash': 178}
+						self.minimum_production_time = 10
+						self.research_time = 46
+						self.day_available = 22
+
