@@ -41,21 +41,24 @@ class Stack:
 		for unit in self.units:
 			name = unit.name
 			hp = unit.health
+			lvl = unit.level
 			
 			if name not in units_list:
 				units_list[name] = {}
-			if hp not in units_list[name]:
-				units_list[name][hp] = 0
 
-			units_list[name][hp] += 1
+			key = (hp, lvl)
+			if key not in units_list[name]:
+				units_list[name][key] = 0
+
+			units_list[name][key] += 1
 		
 		total = 0
-		for unit_name, unit_health in units_list.items():
-			for unit_hp, unit_count in unit_health.items():
+		for unit_name, unit_hp_lvl in units_list.items():
+			for (unit_hp, unit_lvl), unit_count in unit_hp_lvl.items():
 				total += unit_count * unit_hp
 				if unit_count > 1:
-					info += f"{unit_count} {unit_name} with {unit_hp * unit_count} total health, {unit_hp} each\n"
+					info += f"{unit_count} {unit_name} (level {unit_lvl}) with {unit_hp * unit_count} total health, {unit_hp} hp each\n"
 				else:
-					info += f"{unit_count} {unit_name} with {unit_hp} health individually\n"
+					info += f"{unit_count} {unit_name} (level {unit_lvl}) with {unit_hp} health\n"
 		info += f"Total hp: {total}\n{'-' * 50}\n"
 		return info

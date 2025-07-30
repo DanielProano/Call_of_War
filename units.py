@@ -2,15 +2,17 @@
 
 class Unit:
 	@classmethod
-	def create(cls, level, game, territory=None, buildings=None, health=None):
+	def create(cls, level, game, territory=None, buildings=None, health=None, affect_resources=True):
 		unit = cls(level, game, territory, buildings, health, build=False)
 		if hasattr(cls, "update_stats"):
 			unit.update_stats()
-			unit.pay_costs()
 			if health:
 				unit.health = health
-			if not unit.can_afford_unit:
-				return None
+
+			if affect_resources:
+				costs_paid_for = unit.pay_costs()
+				if not costs_paid_for:
+					return None
 			return unit
 		else:
 			return None
@@ -21,21 +23,24 @@ class Unit:
 		self.territory = territory
 		self.buildings = buildings
 		self.health = health
+
 	def pay_costs(self):
 		if hasattr(self, "daily_costs") and hasattr(self, "production_costs"):
 			resources_depleted = self.game.resources.subtract(resources=self.production_costs)
 			if not resources_depleted:
 				self.game.resources.add(upkeep=self.daily_costs)
-				self.can_afford_unit = True
+				return True
 			else:
 				print(f"{'*' * 50}\n\nCannot afford {self.__class__.__name__}, need at least:")
 				for key, value in resources_depleted.items():
 					print(f"\t~ {value} {key}\n")
 				print(f"{'*' * 50}\n")
 
-				self.can_afford_unit = False
+				return False
 		else:
-			self.can_afford_unit = False
+			return False
+
+
 	def research_unit(self):
 		if self.research_costs:
 			payment = self.game.resources.subtract(resources=self.research_costs)
@@ -152,10 +157,10 @@ class Militia(Unit):
 
 		if build:
 			self.update_stats()
-			self.pay_costs()
+			costs_paid_for = self.pay_costs()
 			if health:
 				self.health = health
-			if not self.can_afford_unit:
+			if not costs_paid_for:
 				raise ValueError("Cannot afford Militia. Please do not try to bypass create() method! Instead, use game.add_unit()")
 
 		self.terrain_effects = {'plains': {'HP': self.health, 'armor': self.armor_class, 'speed': None, 'strength': None}, 'hills': {'HP': self.health, 'armor': self.armor_class, 'speed': None, 'strength': 1.25}, 'mountains': {'HP': self.health, 'armor': self.armor_class, 'speed': -1.5, 'strength': 1.25}, 'forest': {'HP': self.health, 'armor': self.armor_class, 'speed': None, 'strength': 1.50}, 'urban': {'HP': self.health, 'armor': self.armor_class, 'speed': None, 'strength': None}, 'sea': {'HP': 12, 'armor': 'ship', 'speed': None, 'strength': None}, 'enemy_territory': {'HP': None, 'armor': None, 'speed': -1.50, 'strength': None}}
@@ -231,8 +236,8 @@ class Infantry(Unit):
 		self.armor_class = "unarmored"
 		if build:
 			self.update_stats()
-			self.pay_costs()
-			if not self.can_afford_unit:
+			costs_paid_for = self.pay_costs()
+			if not costs_paid_for:
 				raise ValueError("Cannot afford this Unit. Please do not try to bypass my code, use game.add_unit()!")
 		self.terrain_effects = {'plains': {'HP': self.health, 'armor': self.armor_class, 'speed': None, 'strength': None}, 'hills': {'HP': self.health, 'armor': self.armor_class, 'speed': None, 'strength': None}, 'mountains': {'HP': self.health, 'armor': self.armor_class, 'speed': -1.5, 'strength': 1.20}, 'forest': {'HP': self.health, 'armor': self.armor_class, 'speed': None, 'strength': 1.20}, 'urban': {'HP': self.health, 'armor': self.armor_class, 'speed': None, 'strength': 1.5}, 'sea': {'HP': 12, 'armor': 'ship', 'speed': None, 'strength': None}, 'Enemy_territory': {'HP': None, 'armor': None, 'speed': -1.50, 'strength': None}}
 
@@ -341,10 +346,10 @@ class Motorized_Infantry(Unit):
 		self.armor_class = "unarmored"
 		if build:
 			self.update_stats()
-			self.pay_costs()
+			costs_paid_for = self.pay_costs()
 			if health:
 				self.health = health
-			if not self.can_afford_unit:
+			if not costs_paid_for:
 				raise ValueError("Cannot afford Mot. Infantry. Please do not try to bypass create() method! Instead, use game.add_unit()")
 		self.terrain_effects = {'plains': {'HP': self.health, 'armor': self.armor_class, 'speed': 1.25, 'strength': 1.25}, 'hills': {'HP': self.health, 'armor': self.armor_class, 'speed': -1.25, 'strength': None}, 'mountains': {'HP': self.health, 'armor': self.armor_class, 'speed': -1.5, 'strength': None}, 'forest': {'HP': self.health, 'armor': self.armor_class, 'speed': -1.25, 'strength': None}, 'urban': {'HP': self.health, 'armor': self.armor_class, 'speed': None, 'strength': 1.25}, 'sea': {'HP': 12, 'armor': 'ship', 'speed': None, 'strength': None}, 'enemy_territory': {'HP': None, 'armor': None, 'speed': -1.50, 'strength': None}}
 
@@ -434,10 +439,10 @@ class Mechanized_Infantry(Unit):
 		self.armor_class = "light armor"
 		if build:
 			self.update_stats()
-			self.pay_costs()
+			costs_paid_for = self.pay_costs()
 			if health:
 				self.health = health
-			if not self.can_afford_unit:
+			if not costs_paid_for:
 				raise ValueError("Cannot afford Mech. Infantry. Please do not try to bypass create() method! Instead, use game.add_unit()")
 		self.terrain_effects = {'plains': {'HP': self.health, 'armor': self.armor_class, 'speed': 1.25, 'strength': 1.25}, 'hills': {'HP': self.health, 'armor': self.armor_class, 'speed': -1.25, 'strength': None}, 'mountains': {'HP': self.health, 'armor': self.armor_class, 'speed': -1.5, 'strength': None}, 'forest': {'HP': self.health, 'armor': self.armor_class, 'speed': -1.25, 'strength': None}, 'urban': {'HP': self.health, 'armor': self.armor_class, 'speed': None, 'strength': 1.25}, 'sea': {'HP': 12, 'armor': 'ship', 'speed': None, 'strength': None}, 'enemy_territory': {'HP': None, 'armor': None, 'speed': -1.50, 'strength': None}}
 
@@ -503,10 +508,10 @@ class Commandos(Unit):
 		self.armor_class = "unarmored"
 		if build:
 			self.update_stats()
-			self.pay_costs()
+			costs_paid_for = self.pay_costs()
 			if health:
 				self.health = health
-			if not self.can_afford_unit:
+			if not costs_paid_for:
 				raise ValueError("Cannot afford Commando. Please do not try to bypass create() method! Instead, use game.add_unit()")
 		self.terrain_effects = {'plains': {'HP': self.health, 'armor': self.armor_class, 'speed': None, 'strength': None}, 'hills': {'HP': self.health, 'armor': self.armor_class, 'speed': None, 'strength': None}, 'mountains': {'HP': self.health, 'armor': self.armor_class, 'speed': -1.5, 'strength': 1.5}, 'forest': {'HP': self.health, 'armor': self.armor_class, 'speed': None, 'strength': 1.5}, 'urban': {'HP': self.health, 'armor': self.armor_class, 'speed': None, 'strength': None}, 'sea': {'HP': 12, 'armor': 'ship', 'speed': None, 'strength': None}, 'enemy_territory': {'HP': None, 'armor': None, 'speed': -1.50, 'strength': None}}
 
@@ -571,10 +576,10 @@ class Paratrooper(Unit):
 		self.armor_class = "unarmored"
 		if build:
 			self.update_stats()
-			self.pay_costs()
+			costs_paid_for = self.pay_costs()
 			if health:
 				self.health = health
-			if not self.can_afford_unit:
+			if not costs_paid_for:
 				raise ValueError("Cannot afford Paratrooper. Please do not try to bypass create() method! Instead, use game.add_unit()")
 		self.terrain_effects = {'plains': {'HP': self.health, 'armor': self.armor_class, 'speed': None, 'strength': None}, 'hills': {'HP': self.health, 'armor': self.armor_class, 'speed': None, 'strength': None}, 'mountains': {'HP': self.health, 'armor': self.armor_class, 'speed': -1.5, 'strength': 1.5}, 'forest': {'HP': self.health, 'armor': self.armor_class, 'speed': None, 'strength': 1.5}, 'urban': {'HP': self.health, 'armor': self.armor_class, 'speed': None, 'strength': None}, 'sea': {'HP': 12, 'armor': 'ship', 'speed': None, 'strength': None}, 'enemy_territory': {'HP': None, 'armor': None, 'speed': -1.50, 'strength': None}}
 
@@ -640,10 +645,10 @@ class Armored_Car(Unit):
 		self.armor_class = "light armor"
 		if build:
 			self.update_stats()
-			self.pay_costs()
+			costs_paid_for = self.pay_costs()
 			if health:
 				self.health = health
-			if not self.can_afford_unit:
+			if not costs_paid_for:
 				raise ValueError("Cannot afford Armored Car. Please do not try to bypass create() method! Instead, use game.add_unit()")
 		self.terrain_effects = {'plains': {'HP': self.health, 'armor': self.armor_class, 'speed': 1.25, 'strength': 1.50}, 'hills': {'HP': self.health, 'armor': self.armor_class, 'speed': -1.25, 'strength': None}, 'mountains': {'HP': self.health, 'armor': self.armor_class, 'speed': -1.5, 'strength': None}, 'forest': {'HP': self.health, 'armor': self.armor_class, 'speed': -1.25, 'strength': None}, 'urban': {'HP': self.health, 'armor': self.armor_class, 'speed': None, 'strength': None}, 'sea': {'HP': 12, 'armor': 'ship', 'speed': None, 'strength': None}, 'enemy_territory': {'HP': None, 'armor': None, 'speed': -1.50, 'strength': None}}
 
@@ -720,10 +725,10 @@ class Light_Tank(Unit):
 		self.armor_class = "light armor"
 		if build:
 			self.update_stats()
-			self.pay_costs()
+			costs_paid_for = self.pay_costs()
 			if health:
 				self.health = health
-			if not self.can_afford_unit:
+			if not costs_paid_for:
 				raise ValueError("Cannot afford Light Tank. Please do not try to bypass create() method! Instead, use game.add_unit()")
 		self.terrain_effects = {'plains': {'HP': self.health, 'armor': self.armor_class, 'speed': 1.25, 'strength': 1.50}, 'hills': {'HP': self.health, 'armor': self.armor_class, 'speed': -1.25, 'strength': None}, 'mountains': {'HP': self.health, 'armor': self.armor_class, 'speed': -1.5, 'strength': None}, 'forest': {'HP': self.health, 'armor': self.armor_class, 'speed': -1.25, 'strength': None}, 'urban': {'HP': self.health, 'armor': self.armor_class, 'speed': None, 'strength': None}, 'sea': {'HP': 12, 'armor': 'ship', 'speed': None, 'strength': None}, 'enemy_territory': {'HP': None, 'armor': None, 'speed': -1.50, 'strength': None}}
 
@@ -768,7 +773,7 @@ class Light_Tank(Unit):
 						self.research_time = 16
 						self.day_available = 8
 					case 4:
-						self.combat = {"unarmored": {"attack": 12.1, "defense": 8.1}, "light_armor": {"attack": 17.8, "defense": 11.9}, "heavy_armor": {"attack": 8.6, "defense": 5.7}, "airplane": {"attack": 4.6, "defense": 3.1}, "ship": {"attack": 4.6, "defense": 3.1}, "submarine": {"attack": 4.6, "defense": 3.1}, "buildings": {"attack": 2.1, "defense": 1.4, "morale": 0.3}
+						self.combat = {"unarmored": {"attack": 12.1, "defense": 8.1}, "light_armor": {"attack": 17.8, "defense": 11.9}, "heavy_armor": {"attack": 8.6, "defense": 5.7}, "airplane": {"attack": 4.6, "defense": 3.1}, "ship": {"attack": 4.6, "defense": 3.1}, "submarine": {"attack": 4.6, "defense": 3.1}, "buildings": {"attack": 2.1, "defense": 1.4}, "morale": 0.3}
 						self.health = 75
 						self.speed = 81
 						self.view_range = 42
@@ -780,7 +785,7 @@ class Light_Tank(Unit):
 						self.research_time = 26
 						self.day_available = 14
 					case 5:
-						self.combat = {"unarmored": {"attack": 17.8, "defense": 11.9}, "light_armor": {"attack": 26.5, "defense": 17.7}, "heavy_armor": {"attack": 12.7, "defense": 8.5}, "airplane": {"attack": 6.9, "defense": 4.6}, "ship": {"attack": 6.9, "defense": 4.6}, "submarine": {"attack": 6.9, "defense": 4.6}, "buildings": {"attack": 3.2, "defense": 2.1, "morale": 0.4}
+						self.combat = {"unarmored": {"attack": 17.8, "defense": 11.9}, "light_armor": {"attack": 26.5, "defense": 17.7}, "heavy_armor": {"attack": 12.7, "defense": 8.5}, "airplane": {"attack": 6.9, "defense": 4.6}, "ship": {"attack": 6.9, "defense": 4.6}, "submarine": {"attack": 6.9, "defense": 4.6}, "buildings": {"attack": 3.2, "defense": 2.1}, "morale": 0.4}
 						self.health = 98
 						self.speed = 88
 						self.view_range = 42
@@ -800,10 +805,10 @@ class Medium_Tank(Unit):
 		self.armor_class = "heavy armor"
 		if build:
 			self.update_stats()
-			self.pay_costs()
+			costs_paid_for = self.pay_costs()
 			if health:
 				self.health = health
-			if not self.can_afford_unit:
+			if not costs_paid_for:
 				raise ValueError("Cannot afford Medium Tank. Please do not try to bypass create() method! Instead, use game.add_unit()")
 		self.terrain_effects = {'plains': {'HP': self.health, 'armor': self.armor_class, 'speed': 1.25, 'strength': 1.50}, 'hills': {'HP': self.health, 'armor': self.armor_class, 'speed': -1.25, 'strength': None}, 'mountains': {'HP': self.health, 'armor': self.armor_class, 'speed': -1.5, 'strength': None}, 'forest': {'HP': self.health, 'armor': self.armor_class, 'speed': -1.25, 'strength': None}, 'urban': {'HP': self.health, 'armor': self.armor_class, 'speed': None, 'strength': None}, 'sea': {'HP': 12, 'armor': 'ship', 'speed': None, 'strength': None}, 'enemy_territory': {'HP': None, 'armor': None, 'speed': -1.50, 'strength': None}}
 
@@ -893,10 +898,10 @@ class Heavy_Tank(Unit):
 		self.armor_class = "Heavy armor"
 		if build:
 			self.update_stats()
-			self.pay_costs()
+			costs_paid_for = self.pay_costs()
 			if health:
 				self.health = health
-			if not self.can_afford_unit:
+			if not costs_paid_for:
 				raise ValueError("Cannot afford Heavy Tank. Please do not try to bypass create() method! Instead, use game.add_unit()")
 		self.terrain_effects = {'plains': {'HP': self.health, 'armor': self.armor_class, 'speed': 1.25, 'strength': 1.50}, 'hills': {'HP': self.health, 'armor': self.armor_class, 'speed': -1.25, 'strength': None}, 'mountains': {'HP': self.health, 'armor': self.armor_class, 'speed': -1.5, 'strength': None}, 'forest': {'HP': self.health, 'armor': self.armor_class, 'speed': -1.25, 'strength': None}, 'urban': {'HP': self.health, 'armor': self.armor_class, 'speed': None, 'strength': None}, 'sea': {'HP': 12, 'armor': 'ship', 'speed': None, 'strength': None}, 'enemy_territory': {'HP': None, 'armor': None, 'speed': -1.50, 'strength': None}}
 
@@ -962,10 +967,10 @@ class Tank_Destroyer(Unit):
 		self.armor_class = "Heavy armor"
 		if build:
 			self.update_stats()
-			self.pay_costs()
+			costs_paid_for = self.pay_costs()
 			if health:
 				self.health = health
-			if not self.can_afford_unit:
+			if not costs_paid_for:
 				raise ValueError("Cannot afford Tank Destroyer. Please do not try to bypass create() method! Instead, use game.add_unit()")
 		self.terrain_effects = {'plains': {'HP': self.health, 'armor': self.armor_class, 'speed': 1.25, 'strength': 1.50}, 'hills': {'HP': self.health, 'armor': self.armor_class, 'speed': -1.25, 'strength': None}, 'mountains': {'HP': self.health, 'armor': self.armor_class, 'speed': -1.5, 'strength': None}, 'forest': {'HP': self.health, 'armor': self.armor_class, 'speed': -1.25, 'strength': 1.25}, 'urban': {'HP': self.health, 'armor': self.armor_class, 'speed': None, 'strength': None}, 'sea': {'HP': 12, 'armor': 'ship', 'speed': None, 'strength': None}, 'enemy_territory': {'HP': None, 'armor': None, 'speed': -1.50, 'strength': None}}
 

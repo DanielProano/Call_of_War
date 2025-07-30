@@ -1,10 +1,7 @@
 class Buildings:
 
 	'''
-	Create is the standard way to initialize a new Building.
-	If you'd like to create a new Building without paying
-	or affecting resources, use the 'affect_resources'
-	boolian keyword arguement
+	Create and add a new building to the game
 	'''
 
 	@classmethod
