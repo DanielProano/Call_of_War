@@ -3,7 +3,7 @@
 class Unit:
 	@classmethod
 	def create(cls, level, game, territory=None, buildings=None, health=None, affect_resources=True):
-		unit = cls(level, game, territory, buildings, health, build=False)
+		unit = cls(level, game, territory=territory, buildings=buildings, health=health, build=False)
 		if hasattr(cls, "update_stats"):
 			unit.update_stats()
 			if health:

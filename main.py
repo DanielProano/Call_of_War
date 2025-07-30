@@ -5,7 +5,7 @@ def run_game():
 
 	print(my_game)
 
-	u1 = my_game.add_unit(units.Mechanized_Infantry, 3)
+	u1 = my_game.add_unit(units.Mechanized_Infantry, 3, territory='plains', health=16)
 
 	print(u1)
 
@@ -19,7 +19,7 @@ def run_game():
 
 	stack1 = my_game.create_stack(territory='hills')
 
-	stack1.create_units(units.Armored_Car, level=2, num=6)
+	stack1.create_units(units.Armored_Car, level=2, num=6, health=10)
 
 	print(stack1)
 
