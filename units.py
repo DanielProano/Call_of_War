@@ -157,11 +157,8 @@ class Militia(Unit):
 
 		if build:
 			self.update_stats()
-			costs_paid_for = self.pay_costs()
 			if health:
 				self.health = health
-			if not costs_paid_for:
-				raise ValueError("Cannot afford Militia. Please do not try to bypass create() method! Instead, use game.add_unit()")
 
 		self.terrain_effects = {'plains': {'HP': self.health, 'armor': self.armor_class, 'speed': None, 'strength': None}, 'hills': {'HP': self.health, 'armor': self.armor_class, 'speed': None, 'strength': 1.25}, 'mountains': {'HP': self.health, 'armor': self.armor_class, 'speed': -1.5, 'strength': 1.25}, 'forest': {'HP': self.health, 'armor': self.armor_class, 'speed': None, 'strength': 1.50}, 'urban': {'HP': self.health, 'armor': self.armor_class, 'speed': None, 'strength': None}, 'sea': {'HP': 12, 'armor': 'ship', 'speed': None, 'strength': None}, 'enemy_territory': {'HP': None, 'armor': None, 'speed': -1.50, 'strength': None}}
 
@@ -236,9 +233,9 @@ class Infantry(Unit):
 		self.armor_class = "unarmored"
 		if build:
 			self.update_stats()
-			costs_paid_for = self.pay_costs()
-			if not costs_paid_for:
-				raise ValueError("Cannot afford this Unit. Please do not try to bypass my code, use game.add_unit()!")
+			if health:
+				self.health = health
+		
 		self.terrain_effects = {'plains': {'HP': self.health, 'armor': self.armor_class, 'speed': None, 'strength': None}, 'hills': {'HP': self.health, 'armor': self.armor_class, 'speed': None, 'strength': None}, 'mountains': {'HP': self.health, 'armor': self.armor_class, 'speed': -1.5, 'strength': 1.20}, 'forest': {'HP': self.health, 'armor': self.armor_class, 'speed': None, 'strength': 1.20}, 'urban': {'HP': self.health, 'armor': self.armor_class, 'speed': None, 'strength': 1.5}, 'sea': {'HP': 12, 'armor': 'ship', 'speed': None, 'strength': None}, 'Enemy_territory': {'HP': None, 'armor': None, 'speed': -1.50, 'strength': None}}
 
 	def update_stats(self):
@@ -346,11 +343,9 @@ class Motorized_Infantry(Unit):
 		self.armor_class = "unarmored"
 		if build:
 			self.update_stats()
-			costs_paid_for = self.pay_costs()
 			if health:
 				self.health = health
-			if not costs_paid_for:
-				raise ValueError("Cannot afford Mot. Infantry. Please do not try to bypass create() method! Instead, use game.add_unit()")
+		
 		self.terrain_effects = {'plains': {'HP': self.health, 'armor': self.armor_class, 'speed': 1.25, 'strength': 1.25}, 'hills': {'HP': self.health, 'armor': self.armor_class, 'speed': -1.25, 'strength': None}, 'mountains': {'HP': self.health, 'armor': self.armor_class, 'speed': -1.5, 'strength': None}, 'forest': {'HP': self.health, 'armor': self.armor_class, 'speed': -1.25, 'strength': None}, 'urban': {'HP': self.health, 'armor': self.armor_class, 'speed': None, 'strength': 1.25}, 'sea': {'HP': 12, 'armor': 'ship', 'speed': None, 'strength': None}, 'enemy_territory': {'HP': None, 'armor': None, 'speed': -1.50, 'strength': None}}
 
 	def update_stats(self):
@@ -439,11 +434,9 @@ class Mechanized_Infantry(Unit):
 		self.armor_class = "light armor"
 		if build:
 			self.update_stats()
-			costs_paid_for = self.pay_costs()
 			if health:
 				self.health = health
-			if not costs_paid_for:
-				raise ValueError("Cannot afford Mech. Infantry. Please do not try to bypass create() method! Instead, use game.add_unit()")
+		
 		self.terrain_effects = {'plains': {'HP': self.health, 'armor': self.armor_class, 'speed': 1.25, 'strength': 1.25}, 'hills': {'HP': self.health, 'armor': self.armor_class, 'speed': -1.25, 'strength': None}, 'mountains': {'HP': self.health, 'armor': self.armor_class, 'speed': -1.5, 'strength': None}, 'forest': {'HP': self.health, 'armor': self.armor_class, 'speed': -1.25, 'strength': None}, 'urban': {'HP': self.health, 'armor': self.armor_class, 'speed': None, 'strength': 1.25}, 'sea': {'HP': 12, 'armor': 'ship', 'speed': None, 'strength': None}, 'enemy_territory': {'HP': None, 'armor': None, 'speed': -1.50, 'strength': None}}
 
 	def update_stats(self):
@@ -508,11 +501,9 @@ class Commandos(Unit):
 		self.armor_class = "unarmored"
 		if build:
 			self.update_stats()
-			costs_paid_for = self.pay_costs()
 			if health:
 				self.health = health
-			if not costs_paid_for:
-				raise ValueError("Cannot afford Commando. Please do not try to bypass create() method! Instead, use game.add_unit()")
+		
 		self.terrain_effects = {'plains': {'HP': self.health, 'armor': self.armor_class, 'speed': None, 'strength': None}, 'hills': {'HP': self.health, 'armor': self.armor_class, 'speed': None, 'strength': None}, 'mountains': {'HP': self.health, 'armor': self.armor_class, 'speed': -1.5, 'strength': 1.5}, 'forest': {'HP': self.health, 'armor': self.armor_class, 'speed': None, 'strength': 1.5}, 'urban': {'HP': self.health, 'armor': self.armor_class, 'speed': None, 'strength': None}, 'sea': {'HP': 12, 'armor': 'ship', 'speed': None, 'strength': None}, 'enemy_territory': {'HP': None, 'armor': None, 'speed': -1.50, 'strength': None}}
 
 	def update_stats(self):
@@ -576,11 +567,9 @@ class Paratrooper(Unit):
 		self.armor_class = "unarmored"
 		if build:
 			self.update_stats()
-			costs_paid_for = self.pay_costs()
 			if health:
 				self.health = health
-			if not costs_paid_for:
-				raise ValueError("Cannot afford Paratrooper. Please do not try to bypass create() method! Instead, use game.add_unit()")
+		
 		self.terrain_effects = {'plains': {'HP': self.health, 'armor': self.armor_class, 'speed': None, 'strength': None}, 'hills': {'HP': self.health, 'armor': self.armor_class, 'speed': None, 'strength': None}, 'mountains': {'HP': self.health, 'armor': self.armor_class, 'speed': -1.5, 'strength': 1.5}, 'forest': {'HP': self.health, 'armor': self.armor_class, 'speed': None, 'strength': 1.5}, 'urban': {'HP': self.health, 'armor': self.armor_class, 'speed': None, 'strength': None}, 'sea': {'HP': 12, 'armor': 'ship', 'speed': None, 'strength': None}, 'enemy_territory': {'HP': None, 'armor': None, 'speed': -1.50, 'strength': None}}
 
 	def update_stats(self):
@@ -645,11 +634,9 @@ class Armored_Car(Unit):
 		self.armor_class = "light armor"
 		if build:
 			self.update_stats()
-			costs_paid_for = self.pay_costs()
 			if health:
 				self.health = health
-			if not costs_paid_for:
-				raise ValueError("Cannot afford Armored Car. Please do not try to bypass create() method! Instead, use game.add_unit()")
+		
 		self.terrain_effects = {'plains': {'HP': self.health, 'armor': self.armor_class, 'speed': 1.25, 'strength': 1.50}, 'hills': {'HP': self.health, 'armor': self.armor_class, 'speed': -1.25, 'strength': None}, 'mountains': {'HP': self.health, 'armor': self.armor_class, 'speed': -1.5, 'strength': None}, 'forest': {'HP': self.health, 'armor': self.armor_class, 'speed': -1.25, 'strength': None}, 'urban': {'HP': self.health, 'armor': self.armor_class, 'speed': None, 'strength': None}, 'sea': {'HP': 12, 'armor': 'ship', 'speed': None, 'strength': None}, 'enemy_territory': {'HP': None, 'armor': None, 'speed': -1.50, 'strength': None}}
 
 	def update_stats(self):
@@ -725,11 +712,9 @@ class Light_Tank(Unit):
 		self.armor_class = "light armor"
 		if build:
 			self.update_stats()
-			costs_paid_for = self.pay_costs()
 			if health:
 				self.health = health
-			if not costs_paid_for:
-				raise ValueError("Cannot afford Light Tank. Please do not try to bypass create() method! Instead, use game.add_unit()")
+		
 		self.terrain_effects = {'plains': {'HP': self.health, 'armor': self.armor_class, 'speed': 1.25, 'strength': 1.50}, 'hills': {'HP': self.health, 'armor': self.armor_class, 'speed': -1.25, 'strength': None}, 'mountains': {'HP': self.health, 'armor': self.armor_class, 'speed': -1.5, 'strength': None}, 'forest': {'HP': self.health, 'armor': self.armor_class, 'speed': -1.25, 'strength': None}, 'urban': {'HP': self.health, 'armor': self.armor_class, 'speed': None, 'strength': None}, 'sea': {'HP': 12, 'armor': 'ship', 'speed': None, 'strength': None}, 'enemy_territory': {'HP': None, 'armor': None, 'speed': -1.50, 'strength': None}}
 
 	def update_stats(self):
@@ -805,11 +790,9 @@ class Medium_Tank(Unit):
 		self.armor_class = "heavy armor"
 		if build:
 			self.update_stats()
-			costs_paid_for = self.pay_costs()
 			if health:
 				self.health = health
-			if not costs_paid_for:
-				raise ValueError("Cannot afford Medium Tank. Please do not try to bypass create() method! Instead, use game.add_unit()")
+		
 		self.terrain_effects = {'plains': {'HP': self.health, 'armor': self.armor_class, 'speed': 1.25, 'strength': 1.50}, 'hills': {'HP': self.health, 'armor': self.armor_class, 'speed': -1.25, 'strength': None}, 'mountains': {'HP': self.health, 'armor': self.armor_class, 'speed': -1.5, 'strength': None}, 'forest': {'HP': self.health, 'armor': self.armor_class, 'speed': -1.25, 'strength': None}, 'urban': {'HP': self.health, 'armor': self.armor_class, 'speed': None, 'strength': None}, 'sea': {'HP': 12, 'armor': 'ship', 'speed': None, 'strength': None}, 'enemy_territory': {'HP': None, 'armor': None, 'speed': -1.50, 'strength': None}}
 
 	def update_stats(self):
@@ -898,11 +881,9 @@ class Heavy_Tank(Unit):
 		self.armor_class = "Heavy armor"
 		if build:
 			self.update_stats()
-			costs_paid_for = self.pay_costs()
 			if health:
 				self.health = health
-			if not costs_paid_for:
-				raise ValueError("Cannot afford Heavy Tank. Please do not try to bypass create() method! Instead, use game.add_unit()")
+		
 		self.terrain_effects = {'plains': {'HP': self.health, 'armor': self.armor_class, 'speed': 1.25, 'strength': 1.50}, 'hills': {'HP': self.health, 'armor': self.armor_class, 'speed': -1.25, 'strength': None}, 'mountains': {'HP': self.health, 'armor': self.armor_class, 'speed': -1.5, 'strength': None}, 'forest': {'HP': self.health, 'armor': self.armor_class, 'speed': -1.25, 'strength': None}, 'urban': {'HP': self.health, 'armor': self.armor_class, 'speed': None, 'strength': None}, 'sea': {'HP': 12, 'armor': 'ship', 'speed': None, 'strength': None}, 'enemy_territory': {'HP': None, 'armor': None, 'speed': -1.50, 'strength': None}}
 
 	def update_stats(self):
@@ -967,11 +948,9 @@ class Tank_Destroyer(Unit):
 		self.armor_class = "Heavy armor"
 		if build:
 			self.update_stats()
-			costs_paid_for = self.pay_costs()
 			if health:
 				self.health = health
-			if not costs_paid_for:
-				raise ValueError("Cannot afford Tank Destroyer. Please do not try to bypass create() method! Instead, use game.add_unit()")
+		
 		self.terrain_effects = {'plains': {'HP': self.health, 'armor': self.armor_class, 'speed': 1.25, 'strength': 1.50}, 'hills': {'HP': self.health, 'armor': self.armor_class, 'speed': -1.25, 'strength': None}, 'mountains': {'HP': self.health, 'armor': self.armor_class, 'speed': -1.5, 'strength': None}, 'forest': {'HP': self.health, 'armor': self.armor_class, 'speed': -1.25, 'strength': 1.25}, 'urban': {'HP': self.health, 'armor': self.armor_class, 'speed': None, 'strength': None}, 'sea': {'HP': 12, 'armor': 'ship', 'speed': None, 'strength': None}, 'enemy_territory': {'HP': None, 'armor': None, 'speed': -1.50, 'strength': None}}
 
 	def update_stats(self):
