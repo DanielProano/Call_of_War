@@ -1030,3 +1030,94 @@ class Tank_Destroyer(Unit):
 						self.research_time = 46
 						self.day_available = 22
 
+class Anti_Tank(Unit):
+	def __init__(self, level, game, territory=None, buildings=None, health=None, build=True):
+		super().__init__(level, game, territory, buildings, health, build)
+		self.name = "Anti Tank"
+		self.description = "Anti Tank guns are defensive units for countering attacks by armored vehicles. They are cheap and fast to produce but they should avoid fights against unarmored targets. With their stealth characteristics they can ambush approaching tanks."
+		self.special = "Is hidden as long as it is not fighting or uncovered by a scout unit of equal or higher level (Forest, Urban)."
+		self.armor_class = "unarmored"
+		if build:
+			self.update_stats()
+			if health:
+				self.health = health
+		
+		self.terrain_effects = {'plains': {'HP': self.health, 'armor': self.armor_class, 'speed': None, 'strength': None}, 'hills': {'HP': self.health, 'armor': self.armor_class, 'speed': None, 'strength': None}, 'mountains': {'HP': self.health, 'armor': self.armor_class, 'speed': -1.5, 'strength': None}, 'forest': {'HP': self.health, 'armor': self.armor_class, 'speed': None, 'strength': 1.5}, 'urban': {'HP': self.health, 'armor': self.armor_class, 'speed': None, 'strength': 1.25}, 'sea': {'HP': 12, 'armor': 'ship', 'speed': None, 'strength': None}, 'enemy_territory': {'HP': None, 'armor': None, 'speed': -1.50, 'strength': None}}
+
+	def update_stats(self):
+		match self.game.faction:
+			case "Axis":
+				match self.level:
+					case 1:
+						self.combat = {"unarmored": {"attack": 0.6, "defense": 1.2}, "light_armor": {"attack": 2.6, "defense": 5.2}, "heavy_armor": {"attack": 3.5, "defense": 7.0}, "airplane": {"attack": 0.6, "defense": 1.2}, "ship": {"attack": 0.6, "defense": 1.2}, "submarine": {"attack": 0.6, "defense": 1.2}, "buildings": {"attack": 0.5, "defense": 1.0}, "morale": 0.1}
+						self.health = 17
+						self.speed = 30
+						self.view_range = 42
+						self.attack_range = 0
+						self.production_costs = {'corn': 1200, 'steel': 610, 'cash': 880, 'manpower': 830}
+						self.research_costs = {'corn': 1800, 'steel': 1000, 'cash': 2650}
+						self.daily_costs = {'corn': 52, 'manpower': 38, 'steel': 28, 'cash': 40}
+						self.minimum_production_time = 2
+						self.research_time = 0.083
+						self.day_available = 1
+					case 2:
+						self.combat = {"unarmored": {"attack": 0.9, "defense": 1.8}, "light_armor": {"attack": 3.7, "defense": 7.4}, "heavy_armor": {"attack": 4.9, "defense": 9.8}, "airplane": {"attack": 1.2, "defense": 2.4}, "ship": {"attack": 0.9, "defense": 1.8}, "submarine": {"attack": 0.9, "defense": 1.8}, "buildings": {"attack": 0.7, "defense": 1.4}, "morale": 0.1}
+						self.health = 23
+						self.speed = 35
+						self.view_range = 42
+						self.attack_range = 0
+						self.production_costs = {'corn': 1300, 'steel': 660, 'cash': 990, 'manpower': 830}
+						self.research_costs = {'corn': 2150, 'steel': 1150, 'cash': 3250}
+						self.daily_costs = {'corn': 58, 'manpower': 38, 'steel': 30, 'cash': 45}
+						self.minimum_production_time = 3
+						self.research_time = 8
+						self.day_available = 3
+					case 3:
+						self.combat = {"unarmored": {"attack": 1.2, "defense": 2.4}, "light_armor": {"attack": 5.5, "defense": 11.0}, "heavy_armor": {"attack": 6.9, "defense": 13.8}, "airplane": {"attack": 1.7, "defense": 3.4}, "ship": {"attack": 1.2, "defense": 2.4}, "submarine": {"attack": 1.2, "defense": 2.4}, "buildings": {"attack": 0.9, "defense": 1.8}, "morale": 0.1}
+						self.health = 35
+						self.speed = 38
+						self.view_range = 42
+						self.attack_range = 0
+						self.production_costs = {'corn': 1400, 'steel': 770, 'cash': 1100, 'manpower': 880}
+						self.research_costs = {'corn': 2150, 'steel': 1150, 'cash': 3250}
+						self.daily_costs = {'corn': 63, 'manpower': 40, 'steel': 35, 'cash': 50}
+						self.minimum_production_time = 4
+						self.research_time = 12
+						self.day_available = 6
+					case 4:
+						self.combat = {"unarmored": {"attack": 1.7, "defense": 3.4}, "light_armor": {"attack": 7.5, "defense": 15.0}, "heavy_armor": {"attack": 9.2, "defense": 18.4}, "airplane": {"attack": 2.3, "defense": 4.6}, "ship": {"attack": 1.7, "defense": 3.4}, "submarine": {"attack": 1.7, "defense": 3.4}, "buildings": {"attack": 1.4, "defense": 2.8}, "morale": 0.2}
+						self.health = 46
+						self.speed = 41
+						self.view_range = 42
+						self.attack_range = 0
+						self.production_costs = {'corn': 1600, 'steel': 880, 'cash': 1200, 'manpower': 880}
+						self.research_costs = {'corn': 3400, 'steel': 1850, 'cash': 5400}
+						self.daily_costs = {'corn': 73, 'manpower': 40, 'steel': 40, 'cash': 55}
+						self.minimum_production_time = 4.5
+						self.research_time = 18
+						self.day_available = 10
+					case 5:
+						self.combat = {"unarmored": {"attack": 2.3, "defense": 4.6}, "light_armor": {"attack": 9.8, "defense": 19.6}, "heavy_armor": {"attack": 12.7, "defense": 25.4}, "airplane": {"attack": 3.5, "defense": 7.0}, "ship": {"attack": 2.3, "defense": 4.6}, "submarine": {"attack": 2.3, "defense": 4.6}, "buildings": {"attack": 2.1, "defense": 4.2}, "morale": 0.2}
+						self.health = 58
+						self.speed = 45
+						self.view_range = 42
+						self.attack_range = 0
+						self.production_costs = {'corn': 1800, 'steel': 940, 'cash': 1400, 'manpower': 940}
+						self.research_costs = {'corn': 4100, 'steel': 2200, 'cash': 6600}
+						self.daily_costs = {'corn': 80, 'manpower': 43, 'steel': 43, 'cash': 63}
+						self.minimum_production_time = 5
+						self.research_time = 26
+						self.day_available = 14
+					case 6:
+						self.combat = {"unarmored": {"attack": 3.5, "defense": 7.0}, "light_armor": {"attack": 12.9, "defense": 25.8}, "heavy_armor": {"attack": 16.7, "defense": 33.4}, "airplane": {"attack": 4.6, "defense": 9.2}, "ship": {"attack": 3.5, "defense": 7.0}, "submarine": {"attack": 3.5, "defense": 7.0}, "buildings": {"attack": 3.0, "defense": 6.0}, "morale": 0.3}
+						self.health = 75
+						self.speed = 48
+						self.view_range = 42
+						self.attack_range = 0
+						self.production_costs = {'corn': 2000, 'steel': 1100, 'cash': 1500, 'manpower': 940}
+						self.research_costs = {'corn': 4800, 'steel': 2600, 'cash': 7850}
+						self.daily_costs = {'corn': 90, 'manpower': 43, 'steel': 48, 'cash': 70}
+						self.minimum_production_time = 5.75
+						self.research_time = 34
+						self.day_available = 18
+
